@@ -10,6 +10,8 @@ import me.notom3ga.optimus.util.Logger;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
+
 public abstract class Check {
     protected CheckInfo info;
 
@@ -33,8 +35,8 @@ public abstract class Check {
         PlayerData data = DataManager.getPlayerData(player);
         return data.EXEMPT
                 || player.hasPermission("optimus.bypass")
-                || player.hasPermission("optimus.bypass." + info.name().toLowerCase())
-                || player.hasPermission("optimus.bypass." + info.name().toLowerCase() + "." + info.type().toLowerCase())
+                || player.hasPermission("optimus.bypass." + info.name().toLowerCase(Locale.ROOT))
+                || player.hasPermission("optimus.bypass." + info.name().toLowerCase(Locale.ROOT) + "." + info.type().toLowerCase(Locale.ROOT))
                 || player.getGameMode() == GameMode.CREATIVE
                 || player.getGameMode() == GameMode.SPECTATOR
                 || System.currentTimeMillis() - data.FIRST_JOINED <= Config.Settings.WAIT_BEFORE_CHECKING;

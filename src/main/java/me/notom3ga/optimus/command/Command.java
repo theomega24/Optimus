@@ -98,7 +98,11 @@ public class Command {
                         Component.newline(),
                         Component.text(" » ", TextColor.fromHexString("#999999")),
                         Component.text("Movement: ", Constants.HIGHLIGHT),
-                        Component.text(data.getMovementVL(), Constants.BRAND_COLOR)
+                        Component.text(data.getMovementVL(), Constants.BRAND_COLOR),
+                        Component.newline(),
+                        Component.text(" » ", TextColor.fromHexString("#999999")),
+                        Component.text("Packet: ", Constants.HIGHLIGHT),
+                        Component.text(data.getPacketVL(), Constants.BRAND_COLOR)
                 )
         );
     }

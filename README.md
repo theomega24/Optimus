@@ -7,6 +7,9 @@ Optimus currently has these checks:
 ##### Movement
 - GroundSpoof (A)
 
+##### Packets
+- BadPackets (A, B, C, D, E)
+
 ## Support
 You can join my [Discord](http://discord.gg/qJ2k4Bbcd7) for support. 
 

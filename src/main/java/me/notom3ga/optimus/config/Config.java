@@ -27,6 +27,38 @@ public class Config {
                 public static List<Object> PUNISH_COMMANDS;
             }
         }
+
+        public static class BadPackets {
+            public static class A {
+                public static boolean ENABLED, PUNISHABLE;
+                public static long VL, PUNISH_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+
+            public static class B {
+                public static boolean ENABLED, PUNISHABLE;
+                public static long VL, PUNISH_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+
+            public static class C {
+                public static boolean ENABLED, PUNISHABLE;
+                public static long VL, PUNISH_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+
+            public static class D {
+                public static boolean ENABLED, PUNISHABLE;
+                public static long VL, PUNISH_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+
+            public static class E {
+                public static boolean ENABLED, PUNISHABLE;
+                public static long VL, PUNISH_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+        }
     }
 
     public static class Settings {
@@ -57,6 +89,36 @@ public class Config {
             Checks.GroundSpoof.A.PUNISHABLE = toml.getBoolean("checks.groundspoof.a.punishable");
             Checks.GroundSpoof.A.PUNISH_VL = toml.getLong("checks.groundspoof.a.punish-vl");
             Checks.GroundSpoof.A.PUNISH_COMMANDS = toml.getArray("checks.groundspoof.a.punish-commands").toList();
+
+            Checks.BadPackets.A.ENABLED = toml.getBoolean("checks.badpackets.a.enabled");
+            Checks.BadPackets.A.VL = toml.getLong("checks.badpackets.a.vl");
+            Checks.BadPackets.A.PUNISHABLE = toml.getBoolean("checks.badpackets.a.punishable");
+            Checks.BadPackets.A.PUNISH_VL = toml.getLong("checks.badpackets.a.punish-vl");
+            Checks.BadPackets.A.PUNISH_COMMANDS = toml.getArray("checks.badpackets.a.punish-commands").toList();
+
+            Checks.BadPackets.B.ENABLED = toml.getBoolean("checks.badpackets.b.enabled");
+            Checks.BadPackets.B.VL = toml.getLong("checks.badpackets.b.vl");
+            Checks.BadPackets.B.PUNISHABLE = toml.getBoolean("checks.badpackets.b.punishable");
+            Checks.BadPackets.B.PUNISH_VL = toml.getLong("checks.badpackets.b.punish-vl");
+            Checks.BadPackets.B.PUNISH_COMMANDS = toml.getArray("checks.badpackets.b.punish-commands").toList();
+
+            Checks.BadPackets.C.ENABLED = toml.getBoolean("checks.badpackets.c.enabled");
+            Checks.BadPackets.C.VL = toml.getLong("checks.badpackets.c.vl");
+            Checks.BadPackets.C.PUNISHABLE = toml.getBoolean("checks.badpackets.c.punishable");
+            Checks.BadPackets.C.PUNISH_VL = toml.getLong("checks.badpackets.c.punish-vl");
+            Checks.BadPackets.C.PUNISH_COMMANDS = toml.getArray("checks.badpackets.c.punish-commands").toList();
+
+            Checks.BadPackets.D.ENABLED = toml.getBoolean("checks.badpackets.d.enabled");
+            Checks.BadPackets.D.VL = toml.getLong("checks.badpackets.d.vl");
+            Checks.BadPackets.D.PUNISHABLE = toml.getBoolean("checks.badpackets.d.punishable");
+            Checks.BadPackets.D.PUNISH_VL = toml.getLong("checks.badpackets.d.punish-vl");
+            Checks.BadPackets.D.PUNISH_COMMANDS = toml.getArray("checks.badpackets.d.punish-commands").toList();
+
+            Checks.BadPackets.E.ENABLED = toml.getBoolean("checks.badpackets.e.enabled");
+            Checks.BadPackets.E.VL = toml.getLong("checks.badpackets.e.vl");
+            Checks.BadPackets.E.PUNISHABLE = toml.getBoolean("checks.badpackets.e.punishable");
+            Checks.BadPackets.E.PUNISH_VL = toml.getLong("checks.badpackets.e.punish-vl");
+            Checks.BadPackets.E.PUNISH_COMMANDS = toml.getArray("checks.badpackets.e.punish-commands").toList();
 
             Settings.WAIT_BEFORE_CHECKING = toml.getLong("settings.wait-before-checking");
         } catch (NullPointerException e) {

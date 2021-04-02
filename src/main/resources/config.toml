@@ -35,6 +35,72 @@
             punish-commands = [
                 "kick {player} [Optimus] GroundSpoof A"
             ]
+    [checks.badpackets]
+        [checks.badpackets.a]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 100
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] BadPackets A"
+            ]
+        [checks.badpackets.b]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 100
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] BadPackets B"
+            ]
+        [checks.badpackets.c]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 100
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] BadPackets C"
+            ]
+        [checks.badpackets.d]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 100
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] BadPackets D"
+            ]
+        [checks.badpackets.e]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 100
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] BadPackets E"
+            ]
 
 [settings]
     # How long (in ms) to wait before checking the player when the first join
