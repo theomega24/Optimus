@@ -6,6 +6,7 @@ import me.notom3ga.optimus.user.DataManager;
 import me.notom3ga.optimus.user.PlayerData;
 import me.notom3ga.optimus.util.Constants;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,7 +25,7 @@ public class AlertManager {
         String hover = this.replacePlaceholders(hoverBuilder.toString(), player, check, vl).replace("{debug}", debug);
         TextComponent alert = Constants.LEGACY_SERIALIZER.deserialize(this.replacePlaceholders(Config.Alerts.FORMAT, player, check, vl)).hoverEvent(HoverEvent.showText(
                 Constants.LEGACY_SERIALIZER.deserialize(hover.substring(0, hover.length() - 1))
-        ));
+        )).clickEvent(ClickEvent.runCommand(Config.Alerts.CLICK_COMMAND.replace("{player}", player.getName())));
 
         Bukkit.getOnlinePlayers().forEach(alertable -> {
             if (alertable.hasPermission("optimus.alerts") && DataManager.getPlayerData(alertable).SEND_ALERTS) {

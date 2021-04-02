@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Config {
     public static class Alerts {
-        public static String FORMAT;
+        public static String FORMAT, CLICK_COMMAND;
         public static List<Object> HOVER_MESSAGE;
         public static boolean CONSOLE;
 
@@ -81,6 +81,7 @@ public class Config {
         try {
             Alerts.FORMAT = toml.getString("alerts.format");
             Alerts.HOVER_MESSAGE = toml.getArray("alerts.hover-message").toList();
+            Alerts.CLICK_COMMAND = toml.getString("alerts.click-command");
             Alerts.CONSOLE = toml.getBoolean("alerts.console");
 
             Alerts.Colors.GREEN = toml.getString("alerts.colors.green");

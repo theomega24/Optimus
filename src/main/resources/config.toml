@@ -22,17 +22,20 @@
         "&#D6D6D6Check Debug:",
         "&#A3A8F0{debug}"
     ]
+    # The command to run when clicking the alert, available placeholders are:
+    # {player} - The name of the player
+    click-command = "/tp {player}"
     # If alerts should be sent to the console
     console = false
 
     [alerts.colors]
         # The hex color used for green
         green = "#A3f0AB"
-        # The hex color used for green
+        # The hex color used for yellow
         yellow = "#EAF0A3"
-        # The hex color used for green
+        # The hex color used for red
         red = "#F0A3A3"
-        # The hex color used for green
+        # The hex color used for dark red
         dark-red = "#F77777"
         # The amount of VL for {color} to turn yellow
         yellow-vl = 50
@@ -42,20 +45,6 @@
         dark-red-vl = 200
 
 [checks]
-    [checks.groundspoof]
-        [checks.groundspoof.a]
-            # If this check is enabled
-            enabled = true
-            # The amount of VL to give the player each time this check is flagged
-            vl = 20
-            # If this check will punish
-            punishable = false
-            # How much VL does the player need to have to run the punishment
-            punish-vl = 200
-            # The commands to punish a player
-            punish-commands = [
-                "kick {player} [Optimus] GroundSpoof A"
-            ]
     [checks.badpackets]
         [checks.badpackets.a]
             # If this check is enabled
@@ -121,6 +110,20 @@
             # The commands to punish a player
             punish-commands = [
                 "kick {player} [Optimus] BadPackets E"
+            ]
+    [checks.groundspoof]
+        [checks.groundspoof.a]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 20
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] GroundSpoof A"
             ]
 
 [settings]
