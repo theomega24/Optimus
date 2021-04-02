@@ -9,12 +9,15 @@ version = "0.0-ALPHA"
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.opencollab.dev/maven-snapshots")
     mavenLocal()
 }
 
 dependencies {
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     compileOnly("com.destroystokyo.paper", "paper", "1.16.5-R0.1-SNAPSHOT")
+
+    compileOnly("org.geysermc", "floodgate-bukkit", "1.0-SNAPSHOT")
 
     implementation("org.tomlj", "tomlj", "1.0.0")
     implementation("cloud.commandframework", "cloud-paper", "1.4.0")

@@ -3,6 +3,8 @@ name: Optimus
 version: ${version}
 api-version: 1.16
 author: notOM3GA
+softdepend:
+  - floodgate-bukkit
 
 permissions:
   optimus.alerts:

@@ -28,7 +28,7 @@ public class AlertManager {
         )).clickEvent(ClickEvent.runCommand(Config.Alerts.CLICK_COMMAND.replace("{player}", player.getName())));
 
         Bukkit.getOnlinePlayers().forEach(alertable -> {
-            if (alertable.hasPermission("optimus.alerts") && DataManager.getPlayerData(alertable).SEND_ALERTS) {
+            if (DataManager.getPlayerData(alertable).SEND_ALERTS && alertable.hasPermission("optimus.alerts")) {
                 alertable.sendMessage(alert);
             }
         });

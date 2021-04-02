@@ -11,6 +11,7 @@ import me.notom3ga.optimus.check.impl.badpackets.BadPacketsE;
 import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.command.CommandManager;
 import me.notom3ga.optimus.config.Config;
+import me.notom3ga.optimus.hooks.FloodgateHook;
 import me.notom3ga.optimus.listener.PlayerListener;
 import me.notom3ga.optimus.punish.PunishmentManager;
 import me.notom3ga.optimus.util.Logger;
@@ -29,6 +30,8 @@ public class Optimus extends JavaPlugin {
     public PunishmentManager punishmentManager;
     public CommandManager commandManager;
 
+    public FloodgateHook floodgateHook;
+
     @Override
     public void onEnable() {
         if (!Config.load()) {
@@ -46,6 +49,8 @@ public class Optimus extends JavaPlugin {
             Logger.severe("Failed to load commands", e);
             getServer().getPluginManager().disablePlugin(this);
         }
+
+        this.floodgateHook = new FloodgateHook();
 
         this.checkManager.register(Config.Checks.BadPackets.A.ENABLED, new BadPacketsA());
         this.checkManager.register(Config.Checks.BadPackets.B.ENABLED, new BadPacketsB());
