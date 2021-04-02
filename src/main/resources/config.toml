@@ -8,17 +8,38 @@
     # {dev} - If the check is in development
     # {type} - The check type
     # {total} - The players total VL for that check
-    format = "&8[{color}!&8] {color}{player} &7failed &b{check} &7{dev}(&b{type}&7) &8&o({total})"
+    # {ping} - The players ping
+    # {tps} - The server tps
+    # {version} - The players client version
+    format = "&8[{color}!&8] {color}{player} &#D6D6D6failed &#A3A8F0{check} &#D6D6D6{dev}(&#A3A8F0{type}&#D6D6D6) &8&o({total})"
+    # Additional placeholders for the hover message:
+    # {debug} - Check debug information
+    hover-message = [
+        "&#D6D6D6Player Ping: &#A3A8F0{ping}",
+        "&#D6D6D6Server TPS: &#A3A8F0{tps}",
+        "&#D6D6D6Client Version: &#A3A8F0{version}",
+        "",
+        "&#D6D6D6Check Debug:",
+        "&#A3A8F0{debug}"
+    ]
     # If alerts should be sent to the console
     console = false
 
     [alerts.colors]
+        # The hex color used for green
+        green = "#A3f0AB"
+        # The hex color used for green
+        yellow = "#EAF0A3"
+        # The hex color used for green
+        red = "#F0A3A3"
+        # The hex color used for green
+        dark-red = "#F77777"
         # The amount of VL for {color} to turn yellow
-        yellow = 50
+        yellow-vl = 50
         # The amount of VL for {color} to turn red
-        red = 100
+        red-vl = 100
         # The amount of VL for {color} to turn dark red
-        dark-red = 200
+        dark-red-vl = 200
 
 [checks]
     [checks.groundspoof]

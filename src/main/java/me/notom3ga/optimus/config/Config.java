@@ -12,10 +12,12 @@ import java.util.List;
 public class Config {
     public static class Alerts {
         public static String FORMAT;
+        public static List<Object> HOVER_MESSAGE;
         public static boolean CONSOLE;
 
         public static class Colors {
-            public static long YELLOW, RED, DARK_RED;
+            public static String GREEN, YELLOW, RED, DARK_RED;
+            public static long YELLOW_VL, RED_VL, DARK_RED_VL;
         }
     }
 
@@ -78,11 +80,16 @@ public class Config {
 
         try {
             Alerts.FORMAT = toml.getString("alerts.format");
+            Alerts.HOVER_MESSAGE = toml.getArray("alerts.hover-message").toList();
             Alerts.CONSOLE = toml.getBoolean("alerts.console");
 
-            Alerts.Colors.YELLOW = toml.getLong("alerts.colors.yellow");
-            Alerts.Colors.RED = toml.getLong("alerts.colors.red");
-            Alerts.Colors.DARK_RED = toml.getLong("alerts.colors.dark-red");
+            Alerts.Colors.GREEN = toml.getString("alerts.colors.green");
+            Alerts.Colors.YELLOW = toml.getString("alerts.colors.yellow");
+            Alerts.Colors.RED = toml.getString("alerts.colors.red");
+            Alerts.Colors.DARK_RED = toml.getString("alerts.colors.dark-red");
+            Alerts.Colors.YELLOW_VL = toml.getLong("alerts.colors.yellow-vl");
+            Alerts.Colors.RED_VL = toml.getLong("alerts.colors.red-vl");
+            Alerts.Colors.DARK_RED_VL = toml.getLong("alerts.colors.dark-red-vl");
 
             Checks.GroundSpoof.A.ENABLED = toml.getBoolean("checks.groundspoof.a.enabled");
             Checks.GroundSpoof.A.VL = toml.getLong("checks.groundspoof.a.vl");
