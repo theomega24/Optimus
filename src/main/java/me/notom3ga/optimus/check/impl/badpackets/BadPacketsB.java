@@ -36,7 +36,7 @@ public class BadPacketsB extends Check {
 
             if (++data.TICKS > 20) {
                 data.BADPACKETSB_VL += Config.Checks.BadPackets.B.VL;
-                flag(player, data.BADPACKETSB_VL);
+                flag(player, "ticks=" + data.TICKS, data.BADPACKETSB_VL);
             }
         } else if (abstractPacket instanceof WrappedPlayInSteerVehicle) {
             data.TICKS = 0;

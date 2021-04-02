@@ -27,7 +27,7 @@ public class BadPacketsE extends Check {
 
         if (Math.abs(packet.getForward()) > .98F || Math.abs(packet.getSideways()) > .98F) {
             data.BADPACKETSE_VL += Config.Checks.BadPackets.E.VL;
-            flag(player, data.BADPACKETSE_VL);
+            flag(player, "forwards=" + packet.getForward() + " sideways=" + packet.getSideways(), data.BADPACKETSE_VL);
         }
     }
 }

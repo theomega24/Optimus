@@ -28,7 +28,10 @@ public abstract class Check {
     }
 
     public void flag(Player player, int vl) {
-        Optimus.INSTANCE.alertManager.alert(player, info, vl);
+        this.flag(player, "", vl);
+    }
+    public void flag(Player player, String debug, int vl) {
+        Optimus.INSTANCE.alertManager.alert(player, debug, info, vl);
     }
 
     public boolean isExempt(Player player) {

@@ -32,7 +32,7 @@ public class BadPacketsD extends Check {
 
         if (packet.getSlot() == data.LAST_SLOT) {
             data.BADPACKETSD_VL += Config.Checks.BadPackets.D.VL;
-            flag(player, data.BADPACKETSD_VL);
+            flag(player, "slot=" + packet.getSlot() + " last=" + data.LAST_SLOT, data.BADPACKETSD_VL);
         }
 
         data.LAST_SLOT = packet.getSlot();

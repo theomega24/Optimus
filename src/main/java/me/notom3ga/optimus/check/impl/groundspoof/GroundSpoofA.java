@@ -58,7 +58,7 @@ public class GroundSpoofA extends Check {
 
             if (!onBoat) {
                 data.GROUNDSPOOFA_VL += Config.Checks.GroundSpoof.A.VL;
-                flag(player, data.GROUNDSPOOFA_VL);
+                flag(player, "client=" + clientGround + " server=" + serverGround, data.GROUNDSPOOFA_VL);
             }
         }
     }

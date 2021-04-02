@@ -28,14 +28,14 @@ public class BadPacketsA extends Check {
         if (abstractPacket instanceof WrappedPlayInLook) {
             if (Math.abs(((WrappedPlayInLook) abstractPacket).getPitch()) > 90) {
                 data.BADPACKETSA_VL += Config.Checks.BadPackets.A.VL;
-                flag(player, data.BADPACKETSA_VL);
+                flag(player, "pitch=" + ((WrappedPlayInLook) abstractPacket).getPitch(), data.BADPACKETSA_VL);
             }
         }
 
         if (abstractPacket instanceof WrappedPlayInPositionLook) {
             if (Math.abs(((WrappedPlayInPositionLook) abstractPacket).getPitch()) > 90) {
                 data.BADPACKETSA_VL += Config.Checks.BadPackets.A.VL;
-                flag(player, data.BADPACKETSA_VL);
+                flag(player, "pitch=" + ((WrappedPlayInPositionLook) abstractPacket).getPitch(), data.BADPACKETSA_VL);
             }
         }
     }

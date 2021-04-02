@@ -1,6 +1,6 @@
 package me.notom3ga.optimus;
 
-import me.notom3ga.optimus.alerts.AlertManager;
+import me.notom3ga.optimus.alert.AlertManager;
 import me.notom3ga.optimus.channel.BrandChannelListener;
 import me.notom3ga.optimus.check.CheckManager;
 import me.notom3ga.optimus.check.impl.badpackets.BadPacketsA;
