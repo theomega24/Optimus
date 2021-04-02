@@ -45,6 +45,11 @@
         dark-red-vl = 200
 
 [checks]
+    # Should a players VL go down over time
+    decay = true
+    # How much VL should be removed from the player per-check/per-minute
+    decay-vl = 25
+
     [checks.badpackets]
         [checks.badpackets.a]
             # If this check is enabled

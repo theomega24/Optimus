@@ -22,13 +22,8 @@ public class Config {
     }
 
     public static class Checks {
-        public static class GroundSpoof {
-            public static class A {
-                public static boolean ENABLED, PUNISHABLE;
-                public static long VL, PUNISH_VL;
-                public static List<Object> PUNISH_COMMANDS;
-            }
-        }
+        public static boolean DECAY;
+        public static long DECAY_VL;
 
         public static class BadPackets {
             public static class A {
@@ -56,6 +51,14 @@ public class Config {
             }
 
             public static class E {
+                public static boolean ENABLED, PUNISHABLE;
+                public static long VL, PUNISH_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+        }
+
+        public static class GroundSpoof {
+            public static class A {
                 public static boolean ENABLED, PUNISHABLE;
                 public static long VL, PUNISH_VL;
                 public static List<Object> PUNISH_COMMANDS;
@@ -92,11 +95,8 @@ public class Config {
             Alerts.Colors.RED_VL = toml.getLong("alerts.colors.red-vl");
             Alerts.Colors.DARK_RED_VL = toml.getLong("alerts.colors.dark-red-vl");
 
-            Checks.GroundSpoof.A.ENABLED = toml.getBoolean("checks.groundspoof.a.enabled");
-            Checks.GroundSpoof.A.VL = toml.getLong("checks.groundspoof.a.vl");
-            Checks.GroundSpoof.A.PUNISHABLE = toml.getBoolean("checks.groundspoof.a.punishable");
-            Checks.GroundSpoof.A.PUNISH_VL = toml.getLong("checks.groundspoof.a.punish-vl");
-            Checks.GroundSpoof.A.PUNISH_COMMANDS = toml.getArray("checks.groundspoof.a.punish-commands").toList();
+            Checks.DECAY = toml.getBoolean("checks.decay");
+            Checks.DECAY_VL = toml.getLong("checks.decay-vl");
 
             Checks.BadPackets.A.ENABLED = toml.getBoolean("checks.badpackets.a.enabled");
             Checks.BadPackets.A.VL = toml.getLong("checks.badpackets.a.vl");
@@ -127,6 +127,12 @@ public class Config {
             Checks.BadPackets.E.PUNISHABLE = toml.getBoolean("checks.badpackets.e.punishable");
             Checks.BadPackets.E.PUNISH_VL = toml.getLong("checks.badpackets.e.punish-vl");
             Checks.BadPackets.E.PUNISH_COMMANDS = toml.getArray("checks.badpackets.e.punish-commands").toList();
+
+            Checks.GroundSpoof.A.ENABLED = toml.getBoolean("checks.groundspoof.a.enabled");
+            Checks.GroundSpoof.A.VL = toml.getLong("checks.groundspoof.a.vl");
+            Checks.GroundSpoof.A.PUNISHABLE = toml.getBoolean("checks.groundspoof.a.punishable");
+            Checks.GroundSpoof.A.PUNISH_VL = toml.getLong("checks.groundspoof.a.punish-vl");
+            Checks.GroundSpoof.A.PUNISH_COMMANDS = toml.getArray("checks.groundspoof.a.punish-commands").toList();
 
             Settings.WAIT_BEFORE_CHECKING = toml.getLong("settings.wait-before-checking");
         } catch (NullPointerException e) {
