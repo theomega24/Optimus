@@ -37,12 +37,12 @@ public abstract class Check {
     public boolean isExempt(Player player) {
         PlayerData data = DataManager.getPlayerData(player);
         return data.EXEMPT
-                || player.hasPermission("optimus.bypass")
-                || player.hasPermission("optimus.bypass." + info.name().toLowerCase(Locale.ROOT))
-                || player.hasPermission("optimus.bypass." + info.name().toLowerCase(Locale.ROOT) + "." + info.type().toLowerCase(Locale.ROOT))
                 || player.getGameMode() == GameMode.CREATIVE
                 || player.getGameMode() == GameMode.SPECTATOR
-                || System.currentTimeMillis() - data.FIRST_JOINED <= Config.Settings.WAIT_BEFORE_CHECKING;
+                || System.currentTimeMillis() - data.FIRST_JOINED <= Config.Settings.WAIT_BEFORE_CHECKING
+                || player.hasPermission("optimus.bypass")
+                || player.hasPermission("optimus.bypass." + info.name().toLowerCase(Locale.ROOT))
+                || player.hasPermission("optimus.bypass." + info.name().toLowerCase(Locale.ROOT) + "." + info.type().toLowerCase(Locale.ROOT));
     }
 
     public abstract void handle(Player player, AbstractPacket abstractPacket);

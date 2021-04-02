@@ -67,7 +67,7 @@ public class Config {
     }
 
     public static class Settings {
-        public static long WAIT_BEFORE_CHECKING = 5000;
+        public static long WAIT_BEFORE_CHECKING;
     }
 
     public static boolean load() {

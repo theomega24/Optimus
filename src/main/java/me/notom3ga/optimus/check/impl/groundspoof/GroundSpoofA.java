@@ -24,7 +24,6 @@ public class GroundSpoofA extends Check {
     @Override
     public void handle(Player player, AbstractPacket abstractPacket) {
         if (isExempt(player)) return;
-
         WrappedPlayInPosition packet = (WrappedPlayInPosition) abstractPacket;
         PlayerData data = DataManager.getPlayerData(player);
 
@@ -36,7 +35,7 @@ public class GroundSpoofA extends Check {
         boolean clientGround = packet.isOnGround(),
                 serverGround = packet.getY() % 0.015625 == 0;
 
-        if (clientGround != serverGround) {
+        if (clientGround && !serverGround) {
             boolean onBoat = false;
 
             AtomicBoolean waiting = new AtomicBoolean(true);
@@ -58,7 +57,7 @@ public class GroundSpoofA extends Check {
 
             if (!onBoat) {
                 data.GROUNDSPOOFA_VL += Config.Checks.GroundSpoof.A.VL;
-                flag(player, "client=" + clientGround + " server=" + serverGround, data.GROUNDSPOOFA_VL);
+                flag(player, "client=true server=false", data.GROUNDSPOOFA_VL);
             }
         }
     }
