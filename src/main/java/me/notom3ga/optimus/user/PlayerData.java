@@ -21,7 +21,7 @@ public class PlayerData {
             BADPACKETSE_VL = 0;
 
     public int getMovementVL() { return GROUNDSPOOFA_VL; }
-    public int getPacketVL() { return BADPACKETSA_VL + BADPACKETSB_VL + BADPACKETSC_VL; }
+    public int getPacketVL() { return BADPACKETSA_VL + BADPACKETSB_VL + BADPACKETSC_VL + BADPACKETSD_VL + BADPACKETSE_VL; }
     public int getTotalVL() { return getMovementVL() + getPacketVL(); }
 
     public String VERSION = "Unknown",

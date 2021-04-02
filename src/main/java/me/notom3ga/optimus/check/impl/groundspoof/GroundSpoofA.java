@@ -46,7 +46,7 @@ public class GroundSpoofA extends Check {
                 waiting.set(false);
             });
 
-            while (waiting.get());
+            while (waiting.get()) {}
 
             for (Entity entity : nearby.get()) {
                 if (entity.getType() == EntityType.BOAT && packet.getY() > entity.getLocation().getY() && entity.getLocation().getY() + 0.6 > packet.getY()) {
