@@ -24,6 +24,7 @@ public class PlayerListener implements Listener {
 
         if (Optimus.INSTANCE.floodgateHook.isEnabled() && FloodgateAPI.isBedrockPlayer(event.getPlayer())) {
             data.EXEMPT = true;
+            return;
         }
 
         PacketInjector.inject(event.getPlayer());
