@@ -1,0 +1,41 @@
+# Optimus Configuration
+
+[alerts]
+    # The format alerts will use, available placeholders are:
+    # {color} - The color of the alerts (set below)
+    # {player} - The name of the player
+    # {check} - The name of the check
+    # {dev} - If the check is in development
+    # {type} - The check type
+    # {total} - The players total VL for that check
+    format = "&8[{color}!&8] {color}{player} &7failed &b{check} &7{dev}(&b{type}&7) &8&o({total})"
+    # If alerts should be sent to the console
+    console = false
+
+    [alerts.colors]
+        # The amount of VL for {color} to turn yellow
+        yellow = 50
+        # The amount of VL for {color} to turn red
+        red = 100
+        # The amount of VL for {color} to turn dark red
+        dark-red = 200
+
+[checks]
+    [checks.groundspoof]
+        [checks.groundspoof.a]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 20
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] GroundSpoof A"
+            ]
+
+[settings]
+    # How long (in ms) to wait before checking the player when the first join
+    wait-before-checking = 1000

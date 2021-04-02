@@ -1,0 +1,19 @@
+main: me.notom3ga.optimus.Optimus
+name: Optimus
+version: ${version}
+api-version: 1.16
+author: notOM3GA
+
+permissions:
+  optimus.alerts:
+    description: Allow the player to recieve alerts.
+    default: false
+  optimus.bypass:
+    description: Bypass all checks.
+    default: false
+  optimus.bypass.groundspoof:
+    description: Bypass all GroundSpoof checks.
+    default: false
+  optimus.bypass.groundspoof.a:
+    description: Bypass GroundSpoof A.
+    default: false
