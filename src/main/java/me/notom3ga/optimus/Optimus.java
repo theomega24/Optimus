@@ -11,6 +11,12 @@ import me.notom3ga.optimus.check.impl.badpackets.BadPacketsD;
 import me.notom3ga.optimus.check.impl.badpackets.BadPacketsE;
 import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.command.CommandManager;
+import me.notom3ga.optimus.command.impl.AlertsCommand;
+import me.notom3ga.optimus.command.impl.ConnectionCommand;
+import me.notom3ga.optimus.command.impl.HelpCommand;
+import me.notom3ga.optimus.command.impl.OptimusCommand;
+import me.notom3ga.optimus.command.impl.ProfileCommand;
+import me.notom3ga.optimus.command.impl.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hooks.FloodgateHook;
 import me.notom3ga.optimus.listener.PlayerListener;
@@ -45,7 +51,13 @@ public class Optimus extends JavaPlugin {
 
         try {
             this.commandManager = new CommandManager(this);
-            this.commandManager.setup();
+
+            this.commandManager.register(new AlertsCommand());
+            this.commandManager.register(new ConnectionCommand());
+            this.commandManager.register(new HelpCommand());
+            this.commandManager.register(new OptimusCommand());
+            this.commandManager.register(new ProfileCommand());
+            this.commandManager.register(new ResetCommand());
         } catch (Exception e) {
             Logger.severe("Failed to load commands", e);
             getServer().getPluginManager().disablePlugin(this);

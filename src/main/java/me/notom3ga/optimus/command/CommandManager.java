@@ -31,7 +31,7 @@ public class CommandManager extends PaperCommandManager<CommandSender> {
         this.parser = new AnnotationParser<>(this, CommandSender.class, parameters -> SimpleCommandMeta.empty());
     }
 
-    public void setup() {
-        this.parser.parse(new Command());
+    public void register(Object command) {
+        this.parser.parse(command);
     }
 }
