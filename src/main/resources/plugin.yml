@@ -19,3 +19,21 @@ permissions:
   optimus.bypass.groundspoof.a:
     description: Bypass GroundSpoof A.
     default: false
+  optimus.bypass.badpackets:
+    description: Bypass all BadPacket checks
+    default: false
+  optimus.bypass.badpackets.a:
+    description: Bypass BadPackets A.
+    default: false
+  optimus.bypass.badpackets.b:
+    description: Bypass BadPackets B.
+    default: false
+  optimus.bypass.badpackets.c:
+    description: Bypass BadPackets C.
+    default: false
+  optimus.bypass.badpackets.d:
+    description: Bypass BadPackets D.
+    default: false
+  optimus.bypass.badpackets.e:
+    description: Bypass BadPackets E.
+    default: false
