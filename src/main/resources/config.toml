@@ -45,11 +45,6 @@
         dark-red-vl = 200
 
 [checks]
-    # Should a players VL go down over time
-    decay = true
-    # How much VL should be removed from the player per-check/per-minute
-    decay-vl = 25
-
     [checks.badpackets]
         [checks.badpackets.a]
             # If this check is enabled
@@ -64,6 +59,10 @@
             punish-commands = [
                 "kick {player} [Optimus] BadPackets A"
             ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 25
         [checks.badpackets.b]
             # If this check is enabled
             enabled = true
@@ -77,6 +76,10 @@
             punish-commands = [
                 "kick {player} [Optimus] BadPackets B"
             ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 25
         [checks.badpackets.c]
             # If this check is enabled
             enabled = true
@@ -90,6 +93,10 @@
             punish-commands = [
                 "kick {player} [Optimus] BadPackets C"
             ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 25
         [checks.badpackets.d]
             # If this check is enabled
             enabled = true
@@ -103,6 +110,10 @@
             punish-commands = [
                 "kick {player} [Optimus] BadPackets D"
             ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 25
         [checks.badpackets.e]
             # If this check is enabled
             enabled = true
@@ -116,6 +127,10 @@
             punish-commands = [
                 "kick {player} [Optimus] BadPackets E"
             ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 25
     [checks.groundspoof]
         [checks.groundspoof.a]
             # If this check is enabled
@@ -130,6 +145,10 @@
             punish-commands = [
                 "kick {player} [Optimus] GroundSpoof A"
             ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 25
 
 [settings]
     # How long (in ms) to wait before checking the player when they first join

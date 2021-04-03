@@ -9,10 +9,24 @@ import me.notom3ga.optimus.packet.wrapper.AbstractPacket;
 import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInUseEntity;
 import me.notom3ga.optimus.user.DataManager;
 import me.notom3ga.optimus.user.PlayerData;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CheckInfo(name = "BadPackets", type = "C", category = Category.PACKET, packets = "PacketPlayInUseEntity")
 public class BadPacketsC extends Check {
+
+    public BadPacketsC() {
+        super();
+        if (Config.Checks.BadPackets.C.ENABLED) {
+            Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.INSTANCE, () -> {
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    PlayerData data = DataManager.getPlayerData(player);
+                    data.BADPACKETSC_VL -= Config.Checks.BadPackets.C.DECAY_VL;
+                    if (data.BADPACKETSC_VL <= 0) data.BADPACKETSC_VL = 0;
+                });
+            }, 1200, 1200);
+        }
+    }
 
     @Override
     public void handle(Player player, AbstractPacket abstractPacket) {

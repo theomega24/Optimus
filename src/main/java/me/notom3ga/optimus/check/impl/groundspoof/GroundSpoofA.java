@@ -21,6 +21,19 @@ import java.util.concurrent.atomic.AtomicReference;
 @CheckInfo(name = "GroundSpoof", type = "A", category = Category.MOVEMENT, packets = {"PacketPlayInPosition", "PacketPlayInPositionLook"})
 public class GroundSpoofA extends Check {
 
+    public GroundSpoofA() {
+        super();
+        if (Config.Checks.GroundSpoof.A.ENABLED) {
+            Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.INSTANCE, () -> {
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    PlayerData data = DataManager.getPlayerData(player);
+                    data.GROUNDSPOOFA_VL -= Config.Checks.GroundSpoof.A.DECAY_VL;
+                    if (data.GROUNDSPOOFA_VL <= 0) data.GROUNDSPOOFA_VL = 0;
+                });
+            }, 1200, 1200);
+        }
+    }
+
     @Override
     public void handle(Player player, AbstractPacket abstractPacket) {
         if (isExempt(player)) return;

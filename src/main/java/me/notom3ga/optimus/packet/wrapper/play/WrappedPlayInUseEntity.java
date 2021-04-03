@@ -4,6 +4,9 @@ import me.notom3ga.optimus.packet.wrapper.AbstractPacket;
 import net.minecraft.server.v1_16_R3.EnumHand;
 import net.minecraft.server.v1_16_R3.PacketPlayInUseEntity;
 import net.minecraft.server.v1_16_R3.Vec3D;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
+import org.bukkit.entity.Entity;
 
 public class WrappedPlayInUseEntity extends AbstractPacket {
     public final int entityId;
@@ -40,5 +43,9 @@ public class WrappedPlayInUseEntity extends AbstractPacket {
 
     public boolean isSecondary() {
         return this.secondary;
+    }
+
+    public Entity getInteracted(World world) {
+        return ((PacketPlayInUseEntity) getPacket()).a(((CraftWorld) world).getHandle()).getBukkitEntity();
     }
 }
