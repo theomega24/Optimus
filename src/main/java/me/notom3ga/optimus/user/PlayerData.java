@@ -13,16 +13,18 @@ public class PlayerData {
         return this.player;
     }
 
-    public int GROUNDSPOOFA_VL = 0,
+    public int AIMA_VL = 0,
+             GROUNDSPOOFA_VL = 0,
             BADPACKETSA_VL = 0,
             BADPACKETSB_VL = 0,
             BADPACKETSC_VL = 0,
             BADPACKETSD_VL = 0,
             BADPACKETSE_VL = 0;
 
+    public int getCombatVL() { return AIMA_VL; }
     public int getMovementVL() { return GROUNDSPOOFA_VL; }
     public int getPacketVL() { return BADPACKETSA_VL + BADPACKETSB_VL + BADPACKETSC_VL + BADPACKETSD_VL + BADPACKETSE_VL; }
-    public int getTotalVL() { return getMovementVL() + getPacketVL(); }
+    public int getTotalVL() { return getCombatVL() + getMovementVL() + getPacketVL(); }
 
     public String VERSION = "Unknown",
             CLIENT_BRAND = "Unknown";
@@ -39,4 +41,8 @@ public class PlayerData {
 
     // BadPackets D
     public int LAST_SLOT = -1;
+
+    // Aim A
+    public Float LAST_YAW,
+            LAST_PITCH;
 }

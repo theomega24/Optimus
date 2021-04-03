@@ -22,6 +22,14 @@ public class Config {
     }
 
     public static class Checks {
+        public static class Aim {
+            public static class A {
+                public static boolean ENABLED, PUNISHABLE, DECAY;
+                public static long VL, PUNISH_VL, DECAY_VL;
+                public static List<Object> PUNISH_COMMANDS;
+            }
+        }
+
         public static class BadPackets {
             public static class A {
                 public static boolean ENABLED, PUNISHABLE, DECAY;
@@ -91,6 +99,14 @@ public class Config {
             Alerts.Colors.YELLOW_VL = toml.getLong("alerts.colors.yellow-vl");
             Alerts.Colors.RED_VL = toml.getLong("alerts.colors.red-vl");
             Alerts.Colors.DARK_RED_VL = toml.getLong("alerts.colors.dark-red-vl");
+
+            Checks.Aim.A.ENABLED = toml.getBoolean("checks.aim.a.enabled");
+            Checks.Aim.A.VL = toml.getLong("checks.aim.a.vl");
+            Checks.Aim.A.PUNISHABLE = toml.getBoolean("checks.aim.a.punishable");
+            Checks.Aim.A.PUNISH_VL = toml.getLong("checks.aim.a.punish-vl");
+            Checks.Aim.A.PUNISH_COMMANDS = toml.getArray("checks.aim.a.punish-commands").toList();
+            Checks.Aim.A.DECAY = toml.getBoolean("checks.aim.a.decay");
+            Checks.Aim.A.DECAY_VL = toml.getLong("checks.aim.a.decay-vl");
 
             Checks.BadPackets.A.ENABLED = toml.getBoolean("checks.badpackets.a.enabled");
             Checks.BadPackets.A.VL = toml.getLong("checks.badpackets.a.vl");

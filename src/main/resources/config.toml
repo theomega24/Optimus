@@ -45,6 +45,24 @@
         dark-red-vl = 200
 
 [checks]
+    [checks.aim]
+        [checks.aim.a]
+            # If this check is enabled
+            enabled = true
+            # The amount of VL to give the player each time this check is flagged
+            vl = 10
+            # If this check will punish
+            punishable = false
+            # How much VL does the player need to have to run the punishment
+            punish-vl = 200
+            # The commands to punish a player
+            punish-commands = [
+                "kick {player} [Optimus] Aim A"
+            ]
+            # Should a players VL go down over time
+            decay = true
+            # How much VL should be removed from the player per-minute
+            decay-vl = 5
     [checks.badpackets]
         [checks.badpackets.a]
             # If this check is enabled

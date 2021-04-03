@@ -3,6 +3,7 @@ package me.notom3ga.optimus;
 import me.notom3ga.optimus.alert.AlertManager;
 import me.notom3ga.optimus.channel.BrandChannelListener;
 import me.notom3ga.optimus.check.CheckManager;
+import me.notom3ga.optimus.check.impl.aim.AimA;
 import me.notom3ga.optimus.check.impl.badpackets.BadPacketsA;
 import me.notom3ga.optimus.check.impl.badpackets.BadPacketsB;
 import me.notom3ga.optimus.check.impl.badpackets.BadPacketsC;
@@ -52,6 +53,7 @@ public class Optimus extends JavaPlugin {
 
         this.floodgateHook = new FloodgateHook();
 
+        this.checkManager.register(Config.Checks.Aim.A.ENABLED, new AimA());
         this.checkManager.register(Config.Checks.BadPackets.A.ENABLED, new BadPacketsA());
         this.checkManager.register(Config.Checks.BadPackets.B.ENABLED, new BadPacketsB());
         this.checkManager.register(Config.Checks.BadPackets.C.ENABLED, new BadPacketsC());

@@ -37,3 +37,9 @@ permissions:
   optimus.bypass.badpackets.e:
     description: Bypass BadPackets E.
     default: false
+  optimus.bypass.aim:
+    description: Bypass all Aim checks
+    default: false
+  optimus.bypass.aim.a:
+    description: Bypass Aim A.
+    default: false
