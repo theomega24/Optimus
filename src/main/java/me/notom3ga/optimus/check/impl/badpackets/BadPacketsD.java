@@ -49,6 +49,7 @@ public class BadPacketsD extends Check {
             flag(player, "slot=" + packet.getSlot() + " last=" + data.LAST_SLOT, data.BADPACKETSD_VL);
         }
 
+
         data.LAST_SLOT = packet.getSlot();
     }
 }

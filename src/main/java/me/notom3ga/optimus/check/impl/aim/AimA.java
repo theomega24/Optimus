@@ -52,6 +52,7 @@ public class AimA extends Check {
                     deltaPitch = Math.abs(packet.getPitch() - data.LAST_PITCH);
 
             if ((deltaYaw > .5F && deltaPitch < .0001 && deltaPitch > 0) || (deltaPitch > .5F && deltaYaw < .0001 && deltaYaw > 0)) {
+                data.AIMA_VL += Config.Checks.Aim.A.VL;
                 flag(player, "deltaYaw=" + deltaYaw + " deltaPitch=" + deltaPitch, 5);
             }
         } else if (abstractPacket instanceof WrappedPlayInPositionLook) {
@@ -72,6 +73,7 @@ public class AimA extends Check {
                     deltaPitch = Math.abs(packet.getPitch() - data.LAST_PITCH);
 
             if ((deltaYaw > .5F && deltaPitch < .0001 && deltaPitch > 0) || (deltaPitch > .5F && deltaYaw < .0001 && deltaYaw > 0)) {
+                data.AIMA_VL += Config.Checks.Aim.A.VL;
                 flag(player, "deltaYaw=" + deltaYaw + " deltaPitch=" + deltaPitch, 5);
             }
         }
