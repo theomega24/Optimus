@@ -35,6 +35,11 @@ public abstract class MovementCheck implements Check {
         this.type = type;
         this.category = category;
         this.packets = packets;
+
+        Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.instance, () -> {
+            this.vl -= config.getInt("decay");
+            if (this.vl <= 0) this.vl = 0;
+        }, 1200, 1200);
     }
 
     @Override
