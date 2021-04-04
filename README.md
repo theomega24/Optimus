@@ -1,14 +1,5 @@
 # Optimus
-A next generation (WIP) AntiCheat for Paper servers.
-
-## Checks
-Optimus currently has these checks:
-
-##### Movement
-- GroundSpoof (A)
-
-##### Packets
-- BadPackets (A, B, C, D, E)
+A next generation (WIP) predictive AntiCheat for Paper servers.
 
 ## Support
 You can join my [Discord](http://discord.gg/qJ2k4Bbcd7) for support. 
