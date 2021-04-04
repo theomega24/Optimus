@@ -28,7 +28,7 @@ checks:
       enabled: true
       vl: 20
       decay: 10
-      punishable: true
+      punishable: false
       punish-vl: 200
       punish-commands:
         - "kick {player} GroundSpoof A"
