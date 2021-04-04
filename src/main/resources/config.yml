@@ -1,0 +1,37 @@
+# Optimus Configuration
+
+alerts:
+  format: "&8[{color}!&8] {color}{player} &#D6D6D6failed &#A3A8F0{check} &#D6D6D6(&#A3A8F0{type}&#D6D6D6) &8&o({total})"
+  hover-message: |
+    &#D6D6D6Player Ping: &#A3A8F0{ping}
+    &#D6D6D6Server TPS: &#A3A8F0{tps}
+    &#D6D6D6Client Version: &#A3A8F0{version}
+
+    &#D6D6D6Check Debug:
+    &#A3A8F0{debug}
+  click-command: "/tp {player}"
+  console: false
+
+  colors:
+    green: "#A3f0AB"
+    yellow: "#EAF0A3"
+    red: "#F0A3A3"
+    dark-red: "#F77777"
+
+    yellow-vl: 50
+    red-vl: 100
+    dark-red-vl: 200
+
+checks:
+  groundspoof:
+    a:
+      enabled: true
+      vl: 20
+      decay: 10
+      punishable: true
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} GroundSpoof A"
+
+settings:
+  join-exemption: 1000

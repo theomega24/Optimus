@@ -1,38 +1,32 @@
 package me.notom3ga.optimus.listener;
 
-import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.packet.PacketInjector;
-import me.notom3ga.optimus.user.DataManager;
-import me.notom3ga.optimus.user.PlayerData;
+import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserManager;
 import me.notom3ga.optimus.util.ProtocolVersion;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.geysermc.floodgate.FloodgateAPI;
 
 public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        ((CraftPlayer) event.getPlayer()).addChannel("minecraft:brand");
+        User user = UserManager.getUser(event.getPlayer());
+        user.join = System.currentTimeMillis();
+        user.version = ProtocolVersion.toString(event.getPlayer().getProtocolVersion());
 
-        PlayerData data = DataManager.getPlayerData(event.getPlayer());
-        data.VERSION = ProtocolVersion.toString(event.getPlayer().getProtocolVersion());
-        data.FIRST_JOINED = System.currentTimeMillis();
+        PacketInjector.inject(user);
 
-        if (Optimus.INSTANCE.floodgateHook.isEnabled() && FloodgateAPI.isBedrockPlayer(event.getPlayer())) {
-            data.EXEMPT = true;
-            return;
-        }
-
-        PacketInjector.inject(event.getPlayer());
+        user.addCheck(new GroundSpoofA(user));
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        PacketInjector.remove(event.getPlayer());
-        DataManager.remove(event.getPlayer());
+        User user = UserManager.getUser(event.getPlayer());
+        PacketInjector.remove(user);
+        UserManager.removeUser(event.getPlayer());
     }
 }

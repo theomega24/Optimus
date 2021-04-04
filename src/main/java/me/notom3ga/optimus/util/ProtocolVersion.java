@@ -1,7 +1,6 @@
 package me.notom3ga.optimus.util;
 
 public class ProtocolVersion {
-
     public static String toString(int version) {
         switch (version) {
             case 754:

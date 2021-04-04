@@ -1,12 +1,13 @@
-package me.notom3ga.optimus.packet.wrapper.play;
+package me.notom3ga.optimus.packet.wrapper.play.in;
 
 import net.minecraft.server.v1_16_R3.PacketPlayInFlying;
 
-public class WrappedPlayInLook extends WrappedPlayInFlying {
+public class PacketPosRot extends PacketPos {
     private final float yaw, pitch;
 
-    public WrappedPlayInLook(PacketPlayInFlying packet) {
+    public PacketPosRot(PacketPlayInFlying packet) {
         super(packet);
+
         this.yaw = packet.a(0F);
         this.pitch = packet.b(0F);
     }

@@ -1,39 +1,22 @@
 package me.notom3ga.optimus.packet.wrapper;
 
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInHeldItemSlot;
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInLook;
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInPosition;
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInPositionLook;
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInSteerVehicle;
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInUseEntity;
-import net.minecraft.server.v1_16_R3.Packet;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketPosRot;
 import net.minecraft.server.v1_16_R3.PacketPlayInFlying;
-import net.minecraft.server.v1_16_R3.PacketPlayInHeldItemSlot;
-import net.minecraft.server.v1_16_R3.PacketPlayInSteerVehicle;
-import net.minecraft.server.v1_16_R3.PacketPlayInUseEntity;
 
 public class PacketWrapper {
-
-    public static AbstractPacket toOptimus(Packet<?> packet) {
+    public static Packet wrap(net.minecraft.server.v1_16_R3.Packet<?> packet) {
         switch (packet.getClass().getSimpleName()) {
-            case "PacketPlayInHeldItemSlot":
-                return new WrappedPlayInHeldItemSlot((PacketPlayInHeldItemSlot) packet);
-            case "PacketPlayInLook":
-                return new WrappedPlayInLook((PacketPlayInFlying) packet);
             case "PacketPlayInPosition":
-                return new WrappedPlayInPosition((PacketPlayInFlying) packet);
+                return new PacketPos((PacketPlayInFlying.PacketPlayInPosition) packet);
             case "PacketPlayInPositionLook":
-                return new WrappedPlayInPositionLook((PacketPlayInFlying) packet);
-            case "PacketPlayInSteerVehicle":
-                return new WrappedPlayInSteerVehicle((PacketPlayInSteerVehicle) packet);
-            case "PacketPlayInUseEntity":
-                return new WrappedPlayInUseEntity((PacketPlayInUseEntity) packet);
+                return new PacketPosRot((PacketPlayInFlying.PacketPlayInPositionLook) packet);
             default:
-                throw new IllegalArgumentException("Failed to get wrapper for " + packet.getClass().getName());
+                throw new IllegalArgumentException(packet.getClass().getSimpleName() + " does not have a wrapper!");
         }
     }
 
-    public static Packet<?> toNMS(AbstractPacket packet) {
-        return packet.getPacket();
+    public static net.minecraft.server.v1_16_R3.Packet<?> unwrap(Packet packet) {
+        return packet.getNMSPacket();
     }
 }

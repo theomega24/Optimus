@@ -1,76 +1,44 @@
 package me.notom3ga.optimus.check.impl.groundspoof;
 
-import me.notom3ga.optimus.Optimus;
-import me.notom3ga.optimus.check.Check;
-import me.notom3ga.optimus.check.setup.Category;
-import me.notom3ga.optimus.check.setup.CheckInfo;
-import me.notom3ga.optimus.config.Config;
-import me.notom3ga.optimus.packet.wrapper.AbstractPacket;
-import me.notom3ga.optimus.packet.wrapper.play.WrappedPlayInPosition;
-import me.notom3ga.optimus.user.DataManager;
-import me.notom3ga.optimus.user.PlayerData;
-import org.bukkit.Bukkit;
+import me.notom3ga.optimus.check.MovementCheck;
+import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.packet.wrapper.Packet;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
+import me.notom3ga.optimus.user.User;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-@CheckInfo(name = "GroundSpoof", type = "A", category = Category.MOVEMENT, packets = {"PacketPlayInPosition", "PacketPlayInPositionLook"})
-public class GroundSpoofA extends Check {
+public class GroundSpoofA extends MovementCheck {
 
-    public GroundSpoofA() {
-        super();
-        if (Config.Checks.GroundSpoof.A.ENABLED) {
-            Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.INSTANCE, () -> {
-                Bukkit.getOnlinePlayers().forEach(player -> {
-                    PlayerData data = DataManager.getPlayerData(player);
-                    data.GROUNDSPOOFA_VL -= Config.Checks.GroundSpoof.A.DECAY_VL;
-                    if (data.GROUNDSPOOFA_VL <= 0) data.GROUNDSPOOFA_VL = 0;
-                });
-            }, 1200, 1200);
-        }
+    public GroundSpoofA(User user) {
+        super(user, "GroundSpoof", "A", Category.MOVEMENT, new String[]{"PacketPos", "PacketPosRot"});
     }
 
     @Override
-    public void handle(Player player, AbstractPacket abstractPacket) {
-        if (isExempt(player)) return;
-        WrappedPlayInPosition packet = (WrappedPlayInPosition) abstractPacket;
-        PlayerData data = DataManager.getPlayerData(player);
+    public void handleMovement(Packet pkt) {
+        PacketPos packet = (PacketPos) pkt;
 
-        if (Config.Checks.GroundSpoof.A.PUNISHABLE && data.GROUNDSPOOFA_VL >= Config.Checks.GroundSpoof.A.PUNISH_VL) {
-            Optimus.INSTANCE.punishmentManager.punish(player, Config.Checks.GroundSpoof.A.PUNISH_COMMANDS);
-            return;
-        }
+        boolean client = packet.isOnGround(),
+                server = packet.getY() % 0.015625 == 0;
 
-        boolean clientGround = packet.isOnGround(),
-                serverGround = packet.getY() % 0.015625 == 0;
+        if (client && !server) {
+            boolean boat = false;
 
-        if (clientGround && !serverGround) {
-            boolean onBoat = false;
-
-            AtomicBoolean waiting = new AtomicBoolean(true);
             AtomicReference<List<Entity>> nearby = new AtomicReference<>();
-
-            Bukkit.getScheduler().runTask(Optimus.INSTANCE, () -> {
-                nearby.set(player.getNearbyEntities(1, 1, 1));
-                waiting.set(false);
-            });
-
-            while (waiting.get()) {}
+            sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1, 1, 1)));
 
             for (Entity entity : nearby.get()) {
-                if (entity.getType() == EntityType.BOAT && packet.getY() > entity.getLocation().getY() && entity.getLocation().getY() + 0.6 > packet.getY()) {
-                    onBoat = true;
+                if (entity.getType() == EntityType.BOAT && packet.getY() > entity.getLocation().getY() && packet.getY() < entity.getLocation().getY() + 0.6) {
+                    boat = true;
                     break;
                 }
             }
 
-            if (!onBoat) {
-                data.GROUNDSPOOFA_VL += Config.Checks.GroundSpoof.A.VL;
-                flag(player, "client=true server=false", data.GROUNDSPOOFA_VL);
+            if (!boat) {
+                fail("client=" + client + " server=" + server + " boat=" + boat);
             }
         }
     }
