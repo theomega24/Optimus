@@ -39,12 +39,6 @@ public class GroundSpoofA extends MovementCheck {
                     boat = true;
                     break;
                 }
-
-                if (entity.getType() == EntityType.SHULKER) {
-                    user.bukkitPlayer.sendMessage("shulker");
-                    shulker = true;
-                    break;
-                }
             }
 
             Location location = new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ());
