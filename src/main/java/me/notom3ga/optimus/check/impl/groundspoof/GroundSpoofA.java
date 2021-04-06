@@ -1,10 +1,13 @@
 package me.notom3ga.optimus.check.impl.groundspoof;
 
-import me.notom3ga.optimus.check.MovementCheck;
 import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.check.MovementCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.util.block.BlockUtil;
+import org.bukkit.Location;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
@@ -26,6 +29,7 @@ public class GroundSpoofA extends MovementCheck {
 
         if (client && !server) {
             boolean boat = false;
+            boolean shulker = false;
 
             AtomicReference<List<Entity>> nearby = new AtomicReference<>();
             sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1, 1, 1)));
@@ -35,10 +39,25 @@ public class GroundSpoofA extends MovementCheck {
                     boat = true;
                     break;
                 }
+
+                if (entity.getType() == EntityType.SHULKER) {
+                    user.bukkitPlayer.sendMessage("shulker");
+                    shulker = true;
+                    break;
+                }
             }
 
-            if (!boat) {
-                fail("client=" + client + " server=" + server + " boat=" + boat);
+            Location location = new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ());
+            if (BlockUtil.isShulkerBox(location.getBlock()) || BlockUtil.isShulkerBox(location.getBlock().getRelative(BlockFace.DOWN))) {
+                /* todo:
+                    - this fp while standing over air
+                    - shulkers
+                 */
+                shulker = true;
+            }
+
+            if (!boat && !shulker) {
+                fail("m=" + packet.getY() % 0.015625);
             }
         }
     }

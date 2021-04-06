@@ -1,4 +1,4 @@
-package me.notom3ga.optimus.util;
+package me.notom3ga.optimus.util.version;
 
 public class ProtocolVersion {
     public static String toString(int version) {

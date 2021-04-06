@@ -4,7 +4,7 @@ import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.packet.PacketInjector;
 import me.notom3ga.optimus.user.User;
 import me.notom3ga.optimus.user.UserManager;
-import me.notom3ga.optimus.util.ProtocolVersion;
+import me.notom3ga.optimus.util.version.ProtocolVersion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

@@ -15,6 +15,9 @@ repositories {
 dependencies {
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     compileOnly("com.destroystokyo.paper", "paper", "1.16.5-R0.1-SNAPSHOT")
+
+    implementation("cloud.commandframework", "cloud-paper", "1.4.0")
+    implementation("cloud.commandframework", "cloud-annotations", "1.4.0")
 }
 
 tasks {
@@ -33,7 +36,7 @@ tasks {
         destinationDirectory.set(rootProject.rootDir.resolve("build").resolve("libs"))
 
         listOf(
-            "me.notom3ga.clementine"
+            "cloud.commandframework"
         ).forEach { relocate(it, "me.notom3ga.optimus.libs.$it") }
         minimize()
     }
