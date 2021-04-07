@@ -1,10 +1,21 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     `java-library`
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
+fun getGitCommit(): String {
+    val stdout = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-parse", "--short", "HEAD")
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
 group = "me.notom3ga"
-version = "0.0-ALPHA"
+version = "1.0-ALPHA-${getGitCommit()}"
 
 repositories {
     mavenCentral()
@@ -16,6 +27,7 @@ dependencies {
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     compileOnly("com.destroystokyo.paper", "paper", "1.16.5-R0.1-SNAPSHOT")
 
+    implementation("org.bstats", "bstats-bukkit", "2.2.1")
     implementation("cloud.commandframework", "cloud-paper", "1.4.0")
     implementation("cloud.commandframework", "cloud-annotations", "1.4.0")
     implementation("cloud.commandframework", "cloud-minecraft-extras", "1.4.0")
@@ -37,6 +49,7 @@ tasks {
         destinationDirectory.set(rootProject.rootDir.resolve("build").resolve("libs"))
 
         listOf(
+            "org.bstats",
             "cloud.commandframework"
         ).forEach { relocate(it, "me.notom3ga.optimus.libs.$it") }
         minimize()

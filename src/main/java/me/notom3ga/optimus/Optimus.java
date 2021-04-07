@@ -11,6 +11,7 @@ import me.notom3ga.optimus.listener.PlayerListener;
 import me.notom3ga.optimus.packet.queue.PacketQueue;
 import me.notom3ga.optimus.util.Constants;
 import me.notom3ga.optimus.util.Logger;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Optimus extends JavaPlugin {
@@ -21,13 +22,14 @@ public class Optimus extends JavaPlugin {
 
     public CommandManager commandManager;
     public PacketQueue packetQueue;
+    public Metrics metrics;
 
     @Override
     public void onEnable() {
         try {
             Class.forName("com.destroystokyo.paper.PaperConfig");
         } catch (ClassNotFoundException e) {
-            Logger.severe("Failed to load Optimus v" + Constants.VERSION);
+            Logger.severe("Failed to load Optimus v" + getDescription().getVersion());
             Logger.severe("We require Paper (https://papermc.io/)");
             getServer().getPluginManager().disablePlugin(this);
             return;
@@ -36,14 +38,14 @@ public class Optimus extends JavaPlugin {
         try {
             Class.forName("net.kyori.adventure.audience.Audience");
         } catch (ClassNotFoundException e) {
-            Logger.severe("Failed to load Optimus v" + Constants.VERSION);
+            Logger.severe("Failed to load Optimus v" + getDescription().getVersion());
             Logger.severe("We require Paper with Adventure included");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
         if (!getServer().getClass().getPackage().getName().contains(Constants.NMS_REVISION)) {
-            Logger.severe("Failed to load Optimus v" + Constants.VERSION);
+            Logger.severe("Failed to load Optimus v" + getDescription().getVersion());
             Logger.severe("We require NMS Revision " + Constants.NMS_REVISION);
             getServer().getPluginManager().disablePlugin(this);
             return;
@@ -64,5 +66,7 @@ public class Optimus extends JavaPlugin {
         this.commandManager.register(new RecalculateCommand());
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+
+        this.metrics = new Metrics(this, 10972);
     }
 }
