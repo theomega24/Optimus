@@ -11,7 +11,6 @@ import me.notom3ga.optimus.listener.PlayerListener;
 import me.notom3ga.optimus.packet.queue.PacketQueue;
 import me.notom3ga.optimus.util.Constants;
 import me.notom3ga.optimus.util.Logger;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Optimus extends JavaPlugin {
@@ -31,6 +30,7 @@ public class Optimus extends JavaPlugin {
             Logger.severe("Failed to load Optimus v" + Constants.VERSION);
             Logger.severe("We require Paper (https://papermc.io/)");
             getServer().getPluginManager().disablePlugin(this);
+            return;
         }
 
         try {
@@ -39,12 +39,14 @@ public class Optimus extends JavaPlugin {
             Logger.severe("Failed to load Optimus v" + Constants.VERSION);
             Logger.severe("We require Paper with Adventure included");
             getServer().getPluginManager().disablePlugin(this);
+            return;
         }
 
-        if (!Bukkit.getServer().getClass().getPackage().getName().contains(Constants.NMS_REVISION)) {
+        if (!getServer().getClass().getPackage().getName().contains(Constants.NMS_REVISION)) {
             Logger.severe("Failed to load Optimus v" + Constants.VERSION);
             Logger.severe("We require NMS Revision " + Constants.NMS_REVISION);
             getServer().getPluginManager().disablePlugin(this);
+            return;
         }
 
         Config.load();
