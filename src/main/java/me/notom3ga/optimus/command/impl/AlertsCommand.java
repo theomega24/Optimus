@@ -1,5 +1,6 @@
 package me.notom3ga.optimus.command.impl;
 
+import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
@@ -16,6 +17,7 @@ public class AlertsCommand implements Command {
 
     @CommandMethod("optimus alerts")
     @CommandPermission("optimus.alerts")
+    @CommandDescription("Toggle Optimus alerts.")
     public void handle(CommandContext<Player> context) {
         User user = UserManager.getUser(context.getSender());
         user.alerts = !user.alerts;

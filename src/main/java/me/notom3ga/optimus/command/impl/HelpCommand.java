@@ -1,6 +1,7 @@
 package me.notom3ga.optimus.command.impl;
 
 import cloud.commandframework.annotations.Argument;
+import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.annotations.specifier.Greedy;
@@ -24,6 +25,7 @@ public class HelpCommand implements Command {
                 Optimus.instance.commandManager
         );
 
+        this.help.setMessage(MinecraftHelp.MESSAGE_HELP_TITLE, "Optimus Help");
         this.help.setHelpColors(MinecraftHelp.HelpColors.of(
                 Constants.BRAND_COLOR,
                 Constants.HIGHLIGHT,
@@ -35,6 +37,7 @@ public class HelpCommand implements Command {
 
     @CommandMethod("optimus help [query]")
     @CommandPermission("optimus.command.help")
+    @CommandDescription("View all Optimus commands.")
     public void handle(CommandContext<CommandSender> context, @Greedy @Argument("query") String query) {
         this.help.queryCommands(query == null ? "" : query, context.getSender());
     }

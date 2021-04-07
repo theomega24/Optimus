@@ -1,5 +1,6 @@
 package me.notom3ga.optimus.command.impl;
 
+import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
@@ -14,6 +15,7 @@ public class OptimusCommand implements Command {
 
     @CommandMethod("optimus")
     @CommandPermission("optimus.command.optimus")
+    @CommandDescription("The main command for Optimus.")
     public void handle(CommandContext<CommandSender> context) {
         context.getSender().sendMessage(TextComponent.ofChildren(
                 Component.text("Optimus v" + Constants.VERSION, Constants.BRAND_COLOR, TextDecoration.BOLD),

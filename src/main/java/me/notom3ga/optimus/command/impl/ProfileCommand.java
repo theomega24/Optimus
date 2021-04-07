@@ -1,6 +1,7 @@
 package me.notom3ga.optimus.command.impl;
 
 import cloud.commandframework.annotations.Argument;
+import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
@@ -18,6 +19,7 @@ public class ProfileCommand implements Command {
 
     @CommandMethod("optimus profile <player>")
     @CommandPermission("optimus.command.profile")
+    @CommandDescription("View Optimus' profile for a player.")
     public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
         User user = UserManager.getUser(player);
         context.getSender().sendMessage(TextComponent.ofChildren(

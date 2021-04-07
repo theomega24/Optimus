@@ -1,7 +1,9 @@
 package me.notom3ga.optimus.command.impl;
 
+import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
+import cloud.commandframework.annotations.Confirmation;
 import cloud.commandframework.context.CommandContext;
 import me.notom3ga.optimus.command.Command;
 import me.notom3ga.optimus.user.UserManager;
@@ -13,8 +15,10 @@ import org.bukkit.command.CommandSender;
 
 public class RecalculateCommand implements Command {
 
+    @Confirmation
     @CommandMethod("optimus recalculate")
     @CommandPermission("optimus.command.recalculate")
+    @CommandDescription("Recalculate the permissions cache.")
     public void handle(CommandContext<CommandSender> context) {
         UserManager.getAllUsers().forEach(user -> {
             user.alerts = user.bukkitPlayer.hasPermission("optimus.alerts");
