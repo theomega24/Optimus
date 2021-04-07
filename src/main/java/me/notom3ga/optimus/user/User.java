@@ -19,7 +19,8 @@ public class User {
 
     public long join, ping;
     public String version;
-    public boolean exempt = false;
+    public boolean exempt = false,
+            alerts = false;
 
     public User(Player player) {
         this.bukkitPlayer = player;

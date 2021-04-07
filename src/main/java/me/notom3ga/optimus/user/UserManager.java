@@ -2,6 +2,7 @@ package me.notom3ga.optimus.user;
 
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,6 +16,10 @@ public class UserManager {
 
         USER_MAP.put(player.getUniqueId(), new User(player));
         return USER_MAP.get(player.getUniqueId());
+    }
+
+    public static Collection<User> getAllUsers() {
+        return USER_MAP.values();
     }
 
     public static void removeUser(Player player) {

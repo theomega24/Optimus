@@ -17,6 +17,8 @@ public class PlayerListener implements Listener {
         User user = UserManager.getUser(event.getPlayer());
         user.join = System.currentTimeMillis();
         user.version = ProtocolVersion.toString(event.getPlayer().getProtocolVersion());
+        user.alerts = event.getPlayer().hasPermission("optimus.alerts");
+        user.exempt = event.getPlayer().hasPermission("optimus.exempt");
 
         PacketInjector.inject(user);
 

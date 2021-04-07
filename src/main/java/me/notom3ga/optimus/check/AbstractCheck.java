@@ -3,6 +3,7 @@ package me.notom3ga.optimus.check;
 import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserManager;
 import me.notom3ga.optimus.util.Constants;
 import me.notom3ga.optimus.util.Formatter;
 import net.kyori.adventure.text.TextComponent;
@@ -25,6 +26,7 @@ public abstract class AbstractCheck implements Check {
     protected final String[] packets;
 
     protected int vl;
+    protected boolean punishing;
 
     public AbstractCheck(User user, String name, String type, Category category, String[] packets) {
         this.user = user;
@@ -43,18 +45,19 @@ public abstract class AbstractCheck implements Check {
 
     @Override
     public boolean exempt() {
-        if (user.bukkitPlayer.getGameMode() == GameMode.CREATIVE
+        if (user.exempt
+                || user.bukkitPlayer.getGameMode() == GameMode.CREATIVE
                 || user.bukkitPlayer.getGameMode() == GameMode.SPECTATOR
-                || System.currentTimeMillis() - user.join <= Config.Settings.JOIN_EXEMPTION
-                || user.bukkitPlayer.hasPermission("optimus.bypass")) {
+                || System.currentTimeMillis() - user.join <= Config.Settings.JOIN_EXEMPTION) {
             return true;
         }
 
         if (config.getBoolean("punishable") && this.vl >= config.getInt("punish-vl") && !user.exempt) {
             List<String> commands = config.getStringList("punish-commands");
 
+            this.punishing = true;
             commands.forEach(command -> syncNoWait(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Formatter.replaceFormats(command, name, type, vl, user))));
-            user.exempt = true;
+            this.punishing = false;
             return true;
         }
 
@@ -98,6 +101,7 @@ public abstract class AbstractCheck implements Check {
 
     @Override
     public void fail(String debug) {
+        if (punishing) return;
         this.vl += config.getInt("vl");
 
         String message = Formatter.replaceFormats(Config.Alerts.FORMAT, name, type, vl, user);
@@ -111,9 +115,9 @@ public abstract class AbstractCheck implements Check {
             Bukkit.getConsoleSender().sendMessage(component);
         }
 
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            if (player.hasPermission("optimus.alerts")) {
-                player.sendMessage(component);
+        UserManager.getAllUsers().forEach(user -> {
+            if (user.alerts) {
+                user.bukkitPlayer.sendMessage(component);
             }
         });
     }
