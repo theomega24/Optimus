@@ -1,5 +1,6 @@
 package me.notom3ga.optimus.user;
 
+import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.Location;
@@ -29,6 +30,26 @@ public class User {
 
     public void addCheck(Check check) {
         this.checks.add(check);
+    }
+
+    public int getVL() {
+        int finalVl = 0;
+        for (Check check : checks) {
+            finalVl += check.getVl();
+        }
+
+        return finalVl;
+    }
+
+    public int getMovementVL() {
+        int finalVl = 0;
+        for (Check check : checks) {
+            if (check.getCategory() == Category.MOVEMENT) {
+                finalVl += check.getVl();
+            }
+        }
+
+        return finalVl;
     }
 
     public Set<Block> getStandingOn(Location location) {

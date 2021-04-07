@@ -18,6 +18,7 @@ dependencies {
 
     implementation("cloud.commandframework", "cloud-paper", "1.4.0")
     implementation("cloud.commandframework", "cloud-annotations", "1.4.0")
+    implementation("cloud.commandframework", "cloud-minecraft-extras", "1.4.0")
 }
 
 tasks {
