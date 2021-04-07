@@ -7,6 +7,7 @@ import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
 import me.notom3ga.optimus.util.block.BlockUtil;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -39,19 +40,27 @@ public class GroundSpoofA extends MovementCheck {
                     boat = true;
                     break;
                 }
+
+                if (entity.getType() == EntityType.SHULKER && packet.getY() > entity.getBoundingBox().getMaxX()) {
+                    shulker = true;
+                    break;
+                }
             }
 
             Location location = new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ());
-            if (BlockUtil.isShulkerBox(location.getBlock()) || BlockUtil.isShulkerBox(location.getBlock().getRelative(BlockFace.DOWN))) {
-                /* todo:
-                    - this fp while standing over air
-                    - shulkers
-                 */
+            for (Block block : user.getStandingOn(location)) {
+                if (BlockUtil.isShulkerBox(block)) {
+                    shulker = true;
+                    break;
+                }
+            }
+
+            if (BlockUtil.isShulkerBox(location.getBlock().getRelative(BlockFace.DOWN))) {
                 shulker = true;
             }
 
             if (!boat && !shulker) {
-                fail("m=" + packet.getY() % 0.015625);
+                fail("modulus=" + packet.getY() % 0.015625);
             }
         }
     }

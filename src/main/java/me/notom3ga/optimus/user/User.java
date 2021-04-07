@@ -2,10 +2,14 @@ package me.notom3ga.optimus.user;
 
 import me.notom3ga.optimus.check.Check;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 public class User {
     public final Player bukkitPlayer;
@@ -25,5 +29,15 @@ public class User {
 
     public void addCheck(Check check) {
         this.checks.add(check);
+    }
+
+    public Set<Block> getStandingOn(Location location) {
+        return new HashSet<>(){{
+            addAll(Arrays.asList(new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY() - 1, location.getZ() - 0.3).getBlock(),
+                    new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY() - 1, location.getZ() - 0.3).getBlock(),
+                    new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY() - 1, location.getZ() + 0.3).getBlock(),
+                    new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY() - 1, location.getZ() + 0.3).getBlock())
+            );
+        }};
     }
 }
