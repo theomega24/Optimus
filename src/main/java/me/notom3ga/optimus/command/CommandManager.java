@@ -18,8 +18,7 @@ public class CommandManager extends PaperCommandManager<CommandSender> {
                 Function.identity(),
                 Function.identity()
         );
-        this.parser = new AnnotationParser<CommandSender>(this, CommandSender.class, p -> SimpleCommandMeta.empty());
-
+        this.parser = new AnnotationParser<>(this, CommandSender.class, p -> SimpleCommandMeta.empty());
         this.registerAsynchronousCompletions();
         this.registerBrigadier();
     }

@@ -5,8 +5,9 @@ import me.notom3ga.optimus.check.MovementCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
-import me.notom3ga.optimus.util.block.BlockUtil;
+import net.minecraft.server.v1_16_R3.BlockUtil;
 import org.bukkit.Location;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -49,13 +50,13 @@ public class GroundSpoofA extends MovementCheck {
 
             Location location = new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ());
             for (Block block : user.getStandingOn(location)) {
-                if (BlockUtil.isShulkerBox(block)) {
+                if (Tag.SHULKER_BOXES.isTagged(block.getType())) {
                     shulker = true;
                     break;
                 }
             }
 
-            if (BlockUtil.isShulkerBox(location.getBlock().getRelative(BlockFace.DOWN))) {
+            if (Tag.SHULKER_BOXES.isTagged(location.getBlock().getRelative(BlockFace.DOWN).getType())) {
                 shulker = true;
             }
 
