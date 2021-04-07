@@ -5,7 +5,6 @@ import me.notom3ga.optimus.check.MovementCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
-import net.minecraft.server.v1_16_R3.BlockUtil;
 import org.bukkit.Location;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
