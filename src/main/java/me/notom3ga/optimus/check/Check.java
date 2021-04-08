@@ -11,6 +11,7 @@ public interface Check {
     String getType();
     Category getCategory();
     String[] getPackets();
+    boolean isEnabled();
 
     void sync(Runnable runnable);
     void syncNoWait(Runnable runnable);

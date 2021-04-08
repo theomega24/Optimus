@@ -46,6 +46,7 @@ public abstract class AbstractCheck implements Check {
     @Override
     public boolean exempt() {
         if (user.exempt
+                || !isEnabled()
                 || user.bukkitPlayer.getGameMode() == GameMode.CREATIVE
                 || user.bukkitPlayer.getGameMode() == GameMode.SPECTATOR
                 || System.currentTimeMillis() - user.join <= Config.Settings.JOIN_EXEMPTION) {
@@ -82,6 +83,11 @@ public abstract class AbstractCheck implements Check {
     @Override
     public String[] getPackets() {
         return this.packets;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return config.getBoolean("enabled");
     }
 
     @Override
