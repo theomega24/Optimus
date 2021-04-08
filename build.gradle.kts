@@ -1,5 +1,4 @@
 import java.io.ByteArrayOutputStream
-import java.time.Year
 
 plugins {
     `java-library`
