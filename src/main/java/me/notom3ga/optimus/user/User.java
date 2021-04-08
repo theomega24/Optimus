@@ -30,7 +30,9 @@ public class User {
     }
 
     public void addCheck(Check check) {
-        this.checks.add(check);
+        if (check.isEnabled()) {
+            this.checks.add(check);
+        }
     }
 
     public int getVL() {
