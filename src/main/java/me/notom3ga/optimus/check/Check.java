@@ -16,6 +16,8 @@ public interface Check {
     void syncNoWait(Runnable runnable);
 
     boolean exempt();
+
+    void fail();
     void fail(String debug);
 
     int getVl();

@@ -37,7 +37,11 @@ public class ProfileCommand implements Command {
                 Component.newline(),
                 Component.text(" » ", Constants.SECONDARY_HIGHLIGHT),
                 Component.text("Movement VL: ", Constants.HIGHLIGHT),
-                Component.text(Integer.toString(user.getMovementVL()), Constants.BRAND_COLOR)
+                Component.text(Integer.toString(user.getMovementVL()), Constants.BRAND_COLOR),
+                Component.newline(),
+                Component.text(" » ", Constants.SECONDARY_HIGHLIGHT),
+                Component.text("Player VL: ", Constants.HIGHLIGHT),
+                Component.text(Integer.toString(user.getPlayerVL()), Constants.BRAND_COLOR)
         ));
     }
 }

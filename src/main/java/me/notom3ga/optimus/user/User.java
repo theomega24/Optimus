@@ -53,6 +53,17 @@ public class User {
         return finalVl;
     }
 
+    public int getPlayerVL() {
+        int finalVl = 0;
+        for (Check check : checks) {
+            if (check.getCategory() == Category.PLAYER) {
+                finalVl += check.getVl();
+            }
+        }
+
+        return finalVl;
+    }
+
     public Set<Block> getStandingOn(Location location) {
         return new HashSet<>(){{
             addAll(Arrays.asList(new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY() - 1, location.getZ() - 0.3).getBlock(),

@@ -32,6 +32,47 @@ checks:
       punish-vl: 200
       punish-commands:
         - "kick {player} GroundSpoof A"
+  protocol:
+    a:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Protocol A"
+    b:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Protocol B"
+    c:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Protocol C"
+    d:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Protocol D"
+    e:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Protocol E"
 
 settings:
   join-exemption: 1000

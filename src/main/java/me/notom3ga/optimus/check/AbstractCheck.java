@@ -100,6 +100,11 @@ public abstract class AbstractCheck implements Check {
     }
 
     @Override
+    public void fail() {
+        this.fail("");
+    }
+
+    @Override
     public void fail(String debug) {
         if (punishing) return;
         this.vl += config.getInt("vl");

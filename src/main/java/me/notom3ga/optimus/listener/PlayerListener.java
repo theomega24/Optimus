@@ -1,6 +1,11 @@
 package me.notom3ga.optimus.listener;
 
 import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
+import me.notom3ga.optimus.check.impl.protocol.ProtocolA;
+import me.notom3ga.optimus.check.impl.protocol.ProtocolB;
+import me.notom3ga.optimus.check.impl.protocol.ProtocolC;
+import me.notom3ga.optimus.check.impl.protocol.ProtocolD;
+import me.notom3ga.optimus.check.impl.protocol.ProtocolE;
 import me.notom3ga.optimus.packet.PacketInjector;
 import me.notom3ga.optimus.user.User;
 import me.notom3ga.optimus.user.UserManager;
@@ -23,6 +28,11 @@ public class PlayerListener implements Listener {
         PacketInjector.inject(user);
 
         user.addCheck(new GroundSpoofA(user));
+        user.addCheck(new ProtocolA(user));
+        user.addCheck(new ProtocolB(user));
+        user.addCheck(new ProtocolC(user));
+        user.addCheck(new ProtocolD(user));
+        user.addCheck(new ProtocolE(user));
     }
 
     @EventHandler
