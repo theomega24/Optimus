@@ -51,7 +51,7 @@ tasks {
         listOf(
             "org.bstats",
             "cloud.commandframework",
-            "net.kyori",
+            "net.kyori.examination",
             "io.leangen.geantyref",
             "org.checkerframework"
         ).forEach { relocate(it, "me.notom3ga.optimus.libs.$it") }
