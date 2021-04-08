@@ -1,8 +1,10 @@
 import java.io.ByteArrayOutputStream
+import java.time.Year
 
 plugins {
     `java-library`
     id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("org.cadixdev.licenser") version "0.5.1"
 }
 
 fun getGitCommit(): String {
@@ -34,6 +36,11 @@ dependencies {
 }
 
 tasks {
+    license {
+        header = project.file("HEADER")
+        include("**/*.java")
+    }
+
     java {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
