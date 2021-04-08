@@ -50,7 +50,10 @@ tasks {
 
         listOf(
             "org.bstats",
-            "cloud.commandframework"
+            "cloud.commandframework",
+            "net.kyori",
+            "io.leangen.geantyref",
+            "org.checkerframework"
         ).forEach { relocate(it, "me.notom3ga.optimus.libs.$it") }
         minimize()
     }
