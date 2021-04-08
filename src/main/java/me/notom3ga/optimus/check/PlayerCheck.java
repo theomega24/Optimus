@@ -5,8 +5,8 @@ import me.notom3ga.optimus.user.User;
 
 public abstract class PlayerCheck extends AbstractCheck {
 
-    public PlayerCheck(User user, String name, String type, Category category, String[] packets) {
-        super(user, name, type, category, packets);
+    public PlayerCheck(User user, String name, String type, String[] packets) {
+        super(user, name, type, Category.PLAYER, packets);
     }
 
     @Override

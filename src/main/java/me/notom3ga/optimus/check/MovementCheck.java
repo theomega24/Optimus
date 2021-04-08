@@ -5,8 +5,8 @@ import me.notom3ga.optimus.user.User;
 
 public abstract class MovementCheck extends AbstractCheck {
 
-    public MovementCheck(User user, String name, String type, Category category, String[] packets) {
-        super(user, name, type, category, packets);
+    public MovementCheck(User user, String name, String type, String[] packets) {
+        super(user, name, type, Category.MOVEMENT, packets);
     }
 
     @Override

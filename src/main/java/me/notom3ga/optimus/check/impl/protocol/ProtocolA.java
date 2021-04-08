@@ -10,7 +10,7 @@ import me.notom3ga.optimus.user.User;
 public class ProtocolA extends PlayerCheck {
 
     public ProtocolA(User user) {
-        super(user, "Protocol", "A", Category.PLAYER, new String[]{"PacketRot", "PacketPosRot"});
+        super(user, "Protocol", "A", new String[]{"PacketRot", "PacketPosRot"});
     }
 
     @Override

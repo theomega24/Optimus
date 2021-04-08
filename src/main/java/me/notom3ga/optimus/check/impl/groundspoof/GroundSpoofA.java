@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GroundSpoofA extends MovementCheck {
 
     public GroundSpoofA(User user) {
-        super(user, "GroundSpoof", "A", Category.MOVEMENT, new String[]{"PacketPos", "PacketPosRot"});
+        super(user, "GroundSpoof", "A", new String[]{"PacketPos", "PacketPosRot"});
     }
 
     @Override

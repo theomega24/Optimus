@@ -23,6 +23,15 @@ alerts:
     dark-red-vl: 200
 
 checks:
+  chat:
+    a:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Chat A"
   groundspoof:
     a:
       enabled: true

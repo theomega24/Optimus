@@ -12,7 +12,7 @@ public class ProtocolB extends PlayerCheck {
     private int ticks;
 
     public ProtocolB(User user) {
-        super(user, "Protocol", "B", Category.PLAYER, new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
+        super(user, "Protocol", "B", new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
     }
 
     @Override

@@ -10,7 +10,7 @@ public class ProtocolD extends PlayerCheck {
     int last = -1;
 
     public ProtocolD(User user) {
-        super(user, "Protocol", "D", Category.PLAYER, new String[]{"PacketItemSlot"});
+        super(user, "Protocol", "D", new String[]{"PacketItemSlot"});
     }
 
     @Override

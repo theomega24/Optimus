@@ -73,4 +73,15 @@ public class User {
             );
         }};
     }
+
+    public Set<Block> getStandingIn() {
+        Location location = bukkitPlayer.getLocation();
+        return new HashSet<>(){{
+            addAll(Arrays.asList(new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY(), location.getZ() - 0.3).getBlock(),
+                    new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY(), location.getZ() - 0.3).getBlock(),
+                    new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY(), location.getZ() + 0.3).getBlock(),
+                    new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY(), location.getZ() + 0.3).getBlock())
+            );
+        }};
+    }
 }
