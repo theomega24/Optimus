@@ -111,16 +111,20 @@ public abstract class AbstractCheck implements Check {
     @Override
     public void sync(Runnable runnable) {
         AtomicBoolean waiting = new AtomicBoolean(true);
-        Bukkit.getScheduler().runTask(Optimus.instance, () -> {
-            runnable.run();
-            waiting.set(false);
-        });
+        if (Optimus.instance.isEnabled()) {
+            Bukkit.getScheduler().runTask(Optimus.instance, () -> {
+                runnable.run();
+                waiting.set(false);
+            });
+        }
         while (waiting.get()) {}
     }
 
     @Override
     public void syncNoWait(Runnable runnable) {
-        Bukkit.getScheduler().runTask(Optimus.instance, runnable);
+        if (Optimus.instance.isEnabled()) {
+            Bukkit.getScheduler().runTask(Optimus.instance, runnable);
+        }
     }
 
     @Override
