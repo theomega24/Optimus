@@ -5,7 +5,6 @@ alerts:
   hover-message: |
     &#D6D6D6Player Ping: &#A3A8F0{ping}
     &#D6D6D6Server TPS: &#A3A8F0{tps}
-    &#D6D6D6Client Version: &#A3A8F0{version}
 
     &#D6D6D6Check Debug:
     &#A3A8F0{debug}

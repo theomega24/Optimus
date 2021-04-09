@@ -28,7 +28,6 @@ import me.notom3ga.optimus.check.impl.protocol.ProtocolE;
 import me.notom3ga.optimus.packet.PacketInjector;
 import me.notom3ga.optimus.user.User;
 import me.notom3ga.optimus.user.UserManager;
-import me.notom3ga.optimus.util.version.ProtocolVersion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -40,7 +39,6 @@ public class PlayerListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         User user = UserManager.getUser(event.getPlayer());
         user.join = System.currentTimeMillis();
-        user.version = ProtocolVersion.toString(event.getPlayer().getProtocolVersion());
         user.alerts = event.getPlayer().hasPermission("optimus.alerts");
         user.exempt = event.getPlayer().hasPermission("optimus.exempt");
 

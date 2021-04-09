@@ -33,7 +33,6 @@ public class Formatter {
                 .replace("{type}", type)
                 .replace("{total}", String.valueOf(vl))
                 .replace("{ping}", String.valueOf(user.ping))
-                .replace("{tps}", String.valueOf(Math.floor(Bukkit.getTPS()[0])))
-                .replace("{version}", user.version);
+                .replace("{tps}", String.valueOf(Math.floor(Bukkit.getTPS()[0])));
     }
 }

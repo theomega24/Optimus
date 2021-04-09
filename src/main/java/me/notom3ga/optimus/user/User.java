@@ -35,8 +35,7 @@ public class User {
     public final EntityPlayer entityPlayer;
     public final HashSet<Check> checks;
 
-    public long join, ping;
-    public String version;
+    public long join, ping = -1;
     public boolean exempt = false,
             alerts = false;
 
