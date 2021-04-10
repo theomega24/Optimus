@@ -18,20 +18,21 @@
 
 package me.notom3ga.optimus.check.impl.protocol;
 
-import me.notom3ga.optimus.check.PlayerCheck;
+import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemSlot;
 import me.notom3ga.optimus.user.User;
 
-public class ProtocolD extends PlayerCheck {
+public class ProtocolD extends Check {
     int last = -1;
 
     public ProtocolD(User user) {
-        super(user, "Protocol", "D", new String[]{"PacketItemSlot"});
+        super(user, "Protocol", "D", Category.PLAYER, new String[]{"PacketItemSlot"});
     }
 
     @Override
-    public void handlePlayer(Packet pkt) {
+    public void handle(Packet pkt) {
         PacketItemSlot packet = (PacketItemSlot) pkt;
 
         if (packet.getSlot() == last) {

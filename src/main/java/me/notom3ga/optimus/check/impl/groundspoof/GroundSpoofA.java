@@ -18,7 +18,8 @@
 
 package me.notom3ga.optimus.check.impl.groundspoof;
 
-import me.notom3ga.optimus.check.MovementCheck;
+import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
@@ -32,14 +33,14 @@ import org.bukkit.entity.EntityType;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class GroundSpoofA extends MovementCheck {
+public class GroundSpoofA extends Check {
 
     public GroundSpoofA(User user) {
-        super(user, "GroundSpoof", "A", new String[]{"PacketPos", "PacketPosRot"});
+        super(user, "GroundSpoof", "A", Category.MOVEMENT, new String[]{"PacketPos", "PacketPosRot"});
     }
 
     @Override
-    public void handleMovement(Packet pkt) {
+    public void handle(Packet pkt) {
         PacketPos packet = (PacketPos) pkt;
 
         boolean client = packet.isOnGround(),

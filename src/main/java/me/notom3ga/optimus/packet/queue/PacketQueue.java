@@ -64,7 +64,7 @@ public class PacketQueue {
                         entry.user.checks.forEach(check -> {
                             if (Arrays.stream(check.getPackets()).anyMatch(s -> packet.getClass().getSimpleName().equalsIgnoreCase(s))) {
                                 try {
-                                    check.handle(packet);
+                                    check.receive(packet);
                                 } catch (Exception e) {
                                     Logger.severe("Failed to execute check " + check.getName() + check.getType() + " for " + entry.user.bukkitPlayer.getName(), e);
                                 }

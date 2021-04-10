@@ -18,22 +18,23 @@
 
 package me.notom3ga.optimus.check.impl.protocol;
 
-import me.notom3ga.optimus.check.PlayerCheck;
+import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketMove;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
 
-public class ProtocolB extends PlayerCheck {
+public class ProtocolB extends Check {
     private int ticks;
 
     public ProtocolB(User user) {
-        super(user, "Protocol", "B", new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
+        super(user, "Protocol", "B", Category.PLAYER, new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
     }
 
     @Override
-    public void handlePlayer(Packet pkt) {
+    public void handle(Packet pkt) {
         if (pkt instanceof PacketMove) {
             PacketMove packet = (PacketMove) pkt;
 
