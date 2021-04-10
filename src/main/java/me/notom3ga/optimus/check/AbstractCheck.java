@@ -36,10 +36,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class AbstractCheck implements Check {
     protected final User user;
-    protected final ConfigurationSection config;
 
-    protected final String name;
-    protected final String type;
+    protected final ConfigurationSection config;
+    protected final boolean enabled, punishable;
+    protected final int cVl, decay, punishVl;
+    protected final List<String> commands;
+
+    protected final String name, type;
     protected final Category category;
     protected final String[] packets;
 
@@ -48,7 +51,14 @@ public abstract class AbstractCheck implements Check {
 
     public AbstractCheck(User user, String name, String type, Category category, String[] packets) {
         this.user = user;
+
         this.config = Config.getCheckSection(name, type);
+        this.enabled = config.getBoolean("enabled");
+        this.cVl = config.getInt("vl");
+        this.decay = config.getInt("decay");
+        this.punishable = config.getBoolean("punishable");
+        this.punishVl = config.getInt("punish-vl");
+        this.commands = config.getStringList("punish-commands");
 
         this.name = name;
         this.type = type;
@@ -56,7 +66,7 @@ public abstract class AbstractCheck implements Check {
         this.packets = packets;
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.instance, () -> {
-            this.vl -= config.getInt("decay");
+            this.vl -= this.decay;
             if (this.vl <= 0) this.vl = 0;
         }, 1200, 1200);
     }
@@ -71,11 +81,13 @@ public abstract class AbstractCheck implements Check {
             return true;
         }
 
-        if (config.getBoolean("punishable") && this.vl >= config.getInt("punish-vl") && !user.exempt) {
-            List<String> commands = config.getStringList("punish-commands");
-
+        if (this.punishable && this.vl >= this.punishVl && !user.exempt) {
             this.punishing = true;
-            commands.forEach(command -> syncNoWait(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Formatter.replaceFormats(command, name, type, vl, user))));
+
+            this.commands.forEach(command -> syncNoWait(() ->
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Formatter.replaceFormats(command, name, type, vl, user))
+            ));
+
             this.punishing = false;
             return true;
         }
@@ -105,7 +117,7 @@ public abstract class AbstractCheck implements Check {
 
     @Override
     public boolean isEnabled() {
-        return config.getBoolean("enabled");
+        return enabled;
     }
 
     @Override
@@ -135,7 +147,7 @@ public abstract class AbstractCheck implements Check {
     @Override
     public void fail(String debug) {
         if (punishing) return;
-        this.vl += config.getInt("vl");
+        this.vl += this.cVl;
 
         String message = Formatter.replaceFormats(Config.Alerts.FORMAT, name, type, vl, user);
         String hover = Formatter.replaceFormats(Config.Alerts.HOVER_MESSAGE, name, type, vl, user).replace("{debug}", debug);
