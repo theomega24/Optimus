@@ -34,39 +34,27 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ProfileCommand implements Command {
+public class ExemptCommand implements Command {
 
-    @CommandMethod("optimus profile <player>")
-    @CommandPermission("optimus.command.profile")
-    @CommandDescription("View Optimus' profile for a player.")
+    @CommandMethod("optimus exempt <player>")
+    @CommandPermission("optimus.command.exempt")
+    @CommandDescription("Toggle a players exemption.")
     public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
         User user = UserManager.getUser(player);
 
-        if (user.exempt) {
+        if (user.bedrock) {
             context.getSender().sendMessage(TextComponent.ofChildren(
                     Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
-                    MiniMessage.get().parse(Config.Lang.PLAYER_EXEMPT.replace("{player}", player.getName()))
+                    MiniMessage.get().parse(Config.Lang.CANNOT_EXEMPT_BEDROCK.replace("{player}", player.getName()))
             ));
+
             return;
         }
 
+        user.exempt = !user.exempt;
         context.getSender().sendMessage(TextComponent.ofChildren(
-                Component.text("Optimus' Profile for ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD).append(player.displayName()),
-                Component.newline(),
-                Component.newline(),
-                Component.text("Client Brand: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(player.getClientBrandName() == null ? "unknown" : player.getClientBrandName(), Config.Brand.BRAND_COLOR),
-                Component.newline(),
-                Component.text("Total VL: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(Integer.toString(user.getVL()), Config.Brand.BRAND_COLOR),
-                Component.newline(),
-                Component.text(" » ", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
-                Component.text("Movement VL: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(Integer.toString(user.getMovementVL()), Config.Brand.BRAND_COLOR),
-                Component.newline(),
-                Component.text(" » ", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
-                Component.text("Player VL: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(Integer.toString(user.getPlayerVL()), Config.Brand.BRAND_COLOR)
+                Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
+                MiniMessage.get().parse((user.exempt ? Config.Lang.EXEMPT_ENABLED : Config.Lang.EXEMPT_DISABLED).replace("{player}", player.getName()))
         ));
     }
 }

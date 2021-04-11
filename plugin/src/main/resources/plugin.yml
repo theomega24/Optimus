@@ -4,6 +4,9 @@ version: ${version}
 api-version: 1.16
 author: notOM3GA
 
+softdepend:
+  - floodgate
+
 permissions:
   optimus.alerts:
     description: Allow the player to recieve alerts.

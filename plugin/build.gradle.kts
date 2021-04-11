@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     compileOnly("com.destroystokyo.paper", "paper", "1.16.5-R0.1-SNAPSHOT")
+    compileOnly("org.geysermc.floodgate", "api", "2.0-SNAPSHOT")
 
     implementation(project(":optimus-api"))
     implementation("org.bstats", "bstats-bukkit", "2.2.1")

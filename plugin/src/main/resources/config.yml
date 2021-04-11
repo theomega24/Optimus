@@ -94,4 +94,8 @@ lang:
   alerts-enabled: "<color:#D6D6D6>Alerts now enabled!</color>"
   alerts-disabled: "<color:#D6D6D6>Alerts now disabled!</color>"
   recalculated-permissions: "<color:#D6D6D6>Recalculated permissions!</color>"
+  player-exempt: "<color:#D6D6D6>{player} is exempt, you can change this with '/optimus exempt'.</color>"
+  exempt-enabled: "<color:#D6D6D6>{player} is now exempt!</color>"
+  exempt-disabled: "<color:#D6D6D6>{player} is no longer exempt!</color>"
+  cannot-exempt-bedrock: "<color:#D6D6D6>Cannot change exemption status on {player}, as they are connected through geyser.</color>"
   help-command-title: "Optimus Help"

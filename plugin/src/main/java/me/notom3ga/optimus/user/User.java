@@ -36,8 +36,7 @@ public class User {
     public final HashSet<Check> checks;
 
     public long join, ping = -1;
-    public boolean exempt = false,
-            alerts = false;
+    public boolean exempt = false, bedrock = false, alerts = false;
 
     public User(Player player) {
         this.bukkitPlayer = player;

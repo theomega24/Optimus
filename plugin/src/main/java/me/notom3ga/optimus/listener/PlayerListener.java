@@ -18,6 +18,7 @@
 
 package me.notom3ga.optimus.listener;
 
+import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.check.impl.chat.ChatA;
 import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.check.impl.protocol.ProtocolA;
@@ -42,7 +43,14 @@ public class PlayerListener implements Listener {
         user.alerts = event.getPlayer().hasPermission("optimus.alerts");
         user.exempt = event.getPlayer().hasPermission("optimus.exempt");
 
-        PacketInjector.inject(user);
+        if (Optimus.instance.floodgateHook.isBedrockPlayer(user.bukkitPlayer)) {
+            user.bedrock = true;
+            user.exempt = true;
+        }
+
+        if (!user.bedrock) {
+            PacketInjector.inject(user);
+        }
 
         user.addCheck(new ChatA(user));
         user.addCheck(new GroundSpoofA(user));

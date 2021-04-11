@@ -75,6 +75,7 @@ public abstract class Check {
 
     public boolean exempt() {
         if (user.exempt
+                || user.bedrock
                 || !isEnabled()
                 || user.bukkitPlayer.getGameMode() == GameMode.CREATIVE
                 || user.bukkitPlayer.getGameMode() == GameMode.SPECTATOR

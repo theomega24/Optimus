@@ -52,6 +52,10 @@ public class Config {
         public static String ALERTS_ENABLED,
                 ALERTS_DISABLED,
                 RECALCULATED_PERMISSIONS,
+                PLAYER_EXEMPT,
+                EXEMPT_ENABLED,
+                EXEMPT_DISABLED,
+                CANNOT_EXEMPT_BEDROCK,
                 HELP_COMMAND_TITLE;
     }
 
@@ -84,6 +88,10 @@ public class Config {
             Lang.ALERTS_ENABLED = config.getString("lang.alerts-enabled");
             Lang.ALERTS_DISABLED = config.getString("lang.alerts-disabled");
             Lang.RECALCULATED_PERMISSIONS = config.getString("lang.recalculated-permissions");
+            Lang.PLAYER_EXEMPT = config.getString("lang.player-exempt");
+            Lang.EXEMPT_ENABLED = config.getString("lang.exempt-enabled");
+            Lang.EXEMPT_DISABLED = config.getString("lang.exempt-disabled");
+            Lang.CANNOT_EXEMPT_BEDROCK = config.getString("lang.cannot-exempt-bedrock");
             Lang.HELP_COMMAND_TITLE = config.getString("lang.help-command-title");
         } catch (NullPointerException e) {
             Logger.severe("Failed to load config (out of date)", e);
