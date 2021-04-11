@@ -17,11 +17,17 @@ tasks {
         header = rootProject.rootDir.resolve("HEADER")
         include("**/*.java")
     }
+}
 
-    publishing {
-        repositories.maven {
-            url = uri("https://repo.notom3ga.me/releases")
-            credentials(PasswordCredentials::class)
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
         }
+    }
+
+    repositories.maven {
+        url = uri("https://repo.notom3ga.me/releases")
+        credentials(PasswordCredentials::class)
     }
 }
