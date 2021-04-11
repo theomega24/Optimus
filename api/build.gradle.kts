@@ -7,16 +7,9 @@ dependencies {
     compileOnlyApi("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
 }
 
-tasks {
-    java {
-        sourceCompatibility = JavaVersion.toVersion(8)
-        targetCompatibility = JavaVersion.toVersion(8)
-    }
-
-    license {
-        header = rootProject.rootDir.resolve("HEADER")
-        include("**/*.java")
-    }
+license {
+    header = rootProject.rootDir.resolve("HEADER")
+    include("**/*.java")
 }
 
 publishing {

@@ -16,18 +16,8 @@ dependencies {
 }
 
 tasks {
-    java {
-        sourceCompatibility = JavaVersion.toVersion(11)
-        targetCompatibility = JavaVersion.toVersion(11)
-    }
-
     processResources {
         expand("version" to project.version)
-    }
-
-    license {
-        header = rootProject.rootDir.resolve("HEADER")
-        include("**/*.java")
     }
 
     shadowJar {
@@ -56,4 +46,8 @@ tasks {
     }
 }
 
+license {
+    header = rootProject.rootDir.resolve("HEADER")
+    include("**/*.java")
+}
 

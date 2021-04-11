@@ -23,6 +23,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This event is fired whenever a player sets off a violation.
@@ -178,7 +179,7 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
      * @return the events handler list
      */
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return HANDLER_LIST;
     }
 }

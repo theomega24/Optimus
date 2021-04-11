@@ -12,6 +12,11 @@ allprojects {
 subprojects {
     apply<JavaLibraryPlugin>()
 
+    java {
+        sourceCompatibility = JavaVersion.toVersion(11)
+        targetCompatibility = JavaVersion.toVersion(11)
+    }
+
     repositories {
         mavenCentral()
         maven("https://papermc.io/repo/repository/maven-public/")
