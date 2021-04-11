@@ -19,6 +19,7 @@
 package me.notom3ga.optimus.check;
 
 import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.api.event.PlayerViolationEvent;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.user.User;
@@ -138,24 +139,37 @@ public abstract class Check {
 
     public void fail(String debug) {
         if (punishing) return;
-        this.vl += this.cVl;
+        PlayerViolationEvent event = new PlayerViolationEvent(user.bukkitPlayer, Config.Alerts.FORMAT,
+                Config.Alerts.HOVER_MESSAGE, Config.Alerts.CLICK_COMMAND, Config.Alerts.CONSOLE, cVl);
 
-        String message = Formatter.replaceFormats(Config.Alerts.FORMAT, name, type, vl, user);
-        String hover = Formatter.replaceFormats(Config.Alerts.HOVER_MESSAGE, name, type, vl, user).replace("{debug}", debug);
+        if (event.getHandlers().getRegisteredListeners().length > 0) {
+            event.callEvent();
+        }
+
+        if (event.isCancelled()) {
+            return;
+        }
+
+        this.vl += event.getVl();
+
+        String message = Formatter.replaceFormats(event.getFormat(), name, type, vl, user);
+        String hover = Formatter.replaceFormats(event.getHoverMessage(), name, type, vl, user).replace("{debug}", debug);
 
         TextComponent component = Constants.LEGACY_SERIALIZER.deserialize(message)
                 .hoverEvent(HoverEvent.showText(Constants.LEGACY_SERIALIZER.deserialize(hover)))
-                .clickEvent(ClickEvent.runCommand(Config.Alerts.CLICK_COMMAND));
+                .clickEvent(ClickEvent.runCommand(event.getClickCommand()));
 
-        if (Config.Alerts.CONSOLE) {
+        if (event.isSendingConsoleAlerts()) {
             Bukkit.getConsoleSender().sendMessage(component);
         }
 
-        UserManager.getAllUsers().forEach(user -> {
-            if (user.alerts) {
-                user.bukkitPlayer.sendMessage(component);
-            }
-        });
+        if (event.isSendingAlerts()) {
+            UserManager.getAllUsers().forEach(user -> {
+                if (user.alerts) {
+                    user.bukkitPlayer.sendMessage(component);
+                }
+            });
+        }
     }
 
     public int getVl() {
