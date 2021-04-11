@@ -141,7 +141,7 @@ public abstract class Check {
     public void fail(String debug) {
         if (punishing) return;
         PlayerViolationEvent event = new PlayerViolationEvent(user.bukkitPlayer, Config.Alerts.FORMAT,
-                Config.Alerts.HOVER_MESSAGE, Config.Alerts.CLICK_COMMAND, Config.Alerts.CONSOLE, cVl);
+                Config.Alerts.HOVER_MESSAGE, Config.Alerts.CLICK_COMMAND, true, Config.Alerts.CONSOLE, cVl);
 
         if (event.getHandlers().getRegisteredListeners().length > 0) {
             event.callEvent();
