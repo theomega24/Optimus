@@ -26,6 +26,7 @@ import me.notom3ga.optimus.check.impl.protocol.ProtocolB;
 import me.notom3ga.optimus.check.impl.protocol.ProtocolC;
 import me.notom3ga.optimus.check.impl.protocol.ProtocolD;
 import me.notom3ga.optimus.check.impl.protocol.ProtocolE;
+import me.notom3ga.optimus.check.impl.skinblinker.SkinBlinkerA;
 import me.notom3ga.optimus.packet.PacketInjector;
 import me.notom3ga.optimus.user.User;
 import me.notom3ga.optimus.user.UserManager;
@@ -59,6 +60,7 @@ public class PlayerListener implements Listener {
         user.addCheck(new ProtocolC(user));
         user.addCheck(new ProtocolD(user));
         user.addCheck(new ProtocolE(user));
+        user.addCheck(new SkinBlinkerA(user));
     }
 
     @EventHandler

@@ -81,6 +81,15 @@ checks:
       punish-vl: 200
       punish-commands:
         - "kick {player} Protocol E"
+  skinblinker:
+    a:
+      enabled: true
+      vl: 15
+      decay: 5
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} SkinBlinker A"
 
 settings:
   join-exemption: 1000
