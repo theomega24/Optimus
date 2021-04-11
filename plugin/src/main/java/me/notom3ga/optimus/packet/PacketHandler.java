@@ -58,6 +58,8 @@ public class PacketHandler extends ChannelDuplexHandler {
         }
 
         Optimus.instance.packetQueue.addPacket(new QueueEntry(user, (Packet<?>) message));
+
+        Optimus.instance.internalThread.execute(() -> new InternalPacketReceiveEvent(user.bukkitPlayer, (Packet<?>) message).callEvent());
         super.channelRead(context, message);
     }
 }

@@ -81,6 +81,14 @@ checks:
       punish-vl: 200
       punish-commands:
         - "kick {player} Protocol E"
+    f:
+      enabled: true
+      vl: 50
+      decay: 15
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} Protocol F"
   skinblinker:
     a:
       enabled: true

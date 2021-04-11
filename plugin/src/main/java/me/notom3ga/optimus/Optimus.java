@@ -34,12 +34,16 @@ import me.notom3ga.optimus.util.Logger;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class Optimus extends JavaPlugin {
     public static Optimus instance;
     public Optimus() {
         instance = this;
     }
 
+    public Executor internalThread;
     public CommandManager commandManager;
     public PacketQueue packetQueue;
     public FloodgateHook floodgateHook;
@@ -65,6 +69,8 @@ public class Optimus extends JavaPlugin {
         }
 
         Config.load();
+
+        this.internalThread = Executors.newFixedThreadPool(1);
         try {
             this.commandManager = new CommandManager();
         } catch (Exception e) {
