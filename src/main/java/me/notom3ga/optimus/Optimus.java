@@ -46,18 +46,10 @@ public class Optimus extends JavaPlugin {
     public void onEnable() {
         try {
             Class.forName("com.destroystokyo.paper.PaperConfig");
-        } catch (ClassNotFoundException e) {
-            Logger.severe("Failed to load Optimus v" + getDescription().getVersion());
-            Logger.severe("We require Paper (https://papermc.io/)");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
-
-        try {
             Class.forName("net.kyori.adventure.audience.Audience");
         } catch (ClassNotFoundException e) {
             Logger.severe("Failed to load Optimus v" + getDescription().getVersion());
-            Logger.severe("We require Paper with Adventure included");
+            Logger.severe("We require Paper with Adventure (https://papermc.io/)");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }

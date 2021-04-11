@@ -18,6 +18,7 @@
 
 package me.notom3ga.optimus.util;
 
+import me.notom3ga.optimus.config.Config;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -27,7 +28,7 @@ public class Logger {
     private static final Audience CONSOLE = Bukkit.getConsoleSender();
 
     private static void log(Component level, Component message) {
-        CONSOLE.sendMessage(Component.text("[Optimus] ", Constants.BRAND_COLOR)
+        CONSOLE.sendMessage(Component.text("[Optimus] ", Config.Brand.BRAND_COLOR)
                 .append(level)
                 .append(message)
         );

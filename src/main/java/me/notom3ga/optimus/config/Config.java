@@ -20,6 +20,7 @@ package me.notom3ga.optimus.config;
 
 import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.util.Logger;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -39,6 +40,19 @@ public class Config {
 
     public static class Settings {
         public static int JOIN_EXEMPTION;
+    }
+
+    public static class Brand {
+        public static TextColor BRAND_COLOR,
+                HIGHLIGHT_COLOR,
+                SECONDARY_HIGHLIGHT_COLOR;
+    }
+
+    public static class Lang {
+        public static String ALERTS_ENABLED,
+                ALERTS_DISABLED,
+                RECALCULATED_PERMISSIONS,
+                HELP_COMMAND_TITLE;
     }
 
     public static void load() {
@@ -62,6 +76,15 @@ public class Config {
             Alerts.Colors.DARK_RED_VL = config.getInt("alerts.colors.dark-red-vl");
 
             Settings.JOIN_EXEMPTION = config.getInt("settings.join-exemption");
+
+            Brand.BRAND_COLOR = TextColor.fromHexString(config.getString("brand.brand-color"));
+            Brand.HIGHLIGHT_COLOR = TextColor.fromHexString(config.getString("brand.highlight-color"));
+            Brand.SECONDARY_HIGHLIGHT_COLOR = TextColor.fromHexString(config.getString("brand.secondary-highlight-color"));
+
+            Lang.ALERTS_ENABLED = config.getString("lang.alerts-enabled");
+            Lang.ALERTS_DISABLED = config.getString("lang.alerts-disabled");
+            Lang.RECALCULATED_PERMISSIONS = config.getString("lang.recalculated-permissions");
+            Lang.HELP_COMMAND_TITLE = config.getString("lang.help-command-title");
         } catch (NullPointerException e) {
             Logger.severe("Failed to load config (out of date)", e);
             Bukkit.getPluginManager().disablePlugin(Optimus.instance);

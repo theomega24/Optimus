@@ -23,11 +23,12 @@ import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
 import me.notom3ga.optimus.command.Command;
+import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.UserManager;
-import me.notom3ga.optimus.util.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 
 public class RecalculateCommand implements Command {
@@ -42,8 +43,8 @@ public class RecalculateCommand implements Command {
         });
 
         context.getSender().sendMessage(TextComponent.ofChildren(
-                Component.text("Optimus > ", Constants.BRAND_COLOR, TextDecoration.BOLD),
-                Component.text("Recalculated permissions!", Constants.HIGHLIGHT)
+                Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
+                MiniMessage.get().parse(Config.Lang.RECALCULATED_PERMISSIONS)
         ));
     }
 }

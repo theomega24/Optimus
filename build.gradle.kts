@@ -32,6 +32,7 @@ dependencies {
     implementation("cloud.commandframework", "cloud-paper", "1.4.0")
     implementation("cloud.commandframework", "cloud-annotations", "1.4.0")
     implementation("cloud.commandframework", "cloud-minecraft-extras", "1.4.0")
+    implementation("net.kyori", "adventure-text-minimessage", "4.1.0-SNAPSHOT")
 }
 
 tasks {
@@ -59,7 +60,8 @@ tasks {
             "cloud.commandframework",
             "net.kyori.examination",
             "io.leangen.geantyref",
-            "org.checkerframework"
+            "org.checkerframework",
+            "net.kyori.adventure.text.minimessage"
         ).forEach { relocate(it, "me.notom3ga.optimus.libs.$it") }
         minimize()
     }

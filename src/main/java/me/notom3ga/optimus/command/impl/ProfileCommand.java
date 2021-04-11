@@ -24,9 +24,9 @@ import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
 import me.notom3ga.optimus.command.Command;
+import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.User;
 import me.notom3ga.optimus.user.UserManager;
-import me.notom3ga.optimus.util.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -41,22 +41,22 @@ public class ProfileCommand implements Command {
     public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
         User user = UserManager.getUser(player);
         context.getSender().sendMessage(TextComponent.ofChildren(
-                Component.text("Optimus Profile for ", Constants.BRAND_COLOR, TextDecoration.BOLD).append(player.displayName()),
+                Component.text("Optimus' Profile for ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD).append(player.displayName()),
                 Component.newline(),
                 Component.newline(),
-                Component.text("Client Brand: ", Constants.HIGHLIGHT),
-                Component.text(player.getClientBrandName() == null ? "unknown" : player.getClientBrandName(), Constants.BRAND_COLOR),
+                Component.text("Client Brand: ", Config.Brand.HIGHLIGHT_COLOR),
+                Component.text(player.getClientBrandName() == null ? "unknown" : player.getClientBrandName(), Config.Brand.BRAND_COLOR),
                 Component.newline(),
-                Component.text("Total VL: ", Constants.HIGHLIGHT),
-                Component.text(Integer.toString(user.getVL()), Constants.BRAND_COLOR),
+                Component.text("Total VL: ", Config.Brand.HIGHLIGHT_COLOR),
+                Component.text(Integer.toString(user.getVL()), Config.Brand.BRAND_COLOR),
                 Component.newline(),
-                Component.text(" » ", Constants.SECONDARY_HIGHLIGHT),
-                Component.text("Movement VL: ", Constants.HIGHLIGHT),
-                Component.text(Integer.toString(user.getMovementVL()), Constants.BRAND_COLOR),
+                Component.text(" » ", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
+                Component.text("Movement VL: ", Config.Brand.HIGHLIGHT_COLOR),
+                Component.text(Integer.toString(user.getMovementVL()), Config.Brand.BRAND_COLOR),
                 Component.newline(),
-                Component.text(" » ", Constants.SECONDARY_HIGHLIGHT),
-                Component.text("Player VL: ", Constants.HIGHLIGHT),
-                Component.text(Integer.toString(user.getPlayerVL()), Constants.BRAND_COLOR)
+                Component.text(" » ", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
+                Component.text("Player VL: ", Config.Brand.HIGHLIGHT_COLOR),
+                Component.text(Integer.toString(user.getPlayerVL()), Config.Brand.BRAND_COLOR)
         ));
     }
 }

@@ -27,7 +27,7 @@ import cloud.commandframework.context.CommandContext;
 import cloud.commandframework.minecraft.extras.MinecraftHelp;
 import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.command.Command;
-import me.notom3ga.optimus.util.Constants;
+import me.notom3ga.optimus.config.Config;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
@@ -43,11 +43,11 @@ public class HelpCommand implements Command {
                 Optimus.instance.commandManager
         );
 
-        this.help.setMessage(MinecraftHelp.MESSAGE_HELP_TITLE, "Optimus Help");
+        this.help.setMessage(MinecraftHelp.MESSAGE_HELP_TITLE, Config.Lang.HELP_COMMAND_TITLE);
         this.help.setHelpColors(MinecraftHelp.HelpColors.of(
-                Constants.BRAND_COLOR,
-                Constants.HIGHLIGHT,
-                Constants.SECONDARY_HIGHLIGHT,
+                Config.Brand.BRAND_COLOR,
+                Config.Brand.HIGHLIGHT_COLOR,
+                Config.Brand.SECONDARY_HIGHLIGHT_COLOR,
                 NamedTextColor.WHITE,
                 TextColor.fromHexString("#E8E8E8")
         ));

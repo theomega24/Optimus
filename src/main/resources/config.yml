@@ -84,3 +84,14 @@ checks:
 
 settings:
   join-exemption: 1000
+
+brand:
+  brand-color: "#A3A8F0"
+  highlight-color: "#D6D6D6"
+  secondary-highlight-color: "#BDBDBD"
+
+lang:
+  alerts-enabled: "<color:#D6D6D6>Alerts now enabled!</color>"
+  alerts-disabled: "<color:#D6D6D6>Alerts now disabled!</color>"
+  recalculated-permissions: "<color:#D6D6D6>Recalculated permissions!</color>"
+  help-command-title: "Optimus Help"
