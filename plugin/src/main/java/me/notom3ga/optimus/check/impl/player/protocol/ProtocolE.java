@@ -16,41 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.chat;
+package me.notom3ga.optimus.check.impl.player.protocol;
 
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 import me.notom3ga.optimus.user.User;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 
-public class ChatA extends Check {
+public class ProtocolE extends Check {
 
-    public ChatA(User user) {
-        super(user, "Chat", "A", Category.PLAYER, new String[]{"PacketChat"});
+    public ProtocolE(User user) {
+        super(user, "Protocol", "E", Category.PLAYER, new String[]{"PacketInput"});
     }
 
     @Override
     public void handle(Packet pkt) {
-        PacketChat packet = (PacketChat) pkt;
+        PacketInput packet = (PacketInput) pkt;
 
-        boolean inPortal = false;
-
-        for (Block block : user.getStandingIn()) {
-            if (block.getType() == Material.NETHER_PORTAL) {
-                inPortal = true;
-                break;
-            }
-        }
-
-        if (inPortal
-                || user.bukkitPlayer.isSprinting()
-                || user.bukkitPlayer.isSneaking()
-                || user.bukkitPlayer.isBlocking()
-                || user.bukkitPlayer.isDead()) {
-            fail();
+        if (Math.abs(packet.getForwards()) > .98F || Math.abs(packet.getSideways()) > .98F) {
+            fail("forward=" + packet.getForwards() + " sideways=" + packet.getSideways());
         }
     }
 }

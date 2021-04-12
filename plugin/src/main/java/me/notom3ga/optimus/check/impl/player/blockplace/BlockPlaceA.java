@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.blockplace;
+package me.notom3ga.optimus.check.impl.player.blockplace;
 
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;

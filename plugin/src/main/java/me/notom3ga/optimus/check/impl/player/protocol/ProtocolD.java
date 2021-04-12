@@ -16,38 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.protocol;
+package me.notom3ga.optimus.check.impl.player.protocol;
 
-import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
-import me.notom3ga.optimus.packet.InternalPacketReceiveEvent;
 import me.notom3ga.optimus.packet.wrapper.Packet;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemSlot;
 import me.notom3ga.optimus.user.User;
-import net.minecraft.server.v1_16_R3.PacketPlayInArmAnimation;
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
-public class ProtocolF extends Check implements Listener {
-    private boolean awaitingBlock = false;
+public class ProtocolD extends Check {
+    int last = -1;
 
-    public ProtocolF(User user) {
-        super(user, "Protocol", "F", Category.PLAYER, new String[]{"PacketInteract"});
-        Bukkit.getServer().getPluginManager().registerEvents(this, Optimus.instance);
+    public ProtocolD(User user) {
+        super(user, "Protocol", "D", Category.PLAYER, new String[]{"PacketItemSlot"});
     }
 
     @Override
     public void handle(Packet pkt) {
-        awaitingBlock = true;
-    }
+        PacketItemSlot packet = (PacketItemSlot) pkt;
 
-    @EventHandler
-    public void onInternalPacketSend(InternalPacketReceiveEvent event) {
-        if (awaitingBlock && !(event.getPacket() instanceof PacketPlayInArmAnimation)) {
-            fail();
+        if (packet.getSlot() == last) {
+            fail("slot=" + packet.getSlot() + " last=" + last);
         }
 
-        awaitingBlock = false;
+        last = packet.getSlot();
     }
 }

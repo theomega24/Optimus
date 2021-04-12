@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.protocol;
+package me.notom3ga.optimus.check.impl.player.protocol;
 
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;

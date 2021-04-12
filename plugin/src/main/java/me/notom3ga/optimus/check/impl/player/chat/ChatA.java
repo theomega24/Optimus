@@ -16,26 +16,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.protocol;
+package me.notom3ga.optimus.check.impl.player.chat;
 
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
 import me.notom3ga.optimus.user.User;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 
-public class ProtocolE extends Check {
+public class ChatA extends Check {
 
-    public ProtocolE(User user) {
-        super(user, "Protocol", "E", Category.PLAYER, new String[]{"PacketInput"});
+    public ChatA(User user) {
+        super(user, "Chat", "A", Category.PLAYER, new String[]{"PacketChat"});
     }
 
     @Override
     public void handle(Packet pkt) {
-        PacketInput packet = (PacketInput) pkt;
+        PacketChat packet = (PacketChat) pkt;
 
-        if (Math.abs(packet.getForwards()) > .98F || Math.abs(packet.getSideways()) > .98F) {
-            fail("forward=" + packet.getForwards() + " sideways=" + packet.getSideways());
+        boolean inPortal = false;
+
+        for (Block block : user.getStandingIn()) {
+            if (block.getType() == Material.NETHER_PORTAL) {
+                inPortal = true;
+                break;
+            }
+        }
+
+        if (inPortal
+                || user.bukkitPlayer.isSprinting()
+                || user.bukkitPlayer.isSneaking()
+                || user.bukkitPlayer.isBlocking()
+                || user.bukkitPlayer.isDead()) {
+            fail();
         }
     }
 }

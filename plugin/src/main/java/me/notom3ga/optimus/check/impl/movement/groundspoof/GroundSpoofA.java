@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.groundspoof;
+package me.notom3ga.optimus.check.impl.movement.groundspoof;
 
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
@@ -44,7 +44,7 @@ public class GroundSpoofA extends Check {
         PacketPos packet = (PacketPos) pkt;
 
         boolean client = packet.isOnGround(),
-                server = packet.getY() % 0.015625 == 0;
+                server = packet.getY() % 0.015625 < 0.0001;
 
         if (client && !server) {
             boolean boat = false;

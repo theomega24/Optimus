@@ -16,40 +16,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.protocol;
+package me.notom3ga.optimus.check.impl.player.protocol;
 
+import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.packet.InternalPacketReceiveEvent;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketMove;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
+import net.minecraft.server.v1_16_R3.PacketPlayInArmAnimation;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
-public class ProtocolB extends Check {
-    private int ticks;
+public class ProtocolF extends Check implements Listener {
+    private boolean awaitingBlock = false;
 
-    public ProtocolB(User user) {
-        super(user, "Protocol", "B", Category.PLAYER, new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
+    public ProtocolF(User user) {
+        super(user, "Protocol", "F", Category.PLAYER, new String[]{"PacketInteract"});
+        Bukkit.getServer().getPluginManager().registerEvents(this, Optimus.instance);
     }
 
     @Override
     public void handle(Packet pkt) {
-        if (pkt instanceof PacketMove) {
-            PacketMove packet = (PacketMove) pkt;
+        awaitingBlock = true;
+    }
 
-            if (packet instanceof PacketPos || user.bukkitPlayer.isInsideVehicle()) {
-                ticks = 0;
-                return;
-            }
-
-            if (++ticks > 20) {
-                fail("ticks=" + ticks);
-            }
+    @EventHandler
+    public void onInternalPacketSend(InternalPacketReceiveEvent event) {
+        if (awaitingBlock && !(event.getPacket() instanceof PacketPlayInArmAnimation)) {
+            fail();
         }
 
-        if (pkt instanceof PacketInput) {
-            ticks = 0;
-        }
+        awaitingBlock = false;
     }
 }

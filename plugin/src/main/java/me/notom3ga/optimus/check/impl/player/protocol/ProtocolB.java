@@ -16,34 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.skinblinker;
+package me.notom3ga.optimus.check.impl.player.protocol;
 
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketSettings;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketMove;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.user.User;
 
-public class SkinBlinkerA extends Check {
-    private int lastSkin = -1;
+public class ProtocolB extends Check {
+    private int ticks;
 
-    public SkinBlinkerA(User user) {
-        super(user, "SkinBlinker", "A", Category.PLAYER, new String[]{"PacketSettings"});
+    public ProtocolB(User user) {
+        super(user, "Protocol", "B", Category.PLAYER, new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
     }
 
     @Override
     public void handle(Packet pkt) {
-        PacketSettings packet = (PacketSettings) pkt;
+        if (pkt instanceof PacketMove) {
+            PacketMove packet = (PacketMove) pkt;
 
-        if (lastSkin == -1) {
-            lastSkin = packet.getSkinCustomization();
-            return;
+            if (packet instanceof PacketPos || user.bukkitPlayer.isInsideVehicle()) {
+                ticks = 0;
+                return;
+            }
+
+            if (++ticks > 20) {
+                fail("ticks=" + ticks);
+            }
         }
 
-        if ((user.bukkitPlayer.isSprinting() || user.bukkitPlayer.isSneaking()) && lastSkin != packet.getSkinCustomization()) {
-            fail("last=" + lastSkin + " current=" + packet.getSkinCustomization());
+        if (pkt instanceof PacketInput) {
+            ticks = 0;
         }
-
-        lastSkin = packet.getSkinCustomization();
     }
 }
