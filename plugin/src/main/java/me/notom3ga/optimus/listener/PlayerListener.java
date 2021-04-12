@@ -19,6 +19,7 @@
 package me.notom3ga.optimus.listener;
 
 import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.check.impl.blockplace.BlockPlaceA;
 import me.notom3ga.optimus.check.impl.chat.ChatA;
 import me.notom3ga.optimus.check.impl.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.check.impl.protocol.ProtocolA;
@@ -53,6 +54,7 @@ public class PlayerListener implements Listener {
             PacketInjector.inject(user);
         }
 
+        user.addCheck(new BlockPlaceA(user));
         user.addCheck(new ChatA(user));
         user.addCheck(new GroundSpoofA(user));
         user.addCheck(new ProtocolA(user));

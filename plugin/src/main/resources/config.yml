@@ -22,6 +22,15 @@ alerts:
     dark-red-vl: 200
 
 checks:
+  blockplace:
+    a:
+      enabled: true
+      vl: 20
+      decay: 10
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} BlockPlace A"
   chat:
     a:
       enabled: true

@@ -21,6 +21,7 @@ package me.notom3ga.optimus.packet.wrapper;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInteract;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemInteract;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemSlot;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPosRot;
@@ -32,6 +33,7 @@ import net.minecraft.server.v1_16_R3.PacketPlayInHeldItemSlot;
 import net.minecraft.server.v1_16_R3.PacketPlayInSettings;
 import net.minecraft.server.v1_16_R3.PacketPlayInSteerVehicle;
 import net.minecraft.server.v1_16_R3.PacketPlayInUseEntity;
+import net.minecraft.server.v1_16_R3.PacketPlayInUseItem;
 
 public class PacketWrapper {
     public static Packet wrap(net.minecraft.server.v1_16_R3.Packet<?> packet) {
@@ -52,6 +54,8 @@ public class PacketWrapper {
                 return new PacketChat((PacketPlayInChat) packet);
             case "PacketPlayInSettings":
                 return new PacketSettings((PacketPlayInSettings) packet);
+            case "PacketPlayInUseItem":
+                return new PacketItemInteract((PacketPlayInUseItem) packet);
             default:
                 throw new IllegalArgumentException(packet.getClass().getSimpleName() + " does not have a wrapper!");
         }
