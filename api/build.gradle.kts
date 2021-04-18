@@ -3,6 +3,8 @@ plugins {
     id("org.cadixdev.licenser") version "0.5.1"
 }
 
+version = "API-1.0"
+
 dependencies {
     compileOnlyApi("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
 }
