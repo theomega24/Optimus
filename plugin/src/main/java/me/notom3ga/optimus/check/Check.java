@@ -41,15 +41,16 @@ public abstract class Check {
 
     protected final ConfigurationSection config;
     protected final boolean enabled, punishable;
-    protected final int cVl, decay, punishVl;
+    protected final int cVl, vlDecay, punishVl;
     protected final List<String> commands;
+    protected final double max, multiple, decay;
 
     protected final String name, type;
     protected final Category category;
     protected final String[] packets;
 
     protected int vl;
-    protected boolean punishing;
+    protected boolean punishing, failed;
 
     public Check(User user, String name, String type, Category category, String[] packets) {
         this.user = user;
@@ -57,10 +58,15 @@ public abstract class Check {
         this.config = Config.getCheckSection(name, type);
         this.enabled = config.getBoolean("enabled");
         this.cVl = config.getInt("vl");
-        this.decay = config.getInt("decay");
+        this.vlDecay = config.getInt("decay");
         this.punishable = config.getBoolean("punishable");
         this.punishVl = config.getInt("punish-vl");
         this.commands = config.getStringList("punish-commands");
+        this.max = config.getDouble("buffer.max");
+        this.multiple = config.getDouble("buffer.multiple");
+        this.decay = config.getDouble("buffer.decay");
+
+        this.buffer = max;
 
         this.name = name;
         this.type = type;
@@ -68,7 +74,7 @@ public abstract class Check {
         this.packets = packets;
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.instance, () -> {
-            this.vl -= this.decay;
+            this.vl -= this.vlDecay;
             if (this.vl <= 0) this.vl = 0;
         }, 1200, 1200);
     }
@@ -138,8 +144,15 @@ public abstract class Check {
         this.fail("");
     }
 
+    protected double buffer;
+    protected int fails = 0;
+
     public void fail(String debug) {
         if (punishing) return;
+        this.failed = true;
+
+        // todo buffer
+
         PlayerViolationEvent event = new PlayerViolationEvent(user.bukkitPlayer, Config.Alerts.FORMAT,
                 Config.Alerts.HOVER_MESSAGE, Config.Alerts.CLICK_COMMAND, true, Config.Alerts.CONSOLE, cVl);
 
@@ -184,6 +197,8 @@ public abstract class Check {
     public void receive(Packet packet) {
         if (this.exempt()) return;
         this.handle(packet);
+
+        // todo buffer
     }
 
     public abstract void handle(Packet pkt);

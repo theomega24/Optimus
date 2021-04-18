@@ -18,6 +18,7 @@
 
 package me.notom3ga.optimus.check.impl.movement.groundspoof;
 
+import com.google.common.collect.Sets;
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
@@ -26,11 +27,11 @@ import me.notom3ga.optimus.user.User;
 import org.bukkit.Location;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class GroundSpoofA extends Check {
@@ -52,7 +53,7 @@ public class GroundSpoofA extends Check {
             boolean shulker = false;
 
             AtomicReference<List<Entity>> nearby = new AtomicReference<>();
-            sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1, 10, 1)));
+            sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1.5, 10, 1.5)));
 
             for (Entity entity : nearby.get()) {
                 if (entity.getType() == EntityType.BOAT && packet.getY() > entity.getLocation().getY()) {
@@ -60,26 +61,27 @@ public class GroundSpoofA extends Check {
                     break;
                 }
 
-                if (entity.getType() == EntityType.SHULKER && packet.getY() > entity.getBoundingBox().getMaxX()) {
+                if (entity.getType() == EntityType.SHULKER && packet.getY() > entity.getBoundingBox().getMinY()) {
                     shulker = true;
                     break;
                 }
             }
 
             Location location = new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ());
-            for (Block block : user.getStandingOn(location)) {
+            Set<Block> blocks = Sets.newHashSet();
+
+            blocks.addAll(user.getStandingOn(location));
+            blocks.addAll(user.getStandingIn(location));
+
+            for (Block block : blocks) {
                 if (Tag.SHULKER_BOXES.isTagged(block.getType())) {
                     shulker = true;
                     break;
                 }
             }
 
-            if (Tag.SHULKER_BOXES.isTagged(location.getBlock().getRelative(BlockFace.DOWN).getType())) {
-                shulker = true;
-            }
-
             if (!boat && !shulker) {
-                fail("client=" + packet.getY() % groundY);
+                fail("mod=" + packet.getY() % groundY);
             }
         }
     }

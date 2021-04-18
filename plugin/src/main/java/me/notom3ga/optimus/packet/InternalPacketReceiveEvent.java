@@ -26,6 +26,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class InternalPacketReceiveEvent extends PlayerEvent {
     public static final HandlerList HANDLER_LIST = new HandlerList();
+
+    public static HandlerList getHandlerList() {
+        return HANDLER_LIST;
+    }
+
     private final Packet<?> packet;
 
     public InternalPacketReceiveEvent(Player player, Packet<?> packet) {

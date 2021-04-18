@@ -19,14 +19,15 @@
 package me.notom3ga.optimus.listener;
 
 import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.check.impl.movement.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.check.impl.player.blockplace.BlockPlaceA;
 import me.notom3ga.optimus.check.impl.player.chat.ChatA;
-import me.notom3ga.optimus.check.impl.movement.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolA;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolB;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolC;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolD;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolE;
+import me.notom3ga.optimus.check.impl.player.protocol.ProtocolF;
 import me.notom3ga.optimus.check.impl.player.skinblinker.SkinBlinkerA;
 import me.notom3ga.optimus.packet.PacketInjector;
 import me.notom3ga.optimus.user.User;
@@ -62,6 +63,7 @@ public class PlayerListener implements Listener {
         user.addCheck(new ProtocolC(user));
         user.addCheck(new ProtocolD(user));
         user.addCheck(new ProtocolE(user));
+        user.addCheck(new ProtocolF(user));
         user.addCheck(new SkinBlinkerA(user));
     }
 
