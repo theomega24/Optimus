@@ -194,6 +194,14 @@ public abstract class Check {
         return config;
     }
 
+    public void reset() {
+        this.vl = 0;
+        this.buffer = max;
+        this.fails = 0;
+        this.punishing = false;
+        this.failed = false;
+    }
+
     public void receive(Packet packet) {
         if (this.exempt()) return;
         this.handle(packet);

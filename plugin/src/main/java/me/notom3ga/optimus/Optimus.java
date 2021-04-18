@@ -25,6 +25,7 @@ import me.notom3ga.optimus.command.impl.HelpCommand;
 import me.notom3ga.optimus.command.impl.OptimusCommand;
 import me.notom3ga.optimus.command.impl.ProfileCommand;
 import me.notom3ga.optimus.command.impl.RecalculateCommand;
+import me.notom3ga.optimus.command.impl.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hook.FloodgateHook;
 import me.notom3ga.optimus.listener.PlayerListener;
@@ -85,6 +86,7 @@ public class Optimus extends JavaPlugin {
         this.commandManager.register(new OptimusCommand());
         this.commandManager.register(new ProfileCommand());
         this.commandManager.register(new RecalculateCommand());
+        this.commandManager.register(new ResetCommand());
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 

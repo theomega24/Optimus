@@ -160,6 +160,7 @@ lang:
   alerts-enabled: "<color:#D6D6D6>Alerts now enabled!</color>"
   alerts-disabled: "<color:#D6D6D6>Alerts now disabled!</color>"
   recalculated-permissions: "<color:#D6D6D6>Recalculated permissions!</color>"
+  reset-player: "<color:#D6D6D6>{player}'s VL has been reset.</color>"
   player-exempt: "<color:#D6D6D6>{player} is exempt, you can change this with '/optimus exempt'.</color>"
   exempt-enabled: "<color:#D6D6D6>{player} is now exempt!</color>"
   exempt-disabled: "<color:#D6D6D6>{player} is no longer exempt!</color>"

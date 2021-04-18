@@ -52,6 +52,7 @@ public class Config {
         public static String ALERTS_ENABLED,
                 ALERTS_DISABLED,
                 RECALCULATED_PERMISSIONS,
+                RESET_PLAYER,
                 PLAYER_EXEMPT,
                 EXEMPT_ENABLED,
                 EXEMPT_DISABLED,
@@ -88,6 +89,7 @@ public class Config {
             Lang.ALERTS_ENABLED = config.getString("lang.alerts-enabled");
             Lang.ALERTS_DISABLED = config.getString("lang.alerts-disabled");
             Lang.RECALCULATED_PERMISSIONS = config.getString("lang.recalculated-permissions");
+            Lang.RESET_PLAYER = config.getString("lang.reset-player");
             Lang.PLAYER_EXEMPT = config.getString("lang.player-exempt");
             Lang.EXEMPT_ENABLED = config.getString("lang.exempt-enabled");
             Lang.EXEMPT_DISABLED = config.getString("lang.exempt-disabled");
