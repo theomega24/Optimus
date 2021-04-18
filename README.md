@@ -18,5 +18,8 @@
 
 Join us on [Discord](https://discord.gg/qJ2k4Bbcd7) for support.
 
+## Documentation
+View the Optimus documentation [here](https://optimus.notom3ga.me/Config/).
+
 ## bStats
 [![bStats Graph Data](https://bstats.org/signatures/bukkit/Optimus.svg)](https://bstats.org/plugin/bukkit/Optimus/10972)

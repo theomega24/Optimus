@@ -1,4 +1,4 @@
-# Optimus Configuration (https://github.com/notOM3GA/Optimus/wiki/Config)
+# Optimus Configuration (https://optimus.notom3ga.me/Config/)
 
 alerts:
   format: "&8[{color}!&8] {color}{player} &#D6D6D6failed &#A3A8F0{check} &#D6D6D6(&#A3A8F0{type}&#D6D6D6) &8&o({total})"
