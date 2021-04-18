@@ -23,9 +23,9 @@ import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
+import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.command.Command;
 import me.notom3ga.optimus.config.Config;
-import me.notom3ga.optimus.user.UserImpl;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -40,9 +40,9 @@ public class ExemptCommand implements Command {
     @CommandPermission("optimus.command.exempt")
     @CommandDescription("Toggle a players exemption.")
     public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
-        UserImpl user = UserManager.getUser(player);
+        User user = UserManager.getUser(player);
 
-        if (user.bedrock) {
+        if (user.isBedrock()) {
             context.getSender().sendMessage(TextComponent.ofChildren(
                     Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
                     MiniMessage.get().parse(Config.Lang.CANNOT_EXEMPT_BEDROCK.replace("{player}", player.getName()))
@@ -51,10 +51,10 @@ public class ExemptCommand implements Command {
             return;
         }
 
-        user.exempt = !user.exempt;
+        user.setExempt(!user.isExempt());
         context.getSender().sendMessage(TextComponent.ofChildren(
                 Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
-                MiniMessage.get().parse((user.exempt ? Config.Lang.EXEMPT_ENABLED : Config.Lang.EXEMPT_DISABLED).replace("{player}", player.getName()))
+                MiniMessage.get().parse((user.isExempt() ? Config.Lang.EXEMPT_ENABLED : Config.Lang.EXEMPT_DISABLED).replace("{player}", player.getName()))
         ));
     }
 }

@@ -19,10 +19,10 @@
 package me.notom3ga.optimus.check.impl.movement.groundspoof;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
+import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
-import me.notom3ga.optimus.user.UserImpl;
 import org.bukkit.Location;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GroundSpoofA extends CheckImpl {
     private final double groundY = 0.015625;
 
-    public GroundSpoofA(UserImpl user) {
+    public GroundSpoofA(User user) {
         super(user, "GroundSpoof", "A", CheckCategory.MOVEMENT, "PacketPos", "PacketPosRot");
     }
 

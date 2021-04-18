@@ -18,6 +18,7 @@
 
 package me.notom3ga.optimus.packet.queue;
 
+import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.user.UserImpl;
 import net.minecraft.server.v1_16_R3.Packet;
 
@@ -25,8 +26,8 @@ public class QueueEntry {
     public final UserImpl user;
     public final Packet<?> packet;
 
-    public QueueEntry(UserImpl user, Packet<?> packet) {
-        this.user = user;
+    public QueueEntry(User user, Packet<?> packet) {
+        this.user = (UserImpl) user;
         this.packet = packet;
     }
 }

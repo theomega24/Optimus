@@ -25,7 +25,6 @@ import org.bukkit.entity.Player;
 
 public class OptimusAPIImpl implements OptimusAPI {
 
-
     @Override
     public User getUser(Player player) {
         return UserManager.getUser(player);

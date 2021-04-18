@@ -22,9 +22,9 @@ import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
+import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.command.Command;
 import me.notom3ga.optimus.config.Config;
-import me.notom3ga.optimus.user.UserImpl;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -38,12 +38,12 @@ public class AlertsCommand implements Command {
     @CommandPermission("optimus.alerts")
     @CommandDescription("Toggle Optimus alerts.")
     public void handle(CommandContext<Player> context) {
-        UserImpl user = UserManager.getUser(context.getSender());
-        user.alerts = !user.alerts;
+        User user = UserManager.getUser(context.getSender());
+        user.setAlerts(!user.hasAlerts());
 
         context.getSender().sendMessage(TextComponent.ofChildren(
                 Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
-                MiniMessage.get().parse(user.alerts ? Config.Lang.ALERTS_ENABLED : Config.Lang.ALERTS_DISABLED)
+                MiniMessage.get().parse(user.hasAlerts() ? Config.Lang.ALERTS_ENABLED : Config.Lang.ALERTS_DISABLED)
         ));
     }
 }

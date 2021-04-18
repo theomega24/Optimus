@@ -22,6 +22,7 @@ import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.packet.queue.QueueEntry;
 import me.notom3ga.optimus.user.UserImpl;
 import net.minecraft.server.v1_16_R3.Packet;
@@ -34,8 +35,8 @@ public class PacketHandler extends ChannelDuplexHandler {
     private boolean keepAliveSent = false;
     private long keepAliveLastSent;
 
-    public PacketHandler(UserImpl user) {
-        this.user = user;
+    public PacketHandler(User user) {
+        this.user = (UserImpl) user;
     }
 
     @Override
@@ -58,8 +59,6 @@ public class PacketHandler extends ChannelDuplexHandler {
         }
 
         Optimus.instance.packetQueue.addPacket(new QueueEntry(user, (Packet<?>) message));
-
-        Optimus.instance.internalThread.execute(() -> new InternalPacketReceiveEvent(user.bukkitPlayer, (Packet<?>) message).callEvent());
         super.channelRead(context, message);
     }
 }

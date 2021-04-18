@@ -38,8 +38,8 @@ public class RecalculateCommand implements Command {
     @CommandDescription("Recalculate the permissions cache.")
     public void handle(CommandContext<CommandSender> context) {
         UserManager.getAllUsers().forEach(user -> {
-            user.alerts = user.bukkitPlayer.hasPermission("optimus.alerts");
-            user.exempt = user.bukkitPlayer.hasPermission("optimus.exempt");
+            user.setAlerts(user.bukkitPlayer.hasPermission("optimus.alerts"));
+            user.setExempt(user.bukkitPlayer.hasPermission("optimus.exempt"));
         });
 
         context.getSender().sendMessage(TextComponent.ofChildren(

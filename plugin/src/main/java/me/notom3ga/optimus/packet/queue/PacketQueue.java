@@ -61,7 +61,7 @@ public class PacketQueue {
                     try {
                         Packet packet = PacketWrapper.wrap(entry.packet);
 
-                        entry.user.checks.forEach(check -> {
+                        entry.user.getChecks().forEach(check -> {
                             if (check instanceof CheckImpl
                                     && ((CheckImpl) check).getPackets().stream().anyMatch(s -> packet.getClass().getSimpleName().equalsIgnoreCase(s))) {
                                 try {

@@ -19,15 +19,15 @@
 package me.notom3ga.optimus.check.impl.player.skinblinker;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
+import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketSettings;
-import me.notom3ga.optimus.user.UserImpl;
 
 public class SkinBlinkerA extends CheckImpl {
     private int lastSkin = -1;
 
-    public SkinBlinkerA(UserImpl user) {
+    public SkinBlinkerA(User user) {
         super(user, "SkinBlinker", "A", CheckCategory.PLAYER, "PacketSettings");
     }
 
