@@ -18,7 +18,7 @@
 
 package me.notom3ga.optimus.check.impl.movement.groundspoof;
 
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
@@ -36,7 +36,7 @@ public class GroundSpoofA extends Check {
     private final double groundY = 0.015625;
 
     public GroundSpoofA(User user) {
-        super(user, "GroundSpoof", "A", Category.MOVEMENT, new String[]{"PacketPos", "PacketPosRot"});
+        super(user, "GroundSpoof", "A", CheckCategory.MOVEMENT, new String[]{"PacketPos", "PacketPosRot"});
     }
 
     @Override

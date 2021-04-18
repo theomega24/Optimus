@@ -16,9 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check;
+package me.notom3ga.optimus.api.check;
 
-public enum Category {
+public enum CheckCategory {
+    /**
+     * Checks to do with a players movement.
+     */
     MOVEMENT,
+    /**
+     * Checks that don't fall into any other category.
+     */
     PLAYER
 }

@@ -18,7 +18,7 @@
 
 package me.notom3ga.optimus.check.impl.player.protocol;
 
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
@@ -30,7 +30,7 @@ public class ProtocolB extends Check {
     private int ticks;
 
     public ProtocolB(User user) {
-        super(user, "Protocol", "B", Category.PLAYER, new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
+        super(user, "Protocol", "B", CheckCategory.PLAYER, new String[]{"PacketPos", "PacketPosRot", "PacketInput"});
     }
 
     @Override

@@ -18,7 +18,7 @@
 
 package me.notom3ga.optimus.user;
 
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.Location;
@@ -63,7 +63,7 @@ public class User {
     public int getMovementVL() {
         int finalVl = 0;
         for (Check check : checks) {
-            if (check.getCategory() == Category.MOVEMENT) {
+            if (check.getCategory() == CheckCategory.MOVEMENT) {
                 finalVl += check.getVl();
             }
         }
@@ -74,7 +74,7 @@ public class User {
     public int getPlayerVL() {
         int finalVl = 0;
         for (Check check : checks) {
-            if (check.getCategory() == Category.PLAYER) {
+            if (check.getCategory() == CheckCategory.PLAYER) {
                 finalVl += check.getVl();
             }
         }

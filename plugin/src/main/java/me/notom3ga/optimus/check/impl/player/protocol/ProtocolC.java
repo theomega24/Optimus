@@ -18,7 +18,7 @@
 
 package me.notom3ga.optimus.check.impl.player.protocol;
 
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInteract;
@@ -27,7 +27,7 @@ import me.notom3ga.optimus.user.User;
 public class ProtocolC extends Check {
 
     public ProtocolC(User user) {
-        super(user, "Protocol", "C", Category.PLAYER, new String[]{"PacketInteract"});
+        super(user, "Protocol", "C", CheckCategory.PLAYER, new String[]{"PacketInteract"});
     }
 
     @Override

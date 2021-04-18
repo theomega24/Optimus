@@ -18,7 +18,7 @@
 
 package me.notom3ga.optimus.check.impl.player.blockplace;
 
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemInteract;
@@ -33,7 +33,7 @@ import java.util.Collection;
 public class BlockPlaceA extends Check {
 
     public BlockPlaceA(User user) {
-        super(user, "BlockPlace", "A", Category.PLAYER, new String[]{"PacketItemInteract"});
+        super(user, "BlockPlace", "A", CheckCategory.PLAYER, new String[]{"PacketItemInteract"});
     }
 
     @Override

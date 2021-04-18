@@ -19,6 +19,7 @@
 package me.notom3ga.optimus.check;
 
 import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.event.PlayerViolationEvent;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.packet.wrapper.Packet;
@@ -46,13 +47,13 @@ public abstract class Check {
     protected final double max, multiple, decay;
 
     protected final String name, type;
-    protected final Category category;
+    protected final CheckCategory category;
     protected final String[] packets;
 
     protected int vl;
     protected boolean punishing, failed;
 
-    public Check(User user, String name, String type, Category category, String[] packets) {
+    public Check(User user, String name, String type, CheckCategory category, String[] packets) {
         this.user = user;
 
         this.config = Config.getCheckSection(name, type);
@@ -111,7 +112,7 @@ public abstract class Check {
         return this.type;
     }
 
-    public Category getCategory() {
+    public CheckCategory getCategory() {
         return this.category;
     }
 

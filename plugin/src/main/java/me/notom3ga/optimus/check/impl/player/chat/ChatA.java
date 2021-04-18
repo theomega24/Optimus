@@ -18,7 +18,7 @@
 
 package me.notom3ga.optimus.check.impl.player.chat;
 
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
@@ -29,7 +29,7 @@ import org.bukkit.block.Block;
 public class ChatA extends Check {
 
     public ChatA(User user) {
-        super(user, "Chat", "A", Category.PLAYER, new String[]{"PacketChat"});
+        super(user, "Chat", "A", CheckCategory.PLAYER, new String[]{"PacketChat"});
     }
 
     @Override

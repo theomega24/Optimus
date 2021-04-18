@@ -18,6 +18,7 @@
 
 package me.notom3ga.optimus;
 
+import me.notom3ga.optimus.api.OptimusAPI;
 import me.notom3ga.optimus.command.CommandManager;
 import me.notom3ga.optimus.command.impl.AlertsCommand;
 import me.notom3ga.optimus.command.impl.ExemptCommand;
@@ -28,11 +29,13 @@ import me.notom3ga.optimus.command.impl.RecalculateCommand;
 import me.notom3ga.optimus.command.impl.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hook.FloodgateHook;
+import me.notom3ga.optimus.impl.OptimusAPIImpl;
 import me.notom3ga.optimus.listener.PlayerListener;
 import me.notom3ga.optimus.packet.queue.PacketQueue;
 import me.notom3ga.optimus.util.Constants;
 import me.notom3ga.optimus.util.Logger;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.Executor;
@@ -47,6 +50,7 @@ public class Optimus extends JavaPlugin {
     public Executor internalThread;
     public CommandManager commandManager;
     public PacketQueue packetQueue;
+    public OptimusAPI api;
     public FloodgateHook floodgateHook;
     public Metrics metrics;
 
@@ -78,6 +82,7 @@ public class Optimus extends JavaPlugin {
             Logger.severe("Failed to load commands", e);
         }
         this.packetQueue = new PacketQueue();
+        this.api = new OptimusAPIImpl();
         this.floodgateHook = new FloodgateHook();
 
         this.commandManager.register(new AlertsCommand());
@@ -88,8 +93,15 @@ public class Optimus extends JavaPlugin {
         this.commandManager.register(new RecalculateCommand());
         this.commandManager.register(new ResetCommand());
 
+        getServer().getServicesManager().register(OptimusAPI.class, this.api, this, ServicePriority.Normal);
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         this.metrics = new Metrics(this, 10972);
+    }
+
+    @Override
+    public void onDisable() {
+        getServer().getScheduler().cancelTasks(this);
+        getServer().getServicesManager().unregister(OptimusAPI.class, this.api);
     }
 }

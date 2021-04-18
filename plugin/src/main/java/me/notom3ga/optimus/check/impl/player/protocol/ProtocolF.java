@@ -19,7 +19,7 @@
 package me.notom3ga.optimus.check.impl.player.protocol;
 
 import me.notom3ga.optimus.Optimus;
-import me.notom3ga.optimus.check.Category;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.InternalPacketReceiveEvent;
 import me.notom3ga.optimus.packet.wrapper.Packet;
@@ -33,7 +33,7 @@ public class ProtocolF extends Check implements Listener {
     private boolean awaitingBlock = false;
 
     public ProtocolF(User user) {
-        super(user, "Protocol", "F", Category.PLAYER, new String[]{"PacketInteract"});
+        super(user, "Protocol", "F", CheckCategory.PLAYER, new String[]{"PacketInteract"});
         Bukkit.getServer().getPluginManager().registerEvents(this, Optimus.instance);
     }
 
