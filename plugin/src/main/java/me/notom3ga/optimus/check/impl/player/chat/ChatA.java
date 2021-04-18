@@ -38,7 +38,7 @@ public class ChatA extends Check {
 
         boolean inPortal = false;
 
-        for (Block block : user.getStandingIn()) {
+        for (Block block : user.getStandingIn(user.bukkitPlayer.getLocation())) {
             if (block.getType() == Material.NETHER_PORTAL) {
                 inPortal = true;
                 break;
