@@ -82,16 +82,6 @@ public class User {
         return finalVl;
     }
 
-    public Set<Block> getStandingOn(Location location) {
-        return new HashSet<>(){{
-            addAll(Arrays.asList(new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY() - 1, location.getZ() - 0.3).getBlock(),
-                    new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY() - 1, location.getZ() - 0.3).getBlock(),
-                    new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY() - 1, location.getZ() + 0.3).getBlock(),
-                    new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY() - 1, location.getZ() + 0.3).getBlock())
-            );
-        }};
-    }
-
     public Set<Block> getStandingIn(Location location) {
         return new HashSet<>(){{
             addAll(Arrays.asList(new Location(bukkitPlayer.getWorld(), location.getX() + 0.3, location.getY(), location.getZ() - 0.3).getBlock(),
@@ -100,5 +90,19 @@ public class User {
                     new Location(bukkitPlayer.getWorld(), location.getX() - 0.3, location.getY(), location.getZ() + 0.3).getBlock())
             );
         }};
+    }
+
+    public Set<Block> getNearbyBlocks(Location location, int radius) {
+        Set<Block> blocks = new HashSet<>();
+
+        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
+            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
+                for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
+                    blocks.add(location.getWorld().getBlockAt(x, y, z));
+                }
+            }
+        }
+
+        return blocks;
     }
 }

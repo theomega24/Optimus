@@ -18,7 +18,6 @@
 
 package me.notom3ga.optimus.check.impl.movement.groundspoof;
 
-import com.google.common.collect.Sets;
 import me.notom3ga.optimus.check.Category;
 import me.notom3ga.optimus.check.Check;
 import me.notom3ga.optimus.packet.wrapper.Packet;
@@ -31,7 +30,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class GroundSpoofA extends Check {
@@ -67,13 +65,7 @@ public class GroundSpoofA extends Check {
                 }
             }
 
-            Location location = new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ());
-            Set<Block> blocks = Sets.newHashSet();
-
-            blocks.addAll(user.getStandingOn(location));
-            blocks.addAll(user.getStandingIn(location));
-
-            for (Block block : blocks) {
+            for (Block block : user.getNearbyBlocks(new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ()), 2)) {
                 if (Tag.SHULKER_BOXES.isTagged(block.getType())) {
                     shulker = true;
                     break;
