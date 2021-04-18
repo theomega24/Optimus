@@ -41,6 +41,12 @@ public interface Check {
      */
     CheckData getData();
 
+    default void fail() {
+        this.fail("");
+    }
+
+    void fail(String debug);
+
     /**
      * Runs the punishment of the check, even
      * if the check isn't punishable.

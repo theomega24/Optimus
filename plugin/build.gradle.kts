@@ -50,4 +50,3 @@ license {
     header = rootProject.rootDir.resolve("HEADER")
     include("**/*.java")
 }
-

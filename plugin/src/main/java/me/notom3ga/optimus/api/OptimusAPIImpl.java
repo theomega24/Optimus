@@ -16,9 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.impl;
+package me.notom3ga.optimus.api;
 
-import me.notom3ga.optimus.api.OptimusAPI;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.user.UserManager;
 import org.bukkit.entity.Player;

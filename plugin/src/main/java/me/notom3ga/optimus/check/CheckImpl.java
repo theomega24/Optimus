@@ -95,27 +95,6 @@ public abstract class CheckImpl implements Check {
     }
 
     @Override
-    public int getVl() {
-        return this.vl;
-    }
-
-    @Override
-    public void reset() {
-        this.vl = 0;
-        this.buffer = data.getBufferMax();
-        this.fails = 0;
-        this.punishing = false;
-        this.failed = false;
-    }
-
-    public HashSet<String> getPackets() {
-        return this.packets;
-    }
-
-    public void fail() {
-        this.fail("");
-    }
-
     public void fail(String debug) {
         if (punishing) return;
         this.failed = true;
@@ -135,7 +114,7 @@ public abstract class CheckImpl implements Check {
 
         this.vl += event.getVl();
 
-        String message = Formatter.replaceFormats(event.getFormat(), data.getName(), data.getType(), vl, user);
+        String message = Formatter.formatAlerts(event.getFormat(), data.getName(), data.getType(), vl, user);
         String hover = message.replace("{debug}", debug);
 
         TextComponent component = Constants.LEGACY_SERIALIZER.deserialize(message)
@@ -153,6 +132,24 @@ public abstract class CheckImpl implements Check {
                 }
             });
         }
+    }
+
+    @Override
+    public int getVl() {
+        return this.vl;
+    }
+
+    @Override
+    public void reset() {
+        this.vl = 0;
+        this.buffer = data.getBufferMax();
+        this.fails = 0;
+        this.punishing = false;
+        this.failed = false;
+    }
+
+    public HashSet<String> getPackets() {
+        return this.packets;
     }
 
     public void sync(Runnable runnable) {

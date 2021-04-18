@@ -29,7 +29,7 @@ import me.notom3ga.optimus.command.impl.RecalculateCommand;
 import me.notom3ga.optimus.command.impl.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hook.FloodgateHook;
-import me.notom3ga.optimus.impl.OptimusAPIImpl;
+import me.notom3ga.optimus.api.OptimusAPIImpl;
 import me.notom3ga.optimus.listener.PlayerListener;
 import me.notom3ga.optimus.packet.queue.PacketQueue;
 import me.notom3ga.optimus.util.Constants;
@@ -54,7 +54,7 @@ public class Optimus extends JavaPlugin {
     public void onEnable() {
         try {
             Class.forName("com.destroystokyo.paper.PaperConfig");
-            Class.forName("net.kyori.adventure.audience.Audience");
+            Class.forName("io.papermc.paper.adventure.PaperAdventure");
         } catch (ClassNotFoundException e) {
             Logger.severe("Failed to load Optimus v" + getDescription().getVersion());
             Logger.severe("We require Paper with Adventure (https://papermc.io/)");
@@ -73,7 +73,8 @@ public class Optimus extends JavaPlugin {
         try {
             this.commandManager = new CommandManager();
         } catch (Exception e) {
-            Logger.severe("Failed to load commands", e);
+            Logger.severe("Failed to load commands, disabling.", e);
+            getServer().getPluginManager().disablePlugin(this);
         }
         this.packetQueue = new PacketQueue();
         this.api = new OptimusAPIImpl();
