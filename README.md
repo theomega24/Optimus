@@ -5,6 +5,7 @@
 [![MIT License](https://img.shields.io/github/license/notOM3GA/Optimus?&logo=github)](License)
 [![CodeFactor](https://www.codefactor.io/repository/github/notOM3GA/Optimus/badge)](https://www.codefactor.io/repository/github/notOM3GA/Optimus)
 [![Join us on Discord](https://img.shields.io/discord/810539670936485899.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/qJ2k4Bbcd7)
+[![Download from Jenkins](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fci.notom3ga.me%2Fjob%2FOptimus%2F)](https://ci.notom3ga.me/job/Optimus/)
 
 [![Optimus' Stargazers](https://img.shields.io/github/stars/notOM3GA/Optimus?label=stars&logo=github)](https://github.com/notOM3GA/Optimus/stargazers)
 [![notOM3GAS's Followers](https://img.shields.io/github/followers/notOM3GA?label=followers&logo=github)](https://github.com/notOM3GA?tab=followers)
