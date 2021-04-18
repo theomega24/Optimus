@@ -6,7 +6,7 @@ plugins {
 
 allprojects {
     group = "me.notom3ga"
-    version = "1.0-ALPHA-${getGitCommit()}"
+    version = "1.0-BETA-${System.getenv("BUILD_NUMBER") ?: getGitCommit()}"
 }
 
 subprojects {
