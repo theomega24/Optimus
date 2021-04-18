@@ -31,12 +31,12 @@ import java.util.List;
 public class CheckData {
     private final String name, type;
     private final CheckCategory category;
-    private final int vl, decay;
-    private final boolean enabled, punishable;
-    private final int punishVl;
-    private final List<String> punishCommands;
-    private final int bufferMax;
-    private final double bufferMultiple, bufferDecay;
+    private int vl, decay;
+    private boolean enabled, punishable;
+    private int punishVl;
+    private List<String> punishCommands;
+    private int bufferMax;
+    private double bufferMultiple, bufferDecay;
 
     public CheckData(String name, String type, CheckCategory category, ConfigurationSection config) {
         this.name = name;
@@ -91,13 +91,32 @@ public class CheckData {
     }
 
     /**
+     * Sets if the check is enabled.
+     *
+     * @param enabled if the check will be enabled
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
      * Gets how much VL is added to the player when
      * they fail the check.
      *
-     * @return how much VL is added to the player whenthey fail the check
+     * @return how much VL is added to the player when they fail the check
      */
     public int getVl() {
         return this.vl;
+    }
+
+    /**
+     * Sets how much VL is added to the player when
+     * they fail the check.
+     *
+     * @param vl how much VL will be added to the player when they fail the check
+     */
+    public void setVl(int vl) {
+        this.vl = vl;
     }
 
     /**
@@ -111,12 +130,31 @@ public class CheckData {
     }
 
     /**
+     * Sets how much VL is removed from the player
+     * per minute.
+     *
+     * @param decay how much VL will be removed from the player per minute
+     */
+    public void setDecay(int decay) {
+        this.decay = decay;
+    }
+
+    /**
      * Gets if the check is punishable.
      *
      * @return if the check is punishable
      */
     public boolean isPunishable() {
         return this.punishable;
+    }
+
+    /**
+     * Sets if the check is punishable.
+     *
+     * @param punishable if the check will be punishable
+     */
+    public void setPunishable(boolean punishable) {
+        this.punishable = punishable;
     }
 
     /**
@@ -129,33 +167,73 @@ public class CheckData {
     }
 
     /**
+     * Sets the VL required for the check to run a punishment.
+     *
+     * @param punishVl the new VL required for the check to run a punishment
+     */
+    public void setPunishVl(int punishVl) {
+        this.punishVl = punishVl;
+    }
+
+    /**
      * Gets a list of commands that will run when
      * the player is punished.
      *
-     * @return a list of commands that will run when the player is punished.
+     * @return a list of commands that will run when the player is punished
      */
     public List<String> getPunishCommands() {
         return this.punishCommands;
     }
 
     /**
-     * THIS IS HERE TO GET DATA FROM THE CONFIG, TODO.
+     * Sets a list of commands that will run when
+     * the player is punished.
+     *
+     * @param punishCommands a new list of commands that will run when the player is punished
+     */
+    public void setPunishCommands(List<String> punishCommands) {
+        this.punishCommands = punishCommands;
+    }
+
+    /**
+     * TODO: BUFFER.
      */
     public int getBufferMax() {
         return this.bufferMax;
     }
 
     /**
-     * THIS IS HERE TO GET DATA FROM THE CONFIG, TODO.
+     * TODO: BUFFER.
+     */
+    public void setBufferMax(int bufferMax) {
+        this.bufferMax = bufferMax;
+    }
+
+    /**
+     * TODO: BUFFER.
      */
     public double getBufferMultiple() {
         return this.bufferMultiple;
     }
 
     /**
-     * THIS IS HERE TO GET DATA FROM THE CONFIG, TODO.
+     * TODO: BUFFER.
+     */
+    public void setBufferMultiple(double bufferMultiple) {
+        this.bufferMultiple = bufferMultiple;
+    }
+
+    /**
+     * TODO: BUFFER.
      */
     public double getBufferDecay() {
         return this.bufferDecay;
+    }
+
+    /**
+     * TODO: BUFFER.
+     */
+    public void setBufferDecay(double bufferDecay) {
+        this.bufferDecay = bufferDecay;
     }
 }
