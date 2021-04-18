@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class GroundSpoofA extends Check {
+    private final double groundY = 0.015625;
 
     public GroundSpoofA(User user) {
         super(user, "GroundSpoof", "A", Category.MOVEMENT, new String[]{"PacketPos", "PacketPosRot"});
@@ -44,14 +45,14 @@ public class GroundSpoofA extends Check {
         PacketPos packet = (PacketPos) pkt;
 
         boolean client = packet.isOnGround(),
-                server = packet.getY() % 0.015625 < 0.0001;
+                server = packet.getY() % groundY < 0.0001;
 
         if (client && !server) {
             boolean boat = false;
             boolean shulker = false;
 
             AtomicReference<List<Entity>> nearby = new AtomicReference<>();
-            sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1, 1, 1)));
+            sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1, 10, 1)));
 
             for (Entity entity : nearby.get()) {
                 if (entity.getType() == EntityType.BOAT && packet.getY() > entity.getLocation().getY()) {
@@ -78,7 +79,7 @@ public class GroundSpoofA extends Check {
             }
 
             if (!boat && !shulker) {
-                fail("modulus=" + packet.getY() % 0.015625);
+                fail("client=" + packet.getY() % groundY);
             }
         }
     }
