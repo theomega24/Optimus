@@ -25,18 +25,18 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserManager {
-    private static final ConcurrentHashMap<UUID, User> USER_MAP = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<UUID, UserImpl> USER_MAP = new ConcurrentHashMap<>();
 
-    public static User getUser(Player player) {
+    public static UserImpl getUser(Player player) {
         if (USER_MAP.containsKey(player.getUniqueId())) {
             return USER_MAP.get(player.getUniqueId());
         }
 
-        USER_MAP.put(player.getUniqueId(), new User(player));
+        USER_MAP.put(player.getUniqueId(), new UserImpl(player));
         return USER_MAP.get(player.getUniqueId());
     }
 
-    public static Collection<User> getAllUsers() {
+    public static Collection<UserImpl> getAllUsers() {
         return USER_MAP.values();
     }
 

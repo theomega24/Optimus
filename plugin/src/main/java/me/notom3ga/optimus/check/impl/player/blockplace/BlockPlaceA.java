@@ -19,10 +19,10 @@
 package me.notom3ga.optimus.check.impl.player.blockplace;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
-import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemInteract;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -30,10 +30,10 @@ import org.bukkit.block.BlockFace;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BlockPlaceA extends Check {
+public class BlockPlaceA extends CheckImpl {
 
-    public BlockPlaceA(User user) {
-        super(user, "BlockPlace", "A", CheckCategory.PLAYER, new String[]{"PacketItemInteract"});
+    public BlockPlaceA(UserImpl user) {
+        super(user, "BlockPlace", "A", CheckCategory.PLAYER, "PacketItemInteract");
     }
 
     @Override

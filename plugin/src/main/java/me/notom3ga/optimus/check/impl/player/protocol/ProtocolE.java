@@ -19,15 +19,15 @@
 package me.notom3ga.optimus.check.impl.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
-import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 
-public class ProtocolE extends Check {
+public class ProtocolE extends CheckImpl {
 
-    public ProtocolE(User user) {
-        super(user, "Protocol", "E", CheckCategory.PLAYER, new String[]{"PacketInput"});
+    public ProtocolE(UserImpl user) {
+        super(user, "Protocol", "E", CheckCategory.PLAYER, "PacketInput");
     }
 
     @Override

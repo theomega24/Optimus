@@ -19,12 +19,12 @@
 package me.notom3ga.optimus.packet;
 
 import io.netty.channel.Channel;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 
 public class PacketInjector {
     private static final String PIPELINE_NAME = "optimus_injector";
 
-    public static void inject(User user) {
+    public static void inject(UserImpl user) {
         Channel channel = user.entityPlayer.networkManager.channel;
 
         if (channel.pipeline().get(PIPELINE_NAME) == null) {
@@ -32,7 +32,7 @@ public class PacketInjector {
         }
     }
 
-    public static void remove(User user) {
+    public static void remove(UserImpl user) {
         Channel channel = user.entityPlayer.networkManager.channel;
 
         if (channel.pipeline().get(PIPELINE_NAME) != null) {

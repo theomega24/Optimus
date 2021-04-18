@@ -18,18 +18,44 @@
 
 package me.notom3ga.optimus.api.check;
 
+import me.notom3ga.optimus.api.user.User;
+
 /**
- * All checks must fall into this category.
+ * An Optimus check.
  *
  * @author notOM3GA
  */
-public enum CheckCategory {
+public interface Check {
+
     /**
-     * Checks to do with a players movement.
+     * Gets the user the check runs for.
+     *
+     * @return the user the check runs for
      */
-    MOVEMENT,
+    User getUser();
+
     /**
-     * Checks that don't fall into any other category.
+     * Gets the data of the check.
+     *
+     * @return the data from the check
      */
-    PLAYER
+    CheckData getData();
+
+    /**
+     * Runs the punishment of the check, even
+     * if the check isn't punishable.
+     */
+    void runPunishment();
+
+    /**
+     * Gets the users VL from this check.
+     *
+     * @return the users VL from this check
+     */
+    int getVl();
+
+    /**
+     * Resets a check.
+     */
+    void reset();
 }

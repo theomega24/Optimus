@@ -19,11 +19,11 @@
 package me.notom3ga.optimus.packet.queue;
 
 import me.notom3ga.optimus.Optimus;
+import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.PacketWrapper;
 import me.notom3ga.optimus.util.Logger;
 
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -62,11 +62,13 @@ public class PacketQueue {
                         Packet packet = PacketWrapper.wrap(entry.packet);
 
                         entry.user.checks.forEach(check -> {
-                            if (Arrays.stream(check.getPackets()).anyMatch(s -> packet.getClass().getSimpleName().equalsIgnoreCase(s))) {
+                            if (check instanceof CheckImpl
+                                    && ((CheckImpl) check).getPackets().stream().anyMatch(s -> packet.getClass().getSimpleName().equalsIgnoreCase(s))) {
                                 try {
-                                    check.receive(packet);
+                                    ((CheckImpl) check).receive(packet);
                                 } catch (Exception e) {
-                                    Logger.severe("Failed to execute check " + check.getName() + check.getType() + " for " + entry.user.bukkitPlayer.getName(), e);
+                                    Logger.severe("Failed to execute check " + check.getData().getName() + check.getData().getType()
+                                            + " for " + entry.user.bukkitPlayer.getName(), e);
                                 }
                             }
                         });

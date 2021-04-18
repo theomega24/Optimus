@@ -19,11 +19,11 @@
 package me.notom3ga.optimus.util;
 
 import me.notom3ga.optimus.config.Config;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import org.bukkit.Bukkit;
 
 public class Formatter {
-    public static String replaceFormats(String message, String name, String type, int vl, User user) {
+    public static String replaceFormats(String message, String name, String type, int vl, UserImpl user) {
         return message.replace("{color}", vl >= Config.Alerts.Colors.DARK_RED_VL ? "&" + Config.Alerts.Colors.DARK_RED
                 : vl >= Config.Alerts.Colors.RED_VL ? "&" + Config.Alerts.Colors.RED
                 : vl >= Config.Alerts.Colors.YELLOW_VL ? "&" + Config.Alerts.Colors.YELLOW

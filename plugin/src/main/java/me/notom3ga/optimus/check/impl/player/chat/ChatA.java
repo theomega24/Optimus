@@ -19,17 +19,17 @@
 package me.notom3ga.optimus.check.impl.player.chat;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
-import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-public class ChatA extends Check {
+public class ChatA extends CheckImpl {
 
-    public ChatA(User user) {
-        super(user, "Chat", "A", CheckCategory.PLAYER, new String[]{"PacketChat"});
+    public ChatA(UserImpl user) {
+        super(user, "Chat", "A", CheckCategory.PLAYER, "PacketChat");
     }
 
     @Override

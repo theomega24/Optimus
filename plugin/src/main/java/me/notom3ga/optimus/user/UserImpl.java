@@ -18,8 +18,9 @@
 
 package me.notom3ga.optimus.user;
 
+import me.notom3ga.optimus.api.check.Check;
 import me.notom3ga.optimus.api.check.CheckCategory;
-import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.api.user.User;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -30,7 +31,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+public class UserImpl implements User {
     public final Player bukkitPlayer;
     public final EntityPlayer entityPlayer;
     public final HashSet<Check> checks;
@@ -38,21 +39,32 @@ public class User {
     public long join, ping = -1;
     public boolean exempt = false, bedrock = false, alerts = false;
 
-    public User(Player player) {
+    public UserImpl(Player player) {
         this.bukkitPlayer = player;
         this.entityPlayer = ((CraftPlayer) player).getHandle();
 
         this.checks = new HashSet<>();
     }
 
-    public void addCheck(Check check) {
-        if (check.isEnabled()) {
-            this.checks.add(check);
-        }
+    @Override
+    public HashSet<Check> getChecks() {
+        return this.checks;
     }
 
-    public int getVL() {
+    @Override
+    public void addCheck(Check check) {
+        this.checks.add(check);
+    }
+
+    @Override
+    public void removeCheck(Check check) {
+        this.checks.remove(check);
+    }
+
+    @Override
+    public int getVl() {
         int finalVl = 0;
+
         for (Check check : checks) {
             finalVl += check.getVl();
         }
@@ -60,10 +72,12 @@ public class User {
         return finalVl;
     }
 
-    public int getMovementVL() {
+    @Override
+    public int getVl(CheckCategory category) {
         int finalVl = 0;
+
         for (Check check : checks) {
-            if (check.getCategory() == CheckCategory.MOVEMENT) {
+            if (check.getData().getCategory() == category) {
                 finalVl += check.getVl();
             }
         }
@@ -71,15 +85,29 @@ public class User {
         return finalVl;
     }
 
-    public int getPlayerVL() {
-        int finalVl = 0;
-        for (Check check : checks) {
-            if (check.getCategory() == CheckCategory.PLAYER) {
-                finalVl += check.getVl();
-            }
-        }
+    @Override
+    public boolean hasAlerts() {
+        return this.alerts;
+    }
 
-        return finalVl;
+    @Override
+    public void setAlerts(boolean alerts) {
+        this.alerts = alerts;
+    }
+
+    @Override
+    public boolean isExempt() {
+        return this.exempt;
+    }
+
+    @Override
+    public void setExempt(boolean exempt) {
+        this.exempt = exempt;
+    }
+
+    @Override
+    public boolean isBedrock() {
+        return this.bedrock;
     }
 
     public Set<Block> getStandingIn(Location location) {

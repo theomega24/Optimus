@@ -23,9 +23,10 @@ import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
+import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.command.Command;
 import me.notom3ga.optimus.config.Config;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -40,7 +41,7 @@ public class ProfileCommand implements Command {
     @CommandPermission("optimus.command.profile")
     @CommandDescription("View Optimus' profile for a player.")
     public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
-        User user = UserManager.getUser(player);
+        UserImpl user = UserManager.getUser(player);
 
         if (user.exempt) {
             context.getSender().sendMessage(TextComponent.ofChildren(
@@ -58,15 +59,15 @@ public class ProfileCommand implements Command {
                 Component.text(player.getClientBrandName() == null ? "unknown" : player.getClientBrandName(), Config.Brand.BRAND_COLOR),
                 Component.newline(),
                 Component.text("Total VL: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(Integer.toString(user.getVL()), Config.Brand.BRAND_COLOR),
+                Component.text(Integer.toString(user.getVl()), Config.Brand.BRAND_COLOR),
                 Component.newline(),
                 Component.text(" » ", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
                 Component.text("Movement VL: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(Integer.toString(user.getMovementVL()), Config.Brand.BRAND_COLOR),
+                Component.text(Integer.toString(user.getVl(CheckCategory.MOVEMENT)), Config.Brand.BRAND_COLOR),
                 Component.newline(),
                 Component.text(" » ", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
                 Component.text("Player VL: ", Config.Brand.HIGHLIGHT_COLOR),
-                Component.text(Integer.toString(user.getPlayerVL()), Config.Brand.BRAND_COLOR)
+                Component.text(Integer.toString(user.getVl(CheckCategory.PLAYER)), Config.Brand.BRAND_COLOR)
         ));
     }
 }

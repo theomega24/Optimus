@@ -27,10 +27,9 @@ import me.notom3ga.optimus.check.impl.player.protocol.ProtocolB;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolC;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolD;
 import me.notom3ga.optimus.check.impl.player.protocol.ProtocolE;
-import me.notom3ga.optimus.check.impl.player.protocol.ProtocolF;
 import me.notom3ga.optimus.check.impl.player.skinblinker.SkinBlinkerA;
 import me.notom3ga.optimus.packet.PacketInjector;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import me.notom3ga.optimus.user.UserManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,7 +40,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        User user = UserManager.getUser(event.getPlayer());
+        UserImpl user = UserManager.getUser(event.getPlayer());
         user.join = System.currentTimeMillis();
         user.alerts = event.getPlayer().hasPermission("optimus.alerts");
         user.exempt = event.getPlayer().hasPermission("optimus.exempt");
@@ -63,13 +62,12 @@ public class PlayerListener implements Listener {
         user.addCheck(new ProtocolC(user));
         user.addCheck(new ProtocolD(user));
         user.addCheck(new ProtocolE(user));
-        user.addCheck(new ProtocolF(user));
         user.addCheck(new SkinBlinkerA(user));
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        User user = UserManager.getUser(event.getPlayer());
+        UserImpl user = UserManager.getUser(event.getPlayer());
         PacketInjector.remove(user);
         UserManager.removeUser(event.getPlayer());
     }

@@ -18,7 +18,6 @@
 
 package me.notom3ga.optimus.api.event;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -30,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * <p>This event will most likely run async, so make sure you check
  * if the event is async with {@link #isAsynchronous()}.</p>
+ *
  * @author notOM3GA
  */
 public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
@@ -49,7 +49,7 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     private boolean cancelled;
 
     public PlayerViolationEvent(Player player, String format, String hoverMessage, String clickCommand, boolean sendAlerts, boolean sendConsoleAlerts, int vl) {
-        super(player, !Bukkit.isPrimaryThread());
+        super(player, true);
 
         this.format = format;
         this.hoverMessage = hoverMessage;
@@ -61,7 +61,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Gets the format of the alert that will be sent to players/console
+     * Gets the format of the alert that will be sent to players/console.
+     *
      * @return the format of the alert
      */
     public String getFormat() {
@@ -69,7 +70,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets the format of the alert that will be sent to players/console
+     * Sets the format of the alert that will be sent to players/console.
+     *
      * @param format the new format of the alert
      */
     public void setFormat(String format) {
@@ -77,7 +79,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Gets the message that players will see when they hover over alerts
+     * Gets the message that players will see when they hover over alerts.
+     *
      * @return the message that players will see when they hover over alerts
      */
     public String getHoverMessage() {
@@ -85,7 +88,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets the message that players will see when they hover over alerts
+     * Sets the message that players will see when they hover over alerts.
+     *
      * @param hoverMessage the new message that players will see when they hover over alerts
      */
     public void setHoverMessage(String hoverMessage) {
@@ -93,7 +97,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Gets the command a player will execute when they click on the alert
+     * Gets the command a player will execute when they click on the alert.
+     *
      * @return the command a player will execute when they click on the alert
      */
     public String getClickCommand() {
@@ -101,7 +106,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets the command a player will execute when they click on the alert
+     * Sets the command a player will execute when they click on the alert.
+     *
      * @param clickCommand the new command a player will execute when they click on the alert
      */
     public void setClickCommand(String clickCommand) {
@@ -109,7 +115,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Checks if the violation will send an alert
+     * Checks if the violation will send an alert.
+     *
      * @return if the violation is sending alerts
      */
     public boolean isSendingAlerts() {
@@ -117,7 +124,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets if the violation will send an alert
+     * Sets if the violation will send an alert.
+     *
      * @param sendAlerts if the violation will send alerts
      */
     public void setSendingAlerts(boolean sendAlerts) {
@@ -125,7 +133,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Checks if the violation will send console an alert
+     * Checks if the violation will send console an alert.
+     *
      * @return if the violation is sending console alerts
      */
     public boolean isSendingConsoleAlerts() {
@@ -133,7 +142,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets if the violation will send console an alert
+     * Sets if the violation will send console an alert.
+     *
      * @param sendConsoleAlerts if the violation will send console alerts
      */
     public void setSendingConsoleAlerts(boolean sendConsoleAlerts) {
@@ -141,7 +151,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Gets the VL that will be added to the player
+     * Gets the VL that will be added to the player.
+     *
      * @return the VL that will be added to the player
      */
     public int getVl() {
@@ -149,7 +160,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets the VL that will be added to the player
+     * Sets the VL that will be added to the player.
+     *
      * @param vl the new VL that will be added to the player
      */
     public void setVl(int vl) {
@@ -157,7 +169,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Checks if the event is cancelled
+     * Checks if the event is cancelled.
+     *
      * @return if the event is cancelled
      */
     @Override
@@ -166,7 +179,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Sets if the event is cancelled
+     * Sets if the event is cancelled.
+     *
      * @param cancelled if the event will be cancelled
      */
     @Override
@@ -175,7 +189,8 @@ public class PlayerViolationEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Gets the events handler list
+     * Gets the events handler list.
+     *
      * @return the events handler list
      */
     @Override

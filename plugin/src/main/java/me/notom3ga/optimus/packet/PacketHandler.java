@@ -23,18 +23,18 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.packet.queue.QueueEntry;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import net.minecraft.server.v1_16_R3.Packet;
 import net.minecraft.server.v1_16_R3.PacketPlayInKeepAlive;
 import net.minecraft.server.v1_16_R3.PacketPlayOutKeepAlive;
 
 public class PacketHandler extends ChannelDuplexHandler {
-    private final User user;
+    private final UserImpl user;
 
     private boolean keepAliveSent = false;
     private long keepAliveLastSent;
 
-    public PacketHandler(User user) {
+    public PacketHandler(UserImpl user) {
         this.user = user;
     }
 

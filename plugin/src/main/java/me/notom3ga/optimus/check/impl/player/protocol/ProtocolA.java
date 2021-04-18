@@ -19,16 +19,16 @@
 package me.notom3ga.optimus.check.impl.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
-import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPosRot;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketRot;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 
-public class ProtocolA extends Check {
+public class ProtocolA extends CheckImpl {
 
-    public ProtocolA(User user) {
-        super(user, "Protocol", "A", CheckCategory.PLAYER, new String[]{"PacketRot", "PacketPosRot"});
+    public ProtocolA(UserImpl user) {
+        super(user, "Protocol", "A", CheckCategory.PLAYER, "PacketRot", "PacketPosRot");
     }
 
     @Override

@@ -23,10 +23,10 @@ import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.context.CommandContext;
-import me.notom3ga.optimus.check.Check;
+import me.notom3ga.optimus.api.check.Check;
 import me.notom3ga.optimus.command.Command;
 import me.notom3ga.optimus.config.Config;
-import me.notom3ga.optimus.user.User;
+import me.notom3ga.optimus.user.UserImpl;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -41,7 +41,7 @@ public class ResetCommand implements Command {
     @CommandPermission("optimus.command.reset")
     @CommandDescription("Reset a players vl.")
     public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
-        User user = UserManager.getUser(player);
+        UserImpl user = UserManager.getUser(player);
 
         user.checks.forEach(Check::reset);
 
