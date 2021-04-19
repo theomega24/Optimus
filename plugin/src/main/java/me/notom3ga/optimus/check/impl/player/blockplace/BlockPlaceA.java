@@ -41,27 +41,29 @@ public class BlockPlaceA extends CheckImpl {
         PacketItemInteract packet = (PacketItemInteract) pkt;
 
         Block block = packet.getBukkitBlock(user.bukkitPlayer.getWorld());
-        Collection<Block> touchingBlocks = new ArrayList<>(){{
-            add(block.getRelative(BlockFace.UP));
-            add(block.getRelative(BlockFace.NORTH));
-            add(block.getRelative(BlockFace.EAST));
-            add(block.getRelative(BlockFace.SOUTH));
-            add(block.getRelative(BlockFace.WEST));
-            add(block.getRelative(BlockFace.DOWN));
+        Collection<Material> touchingTypes = new ArrayList<>(){{
+            add(block.getRelative(BlockFace.UP).getType());
+            add(block.getRelative(BlockFace.NORTH).getType());
+            add(block.getRelative(BlockFace.EAST).getType());
+            add(block.getRelative(BlockFace.SOUTH).getType());
+            add(block.getRelative(BlockFace.WEST).getType());
+            add(block.getRelative(BlockFace.DOWN).getType());
         }};
 
         boolean airPlaced = true;
-        for (Block touchingBlock : touchingBlocks) {
-            if (touchingBlock.getType() != Material.AIR
-                    && touchingBlock.getType() != Material.CAVE_AIR
-                    && touchingBlock.getType() != Material.VOID_AIR) {
+        for (Material type : touchingTypes) {
+            if (type != Material.AIR
+                    && type != Material.CAVE_AIR
+                    && type != Material.VOID_AIR
+                    && type != Material.WATER
+                    && type != Material.LAVA) {
                 airPlaced = false;
                 break;
             }
         }
 
         if (airPlaced) {
-            fail();
+            fail("faces=" + touchingTypes);
         }
     }
 }
