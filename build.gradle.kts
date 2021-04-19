@@ -21,6 +21,7 @@ subprojects {
         mavenCentral()
         maven("https://papermc.io/repo/repository/maven-public/")
         maven("https://repo.opencollab.dev/maven-snapshots")
+        maven("https://libraries.minecraft.net/")
         mavenLocal()
     }
 

@@ -8,11 +8,9 @@ dependencies {
     compileOnly("org.geysermc.floodgate", "api", "2.0-SNAPSHOT")
 
     implementation(project(":optimus-api"))
-    implementation("org.bstats", "bstats-bukkit", "2.2.1")
-    implementation("cloud.commandframework", "cloud-paper", "1.4.0")
-    implementation("cloud.commandframework", "cloud-annotations", "1.4.0")
-    implementation("cloud.commandframework", "cloud-minecraft-extras", "1.4.0")
+    implementation("me.lucko", "commodore", "1.9")
     implementation("net.kyori", "adventure-text-minimessage", "4.1.0-SNAPSHOT")
+    implementation("org.bstats", "bstats-bukkit", "2.2.1")
 }
 
 tasks {
@@ -30,13 +28,18 @@ tasks {
             exclude { it.moduleName == "optimus-api" }
         }
 
+        dependencies {
+            exclude("net.kyori.adventure.key", "net.kyori.adventure.text")
+            exclude(dependency("net.kyori:adventure-api"))
+            exclude(dependency("com.mojang:brigadier"))
+        }
+
         listOf(
-            "org.bstats",
-            "cloud.commandframework",
+            "me.lucko",
             "net.kyori.examination",
-            "io.leangen.geantyref",
-            "org.checkerframework",
-            "net.kyori.adventure.text.minimessage"
+            "net.kyori.adventure.key",
+            "net.kyori.adventure.text.minimessage",
+            "org.bstats",
         ).forEach { relocate(it, "me.notom3ga.optimus.libs.$it") }
         minimize()
     }

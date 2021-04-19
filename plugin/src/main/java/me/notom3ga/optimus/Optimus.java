@@ -20,14 +20,12 @@ package me.notom3ga.optimus;
 
 import me.notom3ga.optimus.api.OptimusAPI;
 import me.notom3ga.optimus.api.OptimusAPIImpl;
-import me.notom3ga.optimus.command.CommandManager;
-import me.notom3ga.optimus.command.impl.AlertsCommand;
-import me.notom3ga.optimus.command.impl.ExemptCommand;
-import me.notom3ga.optimus.command.impl.HelpCommand;
-import me.notom3ga.optimus.command.impl.OptimusCommand;
-import me.notom3ga.optimus.command.impl.ProfileCommand;
-import me.notom3ga.optimus.command.impl.RecalculateCommand;
-import me.notom3ga.optimus.command.impl.ResetCommand;
+import me.notom3ga.optimus.command.CommandExecutor;
+import me.notom3ga.optimus.command.commands.AlertsCommand;
+import me.notom3ga.optimus.command.commands.ExemptCommand;
+import me.notom3ga.optimus.command.commands.ProfileCommand;
+import me.notom3ga.optimus.command.commands.RecalculateCommand;
+import me.notom3ga.optimus.command.commands.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hook.FloodgateHook;
 import me.notom3ga.optimus.listener.ConnectionListener;
@@ -50,8 +48,8 @@ public class Optimus extends JavaPlugin {
     }
 
     private OptimusAPI apiImpl;
+    private CommandExecutor commandExecutor;
     private PacketQueue packetQueue;
-    private CommandManager commandManager;
     private FloodgateHook floodgateHook;
 
     @Override
@@ -76,22 +74,15 @@ public class Optimus extends JavaPlugin {
         Config.load();
 
         this.apiImpl = new OptimusAPIImpl();
+        this.commandExecutor = new CommandExecutor(getCommand("optimus"));
         this.packetQueue = new PacketQueue();
-        try {
-            this.commandManager = new CommandManager();
-        } catch (Exception e) {
-            Logger.severe("Failed to load commands, disabling.", e);
-            getServer().getPluginManager().disablePlugin(this);
-        }
         this.floodgateHook = new FloodgateHook();
 
-        this.commandManager.register(new AlertsCommand());
-        this.commandManager.register(new ExemptCommand());
-        this.commandManager.register(new HelpCommand());
-        this.commandManager.register(new OptimusCommand());
-        this.commandManager.register(new ProfileCommand());
-        this.commandManager.register(new RecalculateCommand());
-        this.commandManager.register(new ResetCommand());
+        this.commandExecutor.addSubcommand(new AlertsCommand());
+        this.commandExecutor.addSubcommand(new ExemptCommand());
+        this.commandExecutor.addSubcommand(new ProfileCommand());
+        this.commandExecutor.addSubcommand(new RecalculateCommand());
+        this.commandExecutor.addSubcommand(new ResetCommand());
 
         getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
         getServer().getServicesManager().register(OptimusAPI.class, this.apiImpl, this, ServicePriority.Normal);
@@ -111,10 +102,6 @@ public class Optimus extends JavaPlugin {
 
     public PacketQueue getPacketQueue() {
         return this.packetQueue;
-    }
-
-    public CommandManager getCommandManager() {
-        return this.commandManager;
     }
 
     public FloodgateHook getFloodgateHook() {

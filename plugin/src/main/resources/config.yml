@@ -147,6 +147,7 @@ brand:
   secondary-highlight-color: "#BDBDBD"
 
 lang:
+  player-command: "<color:#D6D6D6>This command can only be run by a player!</color>"
   alerts-enabled: "<color:#D6D6D6>Alerts now enabled!</color>"
   alerts-disabled: "<color:#D6D6D6>Alerts now disabled!</color>"
   recalculated-permissions: "<color:#D6D6D6>Recalculated permissions!</color>"

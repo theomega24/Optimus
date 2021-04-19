@@ -1,0 +1,14 @@
+optimus {
+  alerts;
+  help;
+  recalculate;
+  exempt {
+    player brigadier:string single_word;
+  }
+  profile {
+    player brigadier:string single_word;
+  }
+  reset {
+    player brigadier:string single_word;
+  }
+}

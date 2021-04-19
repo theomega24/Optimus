@@ -16,13 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.command.impl;
+package me.notom3ga.optimus.command.commands;
 
-import cloud.commandframework.annotations.CommandDescription;
-import cloud.commandframework.annotations.CommandMethod;
-import cloud.commandframework.annotations.CommandPermission;
-import cloud.commandframework.context.CommandContext;
-import me.notom3ga.optimus.command.Command;
+import me.notom3ga.optimus.command.Subcommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
@@ -31,20 +27,40 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 
-public class RecalculateCommand implements Command {
+public class RecalculateCommand implements Subcommand {
 
-    @CommandMethod("optimus recalculate")
-    @CommandPermission("optimus.command.recalculate")
-    @CommandDescription("Recalculate the permissions cache.")
-    public void handle(CommandContext<CommandSender> context) {
+    @Override
+    public String getName() {
+        return "recalculate";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Recalculate the permissions cache.";
+    }
+
+    @Override
+    public boolean playerOnly() {
+        return false;
+    }
+
+    @Override
+    public boolean checkPermission(CommandSender sender) {
+        return sender.hasPermission("optimus.command.recalculate");
+    }
+
+    @Override
+    public boolean runCommand(CommandSender sender, String[] args) {
         UserManager.getAllUsers().forEach(user -> {
             user.setAlerts(user.getBukkitPlayer().hasPermission("optimus.alerts"));
             user.setExempt(user.getBukkitPlayer().hasPermission("optimus.exempt"));
         });
 
-        context.getSender().sendMessage(TextComponent.ofChildren(
+        sender.sendMessage(TextComponent.ofChildren(
                 Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
                 MiniMessage.get().parse(Config.Lang.RECALCULATED_PERMISSIONS)
         ));
+
+        return true;
     }
 }

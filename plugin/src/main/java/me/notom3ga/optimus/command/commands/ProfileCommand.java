@@ -16,42 +16,73 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.command.impl;
+package me.notom3ga.optimus.command.commands;
 
-import cloud.commandframework.annotations.Argument;
-import cloud.commandframework.annotations.CommandDescription;
-import cloud.commandframework.annotations.CommandMethod;
-import cloud.commandframework.annotations.CommandPermission;
-import cloud.commandframework.context.CommandContext;
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.command.Command;
+import me.notom3ga.optimus.command.Subcommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ProfileCommand implements Command {
+public class ProfileCommand implements Subcommand {
 
-    @CommandMethod("optimus profile <player>")
-    @CommandPermission("optimus.command.profile")
-    @CommandDescription("View Optimus' profile for a player.")
-    public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
+    @Override
+    public String getName() {
+        return "profile";
+    }
+
+    @Override
+    public String getDescription() {
+        return "View Optimus' profile for a player.";
+    }
+
+    @Override
+    public boolean playerOnly() {
+        return false;
+    }
+
+    @Override
+    public boolean checkPermission(CommandSender sender) {
+        return sender.hasPermission("optimus.command.profile");
+    }
+
+    @Override
+    public boolean runCommand(CommandSender sender, String[] args) {
+        if (args.length == 0) {
+            sender.sendMessage(TextComponent.ofChildren(
+                    Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
+                    Component.text("Invalid Usage: ", Config.Brand.HIGHLIGHT_COLOR),
+                    Component.text("'/optimus profile <player>'", Config.Brand.SECONDARY_HIGHLIGHT_COLOR)
+            ));
+            return false;
+        }
+
+        Player player = Bukkit.getPlayer(args[0]);
+        if (player == null) {
+            sender.sendMessage(TextComponent.ofChildren(
+                    Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
+                    Component.text(args[0] + " is not a player.", Config.Brand.HIGHLIGHT_COLOR)
+            ));
+            return true;
+        }
+
         User user = UserManager.getUser(player);
-
         if (user.isExempt()) {
-            context.getSender().sendMessage(TextComponent.ofChildren(
+            sender.sendMessage(TextComponent.ofChildren(
                     Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
                     MiniMessage.get().parse(Config.Lang.PLAYER_EXEMPT.replace("{player}", player.getName()))
             ));
-            return;
+            return true;
         }
 
-        context.getSender().sendMessage(TextComponent.ofChildren(
+        sender.sendMessage(TextComponent.ofChildren(
                 Component.text("Optimus' Profile for ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD).append(player.displayName()),
                 Component.newline(),
                 Component.newline(),
@@ -69,5 +100,7 @@ public class ProfileCommand implements Command {
                 Component.text("Player VL: ", Config.Brand.HIGHLIGHT_COLOR),
                 Component.text(Integer.toString(user.getVl(CheckCategory.PLAYER)), Config.Brand.BRAND_COLOR)
         ));
+
+        return true;
     }
 }

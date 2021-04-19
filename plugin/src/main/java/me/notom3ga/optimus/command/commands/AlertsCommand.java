@@ -16,16 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.command.impl;
+package me.notom3ga.optimus.command.commands;
 
-import cloud.commandframework.annotations.Argument;
-import cloud.commandframework.annotations.CommandDescription;
-import cloud.commandframework.annotations.CommandMethod;
-import cloud.commandframework.annotations.CommandPermission;
-import cloud.commandframework.context.CommandContext;
-import me.notom3ga.optimus.api.check.Check;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.command.Command;
+import me.notom3ga.optimus.command.Subcommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.UserManager;
 import net.kyori.adventure.text.Component;
@@ -35,19 +29,38 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ResetCommand implements Command {
+public class AlertsCommand implements Subcommand {
 
-    @CommandMethod("optimus reset <player>")
-    @CommandPermission("optimus.command.reset")
-    @CommandDescription("Reset a players vl.")
-    public void handle(CommandContext<CommandSender> context, @Argument("player") Player player) {
-        User user = UserManager.getUser(player);
+    @Override
+    public String getName() {
+        return "alerts";
+    }
 
-        user.getChecks().forEach(Check::reset);
+    @Override
+    public String getDescription() {
+        return "Toggle Optimus alerts.";
+    }
 
-        context.getSender().sendMessage(TextComponent.ofChildren(
+    @Override
+    public boolean playerOnly() {
+        return true;
+    }
+
+    @Override
+    public boolean checkPermission(CommandSender sender) {
+        return sender.hasPermission("optimus.command.alerts");
+    }
+
+    @Override
+    public boolean runCommand(CommandSender sender, String[] args) {
+        User user = UserManager.getUser((Player) sender);
+        user.setAlerts(!user.hasAlerts());
+
+        sender.sendMessage(TextComponent.ofChildren(
                 Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
-                MiniMessage.get().parse(Config.Lang.RESET_PLAYER.replace("{player}", player.getName()))
+                MiniMessage.get().parse(user.hasAlerts() ? Config.Lang.ALERTS_ENABLED : Config.Lang.ALERTS_DISABLED)
         ));
+
+        return true;
     }
 }

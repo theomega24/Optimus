@@ -49,7 +49,8 @@ public class Config {
     }
 
     public static class Lang {
-        public static String ALERTS_ENABLED,
+        public static String PLAYER_COMMAND,
+                ALERTS_ENABLED,
                 ALERTS_DISABLED,
                 RECALCULATED_PERMISSIONS,
                 RESET_PLAYER,
@@ -87,6 +88,7 @@ public class Config {
             Brand.HIGHLIGHT_COLOR = TextColor.fromHexString(config.getString("brand.highlight-color"));
             Brand.SECONDARY_HIGHLIGHT_COLOR = TextColor.fromHexString(config.getString("brand.secondary-highlight-color"));
 
+            Lang.PLAYER_COMMAND = config.getString("lang.player-command");
             Lang.ALERTS_ENABLED = config.getString("lang.alerts-enabled");
             Lang.ALERTS_DISABLED = config.getString("lang.alerts-disabled");
             Lang.RECALCULATED_PERMISSIONS = config.getString("lang.recalculated-permissions");
