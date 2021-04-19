@@ -18,21 +18,23 @@
 
 package me.notom3ga.optimus.util;
 
+import me.notom3ga.optimus.api.check.CheckData;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.user.UserImpl;
 import org.bukkit.Bukkit;
 
 public class Formatter {
 
-    public static String formatAlerts(String message, String name, String type, int vl, UserImpl user) {
+    public static String formatAlerts(String message, CheckData data, int vl, UserImpl user) {
         return message.replace("{color}", vl >= Config.Alerts.Colors.DARK_RED_VL ? "&" + Config.Alerts.Colors.DARK_RED
                 : vl >= Config.Alerts.Colors.RED_VL ? "&" + Config.Alerts.Colors.RED
                 : vl >= Config.Alerts.Colors.YELLOW_VL ? "&" + Config.Alerts.Colors.YELLOW
                 : "&" + Config.Alerts.Colors.GREEN)
                 .replace("{player}", user.bukkitPlayer.getName())
-                .replace("{check}", name)
-                .replace("{type}", type)
+                .replace("{check}", data.getName())
+                .replace("{type}", data.getType())
                 .replace("{total}", String.valueOf(vl))
+                .replace("{dev}", data.isExperimental() ? Config.Alerts.EXPERIMENTAL_SYMBOL : "")
                 .replace("{ping}", String.valueOf(user.bukkitPlayer.spigot().getPing()))
                 .replace("{tps}", String.valueOf(Math.floor(Bukkit.getTPS()[0])));
     }

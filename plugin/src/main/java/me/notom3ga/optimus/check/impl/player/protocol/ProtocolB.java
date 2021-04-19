@@ -30,7 +30,7 @@ public class ProtocolB extends CheckImpl {
     private int ticks;
 
     public ProtocolB(User user) {
-        super(user, "Protocol", "B", CheckCategory.PLAYER, "PacketPos", "PacketPosRot", "PacketInput");
+        super(user, "Protocol", "B", CheckCategory.PLAYER, false, "PacketPos", "PacketPosRot", "PacketInput");
     }
 
     @Override

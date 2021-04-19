@@ -27,7 +27,7 @@ import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 public class ProtocolE extends CheckImpl {
 
     public ProtocolE(User user) {
-        super(user, "Protocol", "E", CheckCategory.PLAYER, "PacketInput");
+        super(user, "Protocol", "E", CheckCategory.PLAYER, false, "PacketInput");
     }
 
     @Override

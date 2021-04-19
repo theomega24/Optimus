@@ -33,7 +33,7 @@ import java.util.Collection;
 public class BlockPlaceA extends CheckImpl {
 
     public BlockPlaceA(User user) {
-        super(user, "BlockPlace", "A", CheckCategory.PLAYER, "PacketItemInteract");
+        super(user, "BlockPlace", "A", CheckCategory.PLAYER, false, "PacketItemInteract");
     }
 
     @Override

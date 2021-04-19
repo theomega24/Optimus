@@ -28,7 +28,7 @@ import me.notom3ga.optimus.packet.wrapper.play.in.PacketRot;
 public class ProtocolA extends CheckImpl {
 
     public ProtocolA(User user) {
-        super(user, "Protocol", "A", CheckCategory.PLAYER, "PacketRot", "PacketPosRot");
+        super(user, "Protocol", "A", CheckCategory.PLAYER, false, "PacketRot", "PacketPosRot");
     }
 
     @Override

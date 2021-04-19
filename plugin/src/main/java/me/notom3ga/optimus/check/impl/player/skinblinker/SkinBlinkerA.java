@@ -28,7 +28,7 @@ public class SkinBlinkerA extends CheckImpl {
     private int lastSkin = -1;
 
     public SkinBlinkerA(User user) {
-        super(user, "SkinBlinker", "A", CheckCategory.PLAYER, "PacketSettings");
+        super(user, "SkinBlinker", "A", CheckCategory.PLAYER, false, "PacketSettings");
     }
 
     @Override

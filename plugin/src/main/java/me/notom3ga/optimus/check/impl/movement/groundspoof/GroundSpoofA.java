@@ -36,7 +36,7 @@ public class GroundSpoofA extends CheckImpl {
     private final double groundY = 0.015625;
 
     public GroundSpoofA(User user) {
-        super(user, "GroundSpoof", "A", CheckCategory.MOVEMENT, "PacketPos", "PacketPosRot");
+        super(user, "GroundSpoof", "A", CheckCategory.MOVEMENT, false, "PacketPos", "PacketPosRot");
     }
 
     @Override

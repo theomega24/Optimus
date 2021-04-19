@@ -41,10 +41,18 @@ public interface Check {
      */
     CheckData getData();
 
+    /**
+     * Causes the {@link User} to fail the check.
+     */
     default void fail() {
         this.fail("");
     }
 
+    /**
+     * Causes the {@link User} to fail the check.
+     *
+     * @param debug the debug information
+     */
     void fail(String debug);
 
     /**

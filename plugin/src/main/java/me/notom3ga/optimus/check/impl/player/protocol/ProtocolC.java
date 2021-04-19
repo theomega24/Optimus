@@ -27,7 +27,7 @@ import me.notom3ga.optimus.packet.wrapper.play.in.PacketInteract;
 public class ProtocolC extends CheckImpl {
 
     public ProtocolC(User user) {
-        super(user, "Protocol", "C", CheckCategory.PLAYER, "PacketInteract");
+        super(user, "Protocol", "C", CheckCategory.PLAYER, false, "PacketInteract");
     }
 
     @Override

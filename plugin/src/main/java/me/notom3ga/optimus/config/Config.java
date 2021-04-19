@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class Config {
     public static class Alerts {
-        public static String FORMAT, HOVER_MESSAGE, CLICK_COMMAND;
+        public static String FORMAT, HOVER_MESSAGE, EXPERIMENTAL_SYMBOL, CLICK_COMMAND;
         public static boolean CONSOLE;
 
         public static class Colors {
@@ -68,6 +68,7 @@ public class Config {
         try {
             Alerts.FORMAT = config.getString("alerts.format");
             Alerts.HOVER_MESSAGE = config.getString("alerts.hover-message");
+            Alerts.EXPERIMENTAL_SYMBOL = config.getString("alerts.experimental-symbol");
             Alerts.CLICK_COMMAND = config.getString("alerts.click-command");
             Alerts.CONSOLE = config.getBoolean("alerts.console");
 

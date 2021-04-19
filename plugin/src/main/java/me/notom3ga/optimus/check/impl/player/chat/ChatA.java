@@ -29,7 +29,7 @@ import org.bukkit.block.Block;
 public class ChatA extends CheckImpl {
 
     public ChatA(User user) {
-        super(user, "Chat", "A", CheckCategory.PLAYER, "PacketChat");
+        super(user, "Chat", "A", CheckCategory.PLAYER, false, "PacketChat");
     }
 
     @Override

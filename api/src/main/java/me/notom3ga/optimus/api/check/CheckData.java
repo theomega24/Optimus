@@ -31,6 +31,7 @@ import java.util.List;
 public class CheckData {
     private final String name, type;
     private final CheckCategory category;
+    private final boolean experimental;
     private int vl, decay;
     private boolean enabled, punishable;
     private int punishVl;
@@ -38,10 +39,11 @@ public class CheckData {
     private int bufferMax;
     private double bufferMultiple, bufferDecay;
 
-    public CheckData(String name, String type, CheckCategory category, ConfigurationSection config) {
+    public CheckData(String name, String type, CheckCategory category, boolean experimental, ConfigurationSection config) {
         this.name = name;
         this.type = type;
         this.category = category;
+        this.experimental = experimental;
 
         this.enabled = config.getBoolean("enabled");
         this.vl = config.getInt("vl");
@@ -79,6 +81,15 @@ public class CheckData {
      */
     public CheckCategory getCategory() {
         return this.category;
+    }
+
+    /**
+     * Gets if the check is experimental.
+     *
+     * @return if the check is experimental
+     */
+    public boolean isExperimental() {
+        return this.experimental;
     }
 
     /**

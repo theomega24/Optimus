@@ -28,7 +28,7 @@ public class ProtocolD extends CheckImpl {
     int last = -1;
 
     public ProtocolD(User user) {
-        super(user, "Protocol", "D", CheckCategory.PLAYER, "PacketItemSlot");
+        super(user, "Protocol", "D", CheckCategory.PLAYER, false, "PacketItemSlot");
     }
 
     @Override

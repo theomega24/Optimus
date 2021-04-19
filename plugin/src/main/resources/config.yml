@@ -1,13 +1,15 @@
 # Optimus Configuration (https://optimus.notom3ga.me/Config/)
 
 alerts:
-  format: "&8[{color}!&8] {color}{player} &#D6D6D6failed &#A3A8F0{check} &#D6D6D6(&#A3A8F0{type}&#D6D6D6) &8&o({total})"
+  format: "&8[{color}!&8] {color}{player} &#D6D6D6failed &#A3A8F0{check} &#D6D6D6(&#A3A8F0{type}&#D6D6D6)&#A3A8F0{dev} &8&o({total})"
   hover-message: |
     &#D6D6D6Player Ping: &#A3A8F0{ping}
     &#D6D6D6Server TPS: &#A3A8F0{tps}
 
     &#D6D6D6Check Debug:
     &#A3A8F0{debug}
+
+  experimental-symbol: "*"
   click-command: "/tp {player}"
   console: false
 

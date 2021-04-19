@@ -50,9 +50,9 @@ public abstract class CheckImpl implements Check {
     protected boolean punishing = false, failed = false;
     protected double buffer;
 
-    public CheckImpl(User user, String name, String type, CheckCategory category, String... packets) {
+    public CheckImpl(User user, String name, String type, CheckCategory category, boolean experimental, String... packets) {
         this.user = (UserImpl) user;
-        this.data = new CheckData(name, type, category, Config.getCheckSection(name, type));
+        this.data = new CheckData(name, type, category, experimental, Config.getCheckSection(name, type));
         this.packets = Sets.newHashSet(packets);
 
         this.buffer = data.getBufferMax();
@@ -114,8 +114,8 @@ public abstract class CheckImpl implements Check {
 
         this.vl += event.getVl();
 
-        String message = Formatter.formatAlerts(event.getFormat(), data.getName(), data.getType(), vl, user);
-        String hover = message.replace("{debug}", debug);
+        String message = Formatter.formatAlerts(event.getFormat(), data, vl, user);
+        String hover = Formatter.formatAlerts(event.getHoverMessage(), data, vl, user).replace("{debug}", debug);
 
         TextComponent component = Constants.LEGACY_SERIALIZER.deserialize(message)
                 .hoverEvent(HoverEvent.showText(Constants.LEGACY_SERIALIZER.deserialize(hover)))
