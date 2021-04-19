@@ -20,13 +20,13 @@ package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketMove;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 
-public class ProtocolB extends CheckImpl {
+public class ProtocolB extends OptimusCheck {
     private int ticks;
 
     public ProtocolB(User user) {
@@ -38,12 +38,12 @@ public class ProtocolB extends CheckImpl {
         if (pkt instanceof PacketMove) {
             PacketMove packet = (PacketMove) pkt;
 
-            if (packet instanceof PacketPos || user.bukkitPlayer.isInsideVehicle()) {
+            if (packet instanceof PacketPos || user.getBukkitPlayer().isInsideVehicle()) {
                 ticks = 0;
                 return;
             }
 
-            if (++ticks > 20) {
+            if (ticks++ > 20) {
                 fail("ticks=" + ticks);
             }
         }

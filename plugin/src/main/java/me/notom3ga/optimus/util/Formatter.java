@@ -30,12 +30,12 @@ public class Formatter {
                 : vl >= Config.Alerts.Colors.RED_VL ? "&" + Config.Alerts.Colors.RED
                 : vl >= Config.Alerts.Colors.YELLOW_VL ? "&" + Config.Alerts.Colors.YELLOW
                 : "&" + Config.Alerts.Colors.GREEN)
-                .replace("{player}", user.bukkitPlayer.getName())
+                .replace("{player}", user.getBukkitPlayer().getName())
                 .replace("{check}", data.getName())
                 .replace("{type}", data.getType())
                 .replace("{total}", String.valueOf(vl))
                 .replace("{dev}", data.isExperimental() ? Config.Alerts.EXPERIMENTAL_SYMBOL : "")
-                .replace("{ping}", String.valueOf(user.bukkitPlayer.spigot().getPing()))
+                .replace("{ping}", String.valueOf(user.getBukkitPlayer().spigot().getPing()))
                 .replace("{tps}", String.valueOf(Math.floor(Bukkit.getTPS()[0])))
                 .replace("{debug}", debug);
     }

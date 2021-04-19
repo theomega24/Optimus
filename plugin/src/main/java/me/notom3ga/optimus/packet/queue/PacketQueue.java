@@ -19,7 +19,7 @@
 package me.notom3ga.optimus.packet.queue;
 
 import me.notom3ga.optimus.Optimus;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.PacketWrapper;
 import me.notom3ga.optimus.util.Logger;
@@ -54,7 +54,7 @@ public class PacketQueue {
 
         @Override
         public void run() {
-            while (Optimus.instance.isEnabled()) {
+            while (Optimus.getInstance().isEnabled()) {
                 try {
                     QueueEntry entry = queue.take();
 
@@ -62,13 +62,13 @@ public class PacketQueue {
                         Packet packet = PacketWrapper.wrap(entry.packet);
 
                         entry.user.getChecks().forEach(check -> {
-                            if (check instanceof CheckImpl
-                                    && ((CheckImpl) check).getPackets().stream().anyMatch(s -> packet.getClass().getSimpleName().equalsIgnoreCase(s))) {
+                            if (check instanceof OptimusCheck
+                                    && ((OptimusCheck) check).getPackets().stream().anyMatch(s -> packet.getClass().getSimpleName().equalsIgnoreCase(s))) {
                                 try {
-                                    ((CheckImpl) check).receive(packet);
+                                    ((OptimusCheck) check).receive(packet);
                                 } catch (Exception e) {
                                     Logger.severe("Failed to execute check " + check.getData().getName() + check.getData().getType()
-                                            + " for " + entry.user.bukkitPlayer.getName(), e);
+                                            + " for " + entry.user.getBukkitPlayer().getName(), e);
                                 }
                             }
                         });

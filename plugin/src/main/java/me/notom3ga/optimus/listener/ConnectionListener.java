@@ -19,8 +19,7 @@
 package me.notom3ga.optimus.listener;
 
 import me.notom3ga.optimus.Optimus;
-import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.impl.movement.groundspoof.GroundSpoofA;
+import me.notom3ga.optimus.check.movement.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.check.player.blockplace.BlockPlaceA;
 import me.notom3ga.optimus.check.player.chat.ChatA;
 import me.notom3ga.optimus.check.player.protocol.ProtocolA;
@@ -37,17 +36,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class PlayerListener implements Listener {
+public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         UserImpl user = UserManager.getUser(event.getPlayer());
-        user.join = System.currentTimeMillis();
+        user.setJoinTime(System.currentTimeMillis());
         user.setAlerts(event.getPlayer().hasPermission("optimus.alerts"));
         user.setExempt(event.getPlayer().hasPermission("optimus.exempt"));
 
-        if (Optimus.instance.floodgateHook.isBedrockPlayer(user.bukkitPlayer)) {
-            user.bedrock = true;
+        if (Optimus.getInstance().getFloodgateHook().isBedrockPlayer(user.getBukkitPlayer())) {
+            user.setBedrock(true);
             user.setExempt(true);
         }
 
@@ -68,8 +67,8 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        User user = UserManager.getUser(event.getPlayer());
-        PacketInjector.remove((UserImpl) user);
+        UserImpl user = UserManager.getUser(event.getPlayer());
+        PacketInjector.remove(user);
         UserManager.removeUser(event.getPlayer());
     }
 }

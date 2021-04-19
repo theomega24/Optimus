@@ -34,7 +34,7 @@ public class PacketHandler extends ChannelDuplexHandler {
 
     @Override
     public void channelRead(ChannelHandlerContext context, Object message) throws Exception {
-        Optimus.instance.packetQueue.addPacket(new QueueEntry(user, (Packet<?>) message));
+        Optimus.getInstance().getPacketQueue().addPacket(new QueueEntry(user, (Packet<?>) message));
         super.channelRead(context, message);
     }
 }

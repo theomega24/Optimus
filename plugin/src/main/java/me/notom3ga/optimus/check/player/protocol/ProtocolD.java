@@ -20,11 +20,11 @@ package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemSlot;
 
-public class ProtocolD extends CheckImpl {
+public class ProtocolD extends OptimusCheck {
     int last = -1;
 
     public ProtocolD(User user) {

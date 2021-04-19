@@ -37,7 +37,7 @@ public class OptimusCommand implements Command {
     @CommandDescription("The main command for Optimus.")
     public void handle(CommandContext<CommandSender> context) {
         context.getSender().sendMessage(TextComponent.ofChildren(
-                Component.text("Optimus v" + Optimus.instance.getDescription().getVersion(), Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
+                Component.text("Optimus v" + Optimus.getInstance().getDescription().getVersion(), Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
                 Component.newline(),
                 Component.text("Run '/optimus help' for a list of commands.", Config.Brand.HIGHLIGHT_COLOR)
         ));

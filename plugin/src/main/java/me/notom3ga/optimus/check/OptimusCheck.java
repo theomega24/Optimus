@@ -42,7 +42,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class CheckImpl implements Check {
+public abstract class OptimusCheck implements Check {
     protected final UserImpl user;
     protected final CheckData data;
     protected final HashSet<String> packets;
@@ -52,7 +52,7 @@ public abstract class CheckImpl implements Check {
     protected boolean punishing = false, failed = false;
     protected double buffer;
 
-    public CheckImpl(User user, String name, String type, CheckCategory category, boolean experimental, String... packets) {
+    public OptimusCheck(User user, String name, String type, CheckCategory category, boolean experimental, String... packets) {
         this.config = Config.getCheckSection(name, type);
         this.user = (UserImpl) user;
         this.data = new CheckData(name, type, category, experimental, config);
@@ -60,7 +60,7 @@ public abstract class CheckImpl implements Check {
 
         this.buffer = data.getBufferMax();
 
-        Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.instance, () -> {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(Optimus.getInstance(), () -> {
             this.vl -= data.getDecay();
             if (this.vl <= 0) this.vl = 0;
         }, 1200, 1200);
@@ -80,7 +80,7 @@ public abstract class CheckImpl implements Check {
     public void runPunishment() {
         this.punishing = true;
 
-        PlayerPunishEvent event = new PlayerPunishEvent(user.bukkitPlayer, this.data.getPunishCommands());
+        PlayerPunishEvent event = new PlayerPunishEvent(user.getBukkitPlayer(), this.data.getPunishCommands());
 
         if (event.getHandlers().getRegisteredListeners().length > 0) {
             event.callEvent();
@@ -91,7 +91,7 @@ public abstract class CheckImpl implements Check {
         }
 
         syncNoWait(() -> event.getCommands().forEach(command ->
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("{player}", user.bukkitPlayer.getName()))
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("{player}", user.getBukkitPlayer().getName()))
         ));
 
         this.punishing = false;
@@ -104,7 +104,7 @@ public abstract class CheckImpl implements Check {
 
         // todo buffer
 
-        PlayerViolationEvent event = new PlayerViolationEvent(user.bukkitPlayer, Config.Alerts.FORMAT,
+        PlayerViolationEvent event = new PlayerViolationEvent(user.getBukkitPlayer(), Config.Alerts.FORMAT,
                 Config.Alerts.HOVER_MESSAGE, Config.Alerts.CLICK_COMMAND, true, Config.Alerts.CONSOLE, data.getVl());
 
         if (event.getHandlers().getRegisteredListeners().length > 0) {
@@ -130,8 +130,8 @@ public abstract class CheckImpl implements Check {
 
         if (event.isSendingAlerts()) {
             UserManager.getAllUsers().forEach(user -> {
-                if (user.alerts) {
-                    user.bukkitPlayer.sendMessage(component);
+                if (user.hasAlerts()) {
+                    user.getBukkitPlayer().sendMessage(component);
                 }
             });
         }
@@ -157,8 +157,8 @@ public abstract class CheckImpl implements Check {
 
     public void sync(Runnable runnable) {
         AtomicBoolean waiting = new AtomicBoolean(true);
-        if (Optimus.instance.isEnabled()) {
-            Bukkit.getScheduler().runTask(Optimus.instance, () -> {
+        if (Optimus.getInstance().isEnabled()) {
+            Bukkit.getScheduler().runTask(Optimus.getInstance(), () -> {
                 runnable.run();
                 waiting.set(false);
             });
@@ -167,18 +167,18 @@ public abstract class CheckImpl implements Check {
     }
 
     public void syncNoWait(Runnable runnable) {
-        if (Optimus.instance.isEnabled()) {
-            Bukkit.getScheduler().runTask(Optimus.instance, runnable);
+        if (Optimus.getInstance().isEnabled()) {
+            Bukkit.getScheduler().runTask(Optimus.getInstance(), runnable);
         }
     }
 
     public void receive(Packet packet) {
-        if (user.exempt
-                || user.bedrock
+        if (user.isExempt()
+                || user.isBedrock()
                 || !data.isEnabled()
-                || user.bukkitPlayer.getGameMode() == GameMode.CREATIVE
-                || user.bukkitPlayer.getGameMode() == GameMode.SPECTATOR
-                || System.currentTimeMillis() - user.join <= Config.Settings.JOIN_EXEMPTION) {
+                || user.getBukkitPlayer().getGameMode() == GameMode.CREATIVE
+                || user.getBukkitPlayer().getGameMode() == GameMode.SPECTATOR
+                || System.currentTimeMillis() - user.getJoinTime() <= Config.Settings.JOIN_EXEMPTION) {
             return;
         }
 

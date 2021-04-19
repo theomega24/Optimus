@@ -25,7 +25,7 @@ public class PacketInjector {
     private static final String PIPELINE_NAME = "optimus_injector";
 
     public static void inject(UserImpl user) {
-        Channel channel = user.entityPlayer.networkManager.channel;
+        Channel channel = user.getInternalPlayer().networkManager.channel;
 
         if (channel.pipeline().get(PIPELINE_NAME) == null) {
             channel.pipeline().addBefore("packet_handler", PIPELINE_NAME, new PacketHandler(user));
@@ -33,7 +33,7 @@ public class PacketInjector {
     }
 
     public static void remove(UserImpl user) {
-        Channel channel = user.entityPlayer.networkManager.channel;
+        Channel channel = user.getInternalPlayer().networkManager.channel;
 
         if (channel.pipeline().get(PIPELINE_NAME) != null) {
             channel.pipeline().remove(PIPELINE_NAME);

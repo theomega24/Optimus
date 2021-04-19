@@ -20,11 +20,11 @@ package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInteract;
 
-public class ProtocolC extends CheckImpl {
+public class ProtocolC extends OptimusCheck {
 
     public ProtocolC(User user) {
         super(user, "Protocol", "C", CheckCategory.PLAYER, false, "PacketInteract");
@@ -34,7 +34,7 @@ public class ProtocolC extends CheckImpl {
     public void handle(Packet pkt) {
         PacketInteract packet = (PacketInteract) pkt;
 
-        if (packet.getId() == user.bukkitPlayer.getEntityId()) {
+        if (packet.getId() == user.getBukkitPlayer().getEntityId()) {
             fail();
         }
     }

@@ -31,7 +31,7 @@ public class CommandManager extends PaperCommandManager<CommandSender> {
     private final AnnotationParser<CommandSender> parser;
 
     public CommandManager() throws Exception {
-        super(Optimus.instance,
+        super(Optimus.getInstance(),
                 AsynchronousCommandExecutionCoordinator.<CommandSender>newBuilder().withAsynchronousParsing().build(),
                 Function.identity(),
                 Function.identity()

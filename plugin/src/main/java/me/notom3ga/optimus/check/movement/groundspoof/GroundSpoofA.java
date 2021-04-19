@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.movement.groundspoof;
+package me.notom3ga.optimus.check.movement.groundspoof;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 import org.bukkit.Location;
@@ -32,7 +32,7 @@ import org.bukkit.entity.EntityType;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class GroundSpoofA extends CheckImpl {
+public class GroundSpoofA extends OptimusCheck {
     private final double groundY = 0.015625;
 
     public GroundSpoofA(User user) {
@@ -51,7 +51,7 @@ public class GroundSpoofA extends CheckImpl {
             boolean shulker = false;
 
             AtomicReference<List<Entity>> nearby = new AtomicReference<>();
-            sync(() -> nearby.set(user.bukkitPlayer.getNearbyEntities(1.5, 10, 1.5)));
+            sync(() -> nearby.set(user.getBukkitPlayer().getNearbyEntities(1.5, 10, 1.5)));
 
             for (Entity entity : nearby.get()) {
                 if (entity.getType() == EntityType.BOAT && packet.getY() > entity.getLocation().getY()) {
@@ -65,7 +65,7 @@ public class GroundSpoofA extends CheckImpl {
                 }
             }
 
-            for (Block block : user.getNearbyBlocks(new Location(user.bukkitPlayer.getWorld(), packet.getX(), packet.getY(), packet.getZ()), 2)) {
+            for (Block block : user.getNearbyBlocks(new Location(user.getBukkitPlayer().getWorld(), packet.getX(), packet.getY(), packet.getZ()), 2)) {
                 if (Tag.SHULKER_BOXES.isTagged(block.getType())) {
                     shulker = true;
                     break;

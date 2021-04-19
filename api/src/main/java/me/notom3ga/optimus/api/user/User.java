@@ -66,6 +66,20 @@ public interface User {
     int getVl(CheckCategory category);
 
     /**
+     * Gets the time in ms that the player joined on.
+     *
+     * @return the time in ms that the player joined on.
+     */
+    long getJoinTime();
+
+    /**
+     * Sets the time in ms that the player joined on.
+     *
+     * @param joinTime the new time in ms that the player joined on.
+     */
+    void setJoinTime(long joinTime);
+
+    /**
      * Get if the player receives alerts.
      *
      * @return if the player receives alerts

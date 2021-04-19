@@ -124,18 +124,6 @@ checks:
         max: 2
         multiple: 0.75
         decay: 0.1
-    f:
-      enabled: true
-      vl: 50
-      decay: 15
-      punishable: false
-      punish-vl: 200
-      punish-commands:
-        - "kick {player} Protocol F"
-      buffer:
-        max: 2
-        multiple: 0.75
-        decay: 0.1
   skinblinker:
     a:
       enabled: true

@@ -20,11 +20,11 @@ package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 
-public class ProtocolE extends CheckImpl {
+public class ProtocolE extends OptimusCheck {
 
     public ProtocolE(User user) {
         super(user, "Protocol", "E", CheckCategory.PLAYER, false, "PacketInput");

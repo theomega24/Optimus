@@ -20,11 +20,11 @@ package me.notom3ga.optimus.check.player.skinblinker;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketSettings;
 
-public class SkinBlinkerA extends CheckImpl {
+public class SkinBlinkerA extends OptimusCheck {
     private int lastSkin = -1;
 
     public SkinBlinkerA(User user) {
@@ -40,7 +40,10 @@ public class SkinBlinkerA extends CheckImpl {
             return;
         }
 
-        if ((user.bukkitPlayer.isSprinting() || user.bukkitPlayer.isSneaking() || user.bukkitPlayer.isBlocking()) && lastSkin != packet.getSkinCustomization()) {
+        if ((user.getBukkitPlayer().isSprinting()
+                || user.getBukkitPlayer().isSneaking()
+                || user.getBukkitPlayer().isBlocking())
+                && lastSkin != packet.getSkinCustomization()) {
             fail("last=" + lastSkin + " current=" + packet.getSkinCustomization());
         }
 

@@ -19,6 +19,7 @@
 package me.notom3ga.optimus;
 
 import me.notom3ga.optimus.api.OptimusAPI;
+import me.notom3ga.optimus.api.OptimusAPIImpl;
 import me.notom3ga.optimus.command.CommandManager;
 import me.notom3ga.optimus.command.impl.AlertsCommand;
 import me.notom3ga.optimus.command.impl.ExemptCommand;
@@ -29,8 +30,7 @@ import me.notom3ga.optimus.command.impl.RecalculateCommand;
 import me.notom3ga.optimus.command.impl.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hook.FloodgateHook;
-import me.notom3ga.optimus.api.OptimusAPIImpl;
-import me.notom3ga.optimus.listener.PlayerListener;
+import me.notom3ga.optimus.listener.ConnectionListener;
 import me.notom3ga.optimus.packet.queue.PacketQueue;
 import me.notom3ga.optimus.util.Constants;
 import me.notom3ga.optimus.util.Logger;
@@ -39,16 +39,20 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Optimus extends JavaPlugin {
-    public static Optimus instance;
+    private static Optimus instance;
+
+    public static Optimus getInstance() {
+        return instance;
+    }
+
     public Optimus() {
         instance = this;
     }
 
-    public CommandManager commandManager;
-    public PacketQueue packetQueue;
-    public OptimusAPI api;
-    public FloodgateHook floodgateHook;
-    public Metrics metrics;
+    private OptimusAPI apiImpl;
+    private PacketQueue packetQueue;
+    private CommandManager commandManager;
+    private FloodgateHook floodgateHook;
 
     @Override
     public void onEnable() {
@@ -70,14 +74,15 @@ public class Optimus extends JavaPlugin {
         }
 
         Config.load();
+
+        this.apiImpl = new OptimusAPIImpl();
+        this.packetQueue = new PacketQueue();
         try {
             this.commandManager = new CommandManager();
         } catch (Exception e) {
             Logger.severe("Failed to load commands, disabling.", e);
             getServer().getPluginManager().disablePlugin(this);
         }
-        this.packetQueue = new PacketQueue();
-        this.api = new OptimusAPIImpl();
         this.floodgateHook = new FloodgateHook();
 
         this.commandManager.register(new AlertsCommand());
@@ -88,15 +93,31 @@ public class Optimus extends JavaPlugin {
         this.commandManager.register(new RecalculateCommand());
         this.commandManager.register(new ResetCommand());
 
-        getServer().getServicesManager().register(OptimusAPI.class, this.api, this, ServicePriority.Normal);
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
+        getServer().getServicesManager().register(OptimusAPI.class, this.apiImpl, this, ServicePriority.Normal);
 
-        this.metrics = new Metrics(this, 10972);
+        new Metrics(this, 10972);
     }
 
     @Override
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
-        getServer().getServicesManager().unregister(OptimusAPI.class, this.api);
+        getServer().getServicesManager().unregister(OptimusAPI.class, this.apiImpl);
+    }
+
+    public OptimusAPI getApiImpl() {
+        return this.apiImpl;
+    }
+
+    public PacketQueue getPacketQueue() {
+        return this.packetQueue;
+    }
+
+    public CommandManager getCommandManager() {
+        return this.commandManager;
+    }
+
+    public FloodgateHook getFloodgateHook() {
+        return this.floodgateHook;
     }
 }

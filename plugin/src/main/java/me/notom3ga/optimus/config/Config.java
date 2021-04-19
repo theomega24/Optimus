@@ -61,9 +61,9 @@ public class Config {
     }
 
     public static void load() {
-        Optimus.instance.saveDefaultConfig();
+        Optimus.getInstance().saveDefaultConfig();
 
-        YamlConfiguration config = (YamlConfiguration) Optimus.instance.getConfig();
+        YamlConfiguration config = (YamlConfiguration) Optimus.getInstance().getConfig();
 
         try {
             Alerts.FORMAT = config.getString("alerts.format");
@@ -98,11 +98,11 @@ public class Config {
             Lang.HELP_COMMAND_TITLE = config.getString("lang.help-command-title");
         } catch (NullPointerException e) {
             Logger.severe("Failed to load config (out of date)", e);
-            Bukkit.getPluginManager().disablePlugin(Optimus.instance);
+            Bukkit.getPluginManager().disablePlugin(Optimus.getInstance());
         }
     }
 
     public static ConfigurationSection getCheckSection(String name, String type) {
-        return Optimus.instance.getConfig().getConfigurationSection("checks." + name.toLowerCase(Locale.ROOT) + "." + type.toLowerCase(Locale.ROOT));
+        return Optimus.getInstance().getConfig().getConfigurationSection("checks." + name.toLowerCase(Locale.ROOT) + "." + type.toLowerCase(Locale.ROOT));
     }
 }

@@ -32,18 +32,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserImpl implements User {
-    public final Player bukkitPlayer;
-    public final EntityPlayer entityPlayer;
-    public final HashSet<Check> checks;
+    private final Player bukkitPlayer;
+    private final EntityPlayer internalPlayer;
+    private final HashSet<Check> checks;
 
-    public long join, ping = -1;
-    public boolean exempt = false, bedrock = false, alerts = false;
+    private long joinTime;
+    private boolean exempt = false, bedrock = false, alerts = false;
 
     public UserImpl(Player player) {
         this.bukkitPlayer = player;
-        this.entityPlayer = ((CraftPlayer) player).getHandle();
+        this.internalPlayer = ((CraftPlayer) player).getHandle();
 
         this.checks = new HashSet<>();
+    }
+
+    public Player getBukkitPlayer() {
+        return this.bukkitPlayer;
+    }
+
+    public EntityPlayer getInternalPlayer() {
+        return this.internalPlayer;
     }
 
     @Override
@@ -86,6 +94,16 @@ public class UserImpl implements User {
     }
 
     @Override
+    public long getJoinTime() {
+        return this.joinTime;
+    }
+
+    @Override
+    public void setJoinTime(long joinTime) {
+        this.joinTime = joinTime;
+    }
+
+    @Override
     public boolean hasAlerts() {
         return this.alerts;
     }
@@ -108,6 +126,10 @@ public class UserImpl implements User {
     @Override
     public boolean isBedrock() {
         return this.bedrock;
+    }
+
+    public void setBedrock(boolean bedrock) {
+        this.bedrock = bedrock;
     }
 
     public Set<Block> getStandingIn(Location location) {

@@ -20,7 +20,7 @@ package me.notom3ga.optimus.check.player.blockplace;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemInteract;
 import org.bukkit.Material;
@@ -30,7 +30,7 @@ import org.bukkit.block.BlockFace;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BlockPlaceA extends CheckImpl {
+public class BlockPlaceA extends OptimusCheck {
 
     public BlockPlaceA(User user) {
         super(user, "BlockPlace", "A", CheckCategory.PLAYER, false, "PacketItemInteract");
@@ -40,7 +40,7 @@ public class BlockPlaceA extends CheckImpl {
     public void handle(Packet pkt) {
         PacketItemInteract packet = (PacketItemInteract) pkt;
 
-        Block block = packet.getBukkitBlock(user.bukkitPlayer.getWorld());
+        Block block = packet.getBukkitBlock(user.getBukkitPlayer().getWorld());
         Collection<Material> touchingTypes = new ArrayList<>(){{
             add(block.getRelative(BlockFace.UP).getType());
             add(block.getRelative(BlockFace.NORTH).getType());

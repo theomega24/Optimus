@@ -20,13 +20,13 @@ package me.notom3ga.optimus.check.player.chat;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
-import me.notom3ga.optimus.check.CheckImpl;
+import me.notom3ga.optimus.check.OptimusCheck;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-public class ChatA extends CheckImpl {
+public class ChatA extends OptimusCheck {
 
     public ChatA(User user) {
         super(user, "Chat", "A", CheckCategory.PLAYER, false, "PacketChat");
@@ -38,7 +38,7 @@ public class ChatA extends CheckImpl {
 
         boolean inPortal = false;
 
-        for (Block block : user.getStandingIn(user.bukkitPlayer.getLocation())) {
+        for (Block block : user.getStandingIn(user.getBukkitPlayer().getLocation())) {
             if (block.getType() == Material.NETHER_PORTAL) {
                 inPortal = true;
                 break;
@@ -46,10 +46,10 @@ public class ChatA extends CheckImpl {
         }
 
         if (inPortal
-                || user.bukkitPlayer.isSprinting()
-                || user.bukkitPlayer.isSneaking()
-                || user.bukkitPlayer.isBlocking()
-                || user.bukkitPlayer.isDead()) {
+                || user.getBukkitPlayer().isSprinting()
+                || user.getBukkitPlayer().isSneaking()
+                || user.getBukkitPlayer().isBlocking()
+                || user.getBukkitPlayer().isDead()) {
             fail();
         }
     }

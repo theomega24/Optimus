@@ -40,7 +40,7 @@ public class HelpCommand implements Command {
         this.help = new MinecraftHelp<>(
                 "/optimus help",
                 Audience::audience,
-                Optimus.instance.commandManager
+                Optimus.getInstance().getCommandManager()
         );
 
         this.help.setMessage(MinecraftHelp.MESSAGE_HELP_TITLE, Config.Lang.HELP_COMMAND_TITLE);
