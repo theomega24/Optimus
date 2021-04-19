@@ -16,33 +16,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.player.protocol;
+package me.notom3ga.optimus.check.player.skinblinker;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketPosRot;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketRot;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketSettings;
 
-public class ProtocolA extends CheckImpl {
+public class SkinBlinkerA extends CheckImpl {
+    private int lastSkin = -1;
 
-    public ProtocolA(User user) {
-        super(user, "Protocol", "A", CheckCategory.PLAYER, false, "PacketRot", "PacketPosRot");
+    public SkinBlinkerA(User user) {
+        super(user, "SkinBlinker", "A", CheckCategory.PLAYER, false, "PacketSettings");
     }
 
     @Override
-    public void handle(Packet packet) {
-        if (packet instanceof PacketRot) {
-            if (Math.abs(((PacketRot) packet).getPitch()) > 90) {
-                fail("pitch=" + ((PacketRot) packet).getPitch());
-            }
+    public void handle(Packet pkt) {
+        PacketSettings packet = (PacketSettings) pkt;
+
+        if (lastSkin == -1) {
+            lastSkin = packet.getSkinCustomization();
+            return;
         }
 
-        if (packet instanceof PacketPosRot) {
-            if (Math.abs(((PacketPosRot) packet).getPitch()) > 90) {
-                fail("pitch=" + ((PacketPosRot) packet).getPitch());
-            }
+        if ((user.bukkitPlayer.isSprinting() || user.bukkitPlayer.isSneaking() || user.bukkitPlayer.isBlocking()) && lastSkin != packet.getSkinCustomization()) {
+            fail("last=" + lastSkin + " current=" + packet.getSkinCustomization());
         }
+
+        lastSkin = packet.getSkinCustomization();
     }
 }

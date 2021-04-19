@@ -16,29 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.player.protocol;
+package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemSlot;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketPosRot;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketRot;
 
-public class ProtocolD extends CheckImpl {
-    int last = -1;
+public class ProtocolA extends CheckImpl {
 
-    public ProtocolD(User user) {
-        super(user, "Protocol", "D", CheckCategory.PLAYER, false, "PacketItemSlot");
+    public ProtocolA(User user) {
+        super(user, "Protocol", "A", CheckCategory.PLAYER, false, "PacketRot", "PacketPosRot");
     }
 
     @Override
-    public void handle(Packet pkt) {
-        PacketItemSlot packet = (PacketItemSlot) pkt;
-
-        if (packet.getSlot() == last) {
-            fail("slot=" + packet.getSlot() + " last=" + last);
+    public void handle(Packet packet) {
+        if (packet instanceof PacketRot) {
+            if (Math.abs(((PacketRot) packet).getPitch()) > 90) {
+                fail("pitch=" + ((PacketRot) packet).getPitch());
+            }
         }
 
-        last = packet.getSlot();
+        if (packet instanceof PacketPosRot) {
+            if (Math.abs(((PacketPosRot) packet).getPitch()) > 90) {
+                fail("pitch=" + ((PacketPosRot) packet).getPitch());
+            }
+        }
     }
 }

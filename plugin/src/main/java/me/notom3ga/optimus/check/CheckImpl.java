@@ -37,6 +37,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -45,14 +46,16 @@ public abstract class CheckImpl implements Check {
     protected final UserImpl user;
     protected final CheckData data;
     protected final HashSet<String> packets;
+    protected final ConfigurationSection config;
 
     protected int vl = 0, fails = 0;
     protected boolean punishing = false, failed = false;
     protected double buffer;
 
     public CheckImpl(User user, String name, String type, CheckCategory category, boolean experimental, String... packets) {
+        this.config = Config.getCheckSection(name, type);
         this.user = (UserImpl) user;
-        this.data = new CheckData(name, type, category, experimental, Config.getCheckSection(name, type));
+        this.data = new CheckData(name, type, category, experimental, config);
         this.packets = Sets.newHashSet(packets);
 
         this.buffer = data.getBufferMax();

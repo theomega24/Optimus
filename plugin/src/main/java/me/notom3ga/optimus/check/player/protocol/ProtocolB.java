@@ -16,26 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.player.protocol;
+package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
 import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketMove;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
 
-public class ProtocolE extends CheckImpl {
+public class ProtocolB extends CheckImpl {
+    private int ticks;
 
-    public ProtocolE(User user) {
-        super(user, "Protocol", "E", CheckCategory.PLAYER, false, "PacketInput");
+    public ProtocolB(User user) {
+        super(user, "Protocol", "B", CheckCategory.PLAYER, false, "PacketPos", "PacketPosRot", "PacketInput");
     }
 
     @Override
     public void handle(Packet pkt) {
-        PacketInput packet = (PacketInput) pkt;
+        if (pkt instanceof PacketMove) {
+            PacketMove packet = (PacketMove) pkt;
 
-        if (Math.abs(packet.getForwards()) > .98F || Math.abs(packet.getSideways()) > .98F) {
-            fail("forward=" + packet.getForwards() + " sideways=" + packet.getSideways());
+            if (packet instanceof PacketPos || user.bukkitPlayer.isInsideVehicle()) {
+                ticks = 0;
+                return;
+            }
+
+            if (++ticks > 20) {
+                fail("ticks=" + ticks);
+            }
+        }
+
+        if (pkt instanceof PacketInput) {
+            ticks = 0;
         }
     }
 }

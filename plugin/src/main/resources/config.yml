@@ -24,6 +24,19 @@ alerts:
     dark-red-vl: 200
 
 checks:
+  groundspoof:
+    a:
+      enabled: true
+      vl: 20
+      decay: 10
+      punishable: false
+      punish-vl: 200
+      punish-commands:
+        - "kick {player} GroundSpoof A"
+      buffer:
+        max: 4
+        multiple: 0.5
+        decay: 0.125
   blockplace:
     a:
       enabled: true
@@ -50,19 +63,6 @@ checks:
         max: 2
         multiple: 0.75
         decay: 0.1
-  groundspoof:
-    a:
-      enabled: true
-      vl: 20
-      decay: 10
-      punishable: false
-      punish-vl: 200
-      punish-commands:
-        - "kick {player} GroundSpoof A"
-      buffer:
-        max: 4
-        multiple: 0.5
-        decay: 0.125
   protocol:
     a:
       enabled: true

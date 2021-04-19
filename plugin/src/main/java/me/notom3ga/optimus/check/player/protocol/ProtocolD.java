@@ -16,41 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.player.chat;
+package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketChat;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketItemSlot;
 
-public class ChatA extends CheckImpl {
+public class ProtocolD extends CheckImpl {
+    int last = -1;
 
-    public ChatA(User user) {
-        super(user, "Chat", "A", CheckCategory.PLAYER, false, "PacketChat");
+    public ProtocolD(User user) {
+        super(user, "Protocol", "D", CheckCategory.PLAYER, false, "PacketItemSlot");
     }
 
     @Override
     public void handle(Packet pkt) {
-        PacketChat packet = (PacketChat) pkt;
+        PacketItemSlot packet = (PacketItemSlot) pkt;
 
-        boolean inPortal = false;
-
-        for (Block block : user.getStandingIn(user.bukkitPlayer.getLocation())) {
-            if (block.getType() == Material.NETHER_PORTAL) {
-                inPortal = true;
-                break;
-            }
+        if (packet.getSlot() == last) {
+            fail("slot=" + packet.getSlot() + " last=" + last);
         }
 
-        if (inPortal
-                || user.bukkitPlayer.isSprinting()
-                || user.bukkitPlayer.isSneaking()
-                || user.bukkitPlayer.isBlocking()
-                || user.bukkitPlayer.isDead()) {
-            fail();
-        }
+        last = packet.getSlot();
     }
 }

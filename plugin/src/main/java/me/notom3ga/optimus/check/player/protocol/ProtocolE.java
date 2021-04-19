@@ -16,34 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.player.skinblinker;
+package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketSettings;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
 
-public class SkinBlinkerA extends CheckImpl {
-    private int lastSkin = -1;
+public class ProtocolE extends CheckImpl {
 
-    public SkinBlinkerA(User user) {
-        super(user, "SkinBlinker", "A", CheckCategory.PLAYER, false, "PacketSettings");
+    public ProtocolE(User user) {
+        super(user, "Protocol", "E", CheckCategory.PLAYER, false, "PacketInput");
     }
 
     @Override
     public void handle(Packet pkt) {
-        PacketSettings packet = (PacketSettings) pkt;
+        PacketInput packet = (PacketInput) pkt;
 
-        if (lastSkin == -1) {
-            lastSkin = packet.getSkinCustomization();
-            return;
+        if (Math.abs(packet.getForwards()) > .98F || Math.abs(packet.getSideways()) > .98F) {
+            fail("forward=" + packet.getForwards() + " sideways=" + packet.getSideways());
         }
-
-        if ((user.bukkitPlayer.isSprinting() || user.bukkitPlayer.isSneaking() || user.bukkitPlayer.isBlocking()) && lastSkin != packet.getSkinCustomization()) {
-            fail("last=" + lastSkin + " current=" + packet.getSkinCustomization());
-        }
-
-        lastSkin = packet.getSkinCustomization();
     }
 }

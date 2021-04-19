@@ -25,6 +25,10 @@ package me.notom3ga.optimus.api.check;
  */
 public enum CheckCategory {
     /**
+     * Checks to do with a combat.
+     */
+    COMBAT,
+    /**
      * Checks to do with a players movement.
      */
     MOVEMENT,

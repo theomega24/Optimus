@@ -16,40 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.notom3ga.optimus.check.impl.player.protocol;
+package me.notom3ga.optimus.check.player.protocol;
 
 import me.notom3ga.optimus.api.check.CheckCategory;
 import me.notom3ga.optimus.api.user.User;
 import me.notom3ga.optimus.check.CheckImpl;
 import me.notom3ga.optimus.packet.wrapper.Packet;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketInput;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketMove;
-import me.notom3ga.optimus.packet.wrapper.play.in.PacketPos;
+import me.notom3ga.optimus.packet.wrapper.play.in.PacketInteract;
 
-public class ProtocolB extends CheckImpl {
-    private int ticks;
+public class ProtocolC extends CheckImpl {
 
-    public ProtocolB(User user) {
-        super(user, "Protocol", "B", CheckCategory.PLAYER, false, "PacketPos", "PacketPosRot", "PacketInput");
+    public ProtocolC(User user) {
+        super(user, "Protocol", "C", CheckCategory.PLAYER, false, "PacketInteract");
     }
 
     @Override
     public void handle(Packet pkt) {
-        if (pkt instanceof PacketMove) {
-            PacketMove packet = (PacketMove) pkt;
+        PacketInteract packet = (PacketInteract) pkt;
 
-            if (packet instanceof PacketPos || user.bukkitPlayer.isInsideVehicle()) {
-                ticks = 0;
-                return;
-            }
-
-            if (++ticks > 20) {
-                fail("ticks=" + ticks);
-            }
-        }
-
-        if (pkt instanceof PacketInput) {
-            ticks = 0;
+        if (packet.getId() == user.bukkitPlayer.getEntityId()) {
+            fail();
         }
     }
 }
