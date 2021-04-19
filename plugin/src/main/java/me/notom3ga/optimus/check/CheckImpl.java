@@ -114,8 +114,8 @@ public abstract class CheckImpl implements Check {
 
         this.vl += event.getVl();
 
-        String message = Formatter.formatAlerts(event.getFormat(), data, vl, user);
-        String hover = Formatter.formatAlerts(event.getHoverMessage(), data, vl, user).replace("{debug}", debug);
+        String message = Formatter.formatAlerts(event.getFormat(), data, vl, debug, user);
+        String hover = Formatter.formatAlerts(event.getHoverMessage(), data, vl, debug, user);
 
         TextComponent component = Constants.LEGACY_SERIALIZER.deserialize(message)
                 .hoverEvent(HoverEvent.showText(Constants.LEGACY_SERIALIZER.deserialize(hover)))

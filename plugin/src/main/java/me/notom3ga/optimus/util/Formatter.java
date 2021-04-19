@@ -25,7 +25,7 @@ import org.bukkit.Bukkit;
 
 public class Formatter {
 
-    public static String formatAlerts(String message, CheckData data, int vl, UserImpl user) {
+    public static String formatAlerts(String message, CheckData data, int vl, String debug, UserImpl user) {
         return message.replace("{color}", vl >= Config.Alerts.Colors.DARK_RED_VL ? "&" + Config.Alerts.Colors.DARK_RED
                 : vl >= Config.Alerts.Colors.RED_VL ? "&" + Config.Alerts.Colors.RED
                 : vl >= Config.Alerts.Colors.YELLOW_VL ? "&" + Config.Alerts.Colors.YELLOW
@@ -36,6 +36,7 @@ public class Formatter {
                 .replace("{total}", String.valueOf(vl))
                 .replace("{dev}", data.isExperimental() ? Config.Alerts.EXPERIMENTAL_SYMBOL : "")
                 .replace("{ping}", String.valueOf(user.bukkitPlayer.spigot().getPing()))
-                .replace("{tps}", String.valueOf(Math.floor(Bukkit.getTPS()[0])));
+                .replace("{tps}", String.valueOf(Math.floor(Bukkit.getTPS()[0])))
+                .replace("{debug}", debug);
     }
 }
