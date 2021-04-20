@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
 public class CommandExecutor implements TabExecutor {
     private final PluginCommand command;
@@ -78,7 +77,9 @@ public class CommandExecutor implements TabExecutor {
         String subcommandLabel = args[0];
         for (Subcommand subcommand : this.commands) {
             if (subcommandLabel.equalsIgnoreCase(subcommand.getName())) {
-                return subcommand.handle(sender, args.length > 1 ? Arrays.copyOfRange(args, 1, args.length) : new String[0]);
+                Optimus.getInstance().getAsyncExecutor().execute(() ->
+                        subcommand.handle(sender, args.length > 1 ? Arrays.copyOfRange(args, 1, args.length) : new String[0]));
+                return true;
             }
         }
 
@@ -98,7 +99,7 @@ public class CommandExecutor implements TabExecutor {
                 Component.newline(),
                 Component.text("----------------", Config.Brand.SECONDARY_HIGHLIGHT_COLOR),
                 Component.newline(),
-                commands == Component.empty()? Component.text("You have access to no commands.",
+                commands == Component.empty() ? Component.text("You have access to no commands.",
                         Config.Brand.HIGHLIGHT_COLOR).append( Component.newline()) : commands,
                 Component.text("----------------", Config.Brand.SECONDARY_HIGHLIGHT_COLOR)
         ));
@@ -110,11 +111,25 @@ public class CommandExecutor implements TabExecutor {
         List<String> completions = new ArrayList<>();
 
         if (args.length == 2) {
-            switch (args[0].toLowerCase(Locale.ROOT)) {
-                case "exempt":
-                case "profile":
-                case "reset":
+            String subcmd = args[0];
+
+            if (subcmd.equalsIgnoreCase("exempt")
+                    || subcmd.equalsIgnoreCase("profile")
+                    || subcmd.equalsIgnoreCase("reset")) {
+                Bukkit.getOnlinePlayers().forEach(player -> completions.add(player.getName()));
+            }
+        }
+
+        if (args.length == 3) {
+            String subcmd = args[0];
+
+            if (subcmd.equalsIgnoreCase("banwave")) {
+                String banwaveSubcmd = args[1];
+
+                if (banwaveSubcmd.equalsIgnoreCase("add")
+                        || banwaveSubcmd.equalsIgnoreCase("remove")) {
                     Bukkit.getOnlinePlayers().forEach(player -> completions.add(player.getName()));
+                }
             }
         }
 

@@ -20,8 +20,10 @@ package me.notom3ga.optimus;
 
 import me.notom3ga.optimus.api.OptimusAPI;
 import me.notom3ga.optimus.api.OptimusAPIImpl;
+import me.notom3ga.optimus.banwave.BanwaveManager;
 import me.notom3ga.optimus.command.CommandExecutor;
 import me.notom3ga.optimus.command.commands.AlertsCommand;
+import me.notom3ga.optimus.command.commands.BanwaveCommand;
 import me.notom3ga.optimus.command.commands.ExemptCommand;
 import me.notom3ga.optimus.command.commands.ProfileCommand;
 import me.notom3ga.optimus.command.commands.RecalculateCommand;
@@ -36,6 +38,9 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class Optimus extends JavaPlugin {
     private static Optimus instance;
 
@@ -48,8 +53,10 @@ public class Optimus extends JavaPlugin {
     }
 
     private OptimusAPI apiImpl;
-    private CommandExecutor commandExecutor;
+    private Executor asyncExecutor;
     private PacketQueue packetQueue;
+    private BanwaveManager banwaveManager;
+    private CommandExecutor commandExecutor;
     private FloodgateHook floodgateHook;
 
     @Override
@@ -74,11 +81,14 @@ public class Optimus extends JavaPlugin {
         Config.load();
 
         this.apiImpl = new OptimusAPIImpl();
-        this.commandExecutor = new CommandExecutor(getCommand("optimus"));
+        this.asyncExecutor = Executors.newFixedThreadPool(1);
         this.packetQueue = new PacketQueue();
+        this.banwaveManager = new BanwaveManager();
+        this.commandExecutor = new CommandExecutor(getCommand("optimus"));
         this.floodgateHook = new FloodgateHook();
 
         this.commandExecutor.addSubcommand(new AlertsCommand());
+        this.commandExecutor.addSubcommand(new BanwaveCommand());
         this.commandExecutor.addSubcommand(new ExemptCommand());
         this.commandExecutor.addSubcommand(new ProfileCommand());
         this.commandExecutor.addSubcommand(new RecalculateCommand());
@@ -92,16 +102,24 @@ public class Optimus extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (Config.Banwave.RUN_ON_DISABLE) {
+            this.banwaveManager.getCurrent().execute();
+        }
+
         getServer().getScheduler().cancelTasks(this);
         getServer().getServicesManager().unregister(OptimusAPI.class, this.apiImpl);
     }
 
-    public OptimusAPI getApiImpl() {
-        return this.apiImpl;
+    public Executor getAsyncExecutor() {
+        return this.asyncExecutor;
     }
 
     public PacketQueue getPacketQueue() {
         return this.packetQueue;
+    }
+
+    public BanwaveManager getBanwaveManager() {
+        return this.banwaveManager;
     }
 
     public FloodgateHook getFloodgateHook() {

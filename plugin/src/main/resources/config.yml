@@ -23,6 +23,37 @@ alerts:
     red-vl: 100
     dark-red-vl: 200
 
+banwave:
+  commands:
+    - "ban {player} Optimus Cheat Detection: {reason}"
+
+  run-on-disable: true
+  run-automatically: false
+  run-every: 10
+
+settings:
+  join-exemption: 1000
+
+brand:
+  brand-color: "#A3A8F0"
+  highlight-color: "#D6D6D6"
+  secondary-highlight-color: "#BDBDBD"
+
+lang:
+  player-command: "<color:#D6D6D6>This command can only be run by a player!</color>"
+  alerts-enabled: "<color:#D6D6D6>Alerts now enabled!</color>"
+  alerts-disabled: "<color:#D6D6D6>Alerts now disabled!</color>"
+  banwave-added: "<color:#D6D6D6>Added {player} to the banwave for: {reason}!</color>"
+  banwave-removed: "<color:#D6D6D6>Removed {player} from the banwave!</color>"
+  banwave-ran: "<color:#D6D6D6>Executed the banwave!</color>"
+  recalculated-permissions: "<color:#D6D6D6>Recalculated permissions!</color>"
+  reset-player: "<color:#D6D6D6>{player}'s VL has been reset.</color>"
+  player-exempt: "<color:#D6D6D6>{player} is exempt, you can change this with '/optimus exempt'.</color>"
+  exempt-enabled: "<color:#D6D6D6>{player} is now exempt!</color>"
+  exempt-disabled: "<color:#D6D6D6>{player} is no longer exempt!</color>"
+  cannot-exempt-bedrock: "<color:#D6D6D6>Cannot change exemption status on {player}, as they are connected through geyser.</color>"
+  help-command-title: "Optimus Help"
+
 checks:
   groundspoof:
     a:
@@ -137,23 +168,3 @@ checks:
         max: 3
         multiple: 0.65
         decay: 0.2
-
-settings:
-  join-exemption: 1000
-
-brand:
-  brand-color: "#A3A8F0"
-  highlight-color: "#D6D6D6"
-  secondary-highlight-color: "#BDBDBD"
-
-lang:
-  player-command: "<color:#D6D6D6>This command can only be run by a player!</color>"
-  alerts-enabled: "<color:#D6D6D6>Alerts now enabled!</color>"
-  alerts-disabled: "<color:#D6D6D6>Alerts now disabled!</color>"
-  recalculated-permissions: "<color:#D6D6D6>Recalculated permissions!</color>"
-  reset-player: "<color:#D6D6D6>{player}'s VL has been reset.</color>"
-  player-exempt: "<color:#D6D6D6>{player} is exempt, you can change this with '/optimus exempt'.</color>"
-  exempt-enabled: "<color:#D6D6D6>{player} is now exempt!</color>"
-  exempt-disabled: "<color:#D6D6D6>{player} is no longer exempt!</color>"
-  cannot-exempt-bedrock: "<color:#D6D6D6>Cannot change exemption status on {player}, as they are connected through geyser.</color>"
-  help-command-title: "Optimus Help"

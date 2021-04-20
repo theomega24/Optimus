@@ -25,6 +25,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.util.List;
 import java.util.Locale;
 
 public class Config {
@@ -36,6 +37,12 @@ public class Config {
             public static String GREEN, YELLOW, RED, DARK_RED;
             public static int YELLOW_VL, RED_VL, DARK_RED_VL;
         }
+    }
+
+    public static class Banwave {
+        public static List<String> COMMANDS;
+        public static boolean RUN_ON_DISABLE, RUN_AUTOMATICALLY;
+        public static int RUN_EVERY;
     }
 
     public static class Settings {
@@ -52,6 +59,9 @@ public class Config {
         public static String PLAYER_COMMAND,
                 ALERTS_ENABLED,
                 ALERTS_DISABLED,
+                BANWAVE_ADDED,
+                BANWAVE_REMOVED,
+                BANWAVE_RAN,
                 RECALCULATED_PERMISSIONS,
                 RESET_PLAYER,
                 PLAYER_EXEMPT,
@@ -82,6 +92,11 @@ public class Config {
             Alerts.Colors.RED_VL = config.getInt("alerts.colors.red-vl");
             Alerts.Colors.DARK_RED_VL = config.getInt("alerts.colors.dark-red-vl");
 
+            Banwave.COMMANDS = config.getStringList("banwave.commands");
+            Banwave.RUN_ON_DISABLE = config.getBoolean("banwave.run-on-disable");
+            Banwave.RUN_AUTOMATICALLY = config.getBoolean("banwave.run-automatically");
+            Banwave.RUN_EVERY = config.getInt("banwave.run-every");
+
             Settings.JOIN_EXEMPTION = config.getInt("settings.join-exemption");
 
             Brand.BRAND_COLOR = TextColor.fromHexString(config.getString("brand.brand-color"));
@@ -91,6 +106,9 @@ public class Config {
             Lang.PLAYER_COMMAND = config.getString("lang.player-command");
             Lang.ALERTS_ENABLED = config.getString("lang.alerts-enabled");
             Lang.ALERTS_DISABLED = config.getString("lang.alerts-disabled");
+            Lang.BANWAVE_ADDED = config.getString("lang.banwave-added");
+            Lang.BANWAVE_REMOVED = config.getString("lang.banwave-removed");
+            Lang.BANWAVE_RAN = config.getString("lang.banwave-ran");
             Lang.RECALCULATED_PERMISSIONS = config.getString("lang.recalculated-permissions");
             Lang.RESET_PLAYER = config.getString("lang.reset-player");
             Lang.PLAYER_EXEMPT = config.getString("lang.player-exempt");

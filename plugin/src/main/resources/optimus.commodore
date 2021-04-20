@@ -2,6 +2,17 @@ optimus {
   alerts;
   help;
   recalculate;
+  banwave {
+    execute;
+    add {
+      player brigadier:string single_word {
+        reason brigadier:string greedy_phrase;
+      }
+    }
+    remove {
+      player brigadier:string single_word;
+    }
+  }
   exempt {
     player brigadier:string single_word;
   }
