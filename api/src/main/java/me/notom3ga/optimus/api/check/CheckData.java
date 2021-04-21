@@ -206,44 +206,26 @@ public class CheckData {
         this.punishCommands = punishCommands;
     }
 
-    /**
-     * TODO: BUFFER.
-     */
     public int getBufferMax() {
         return this.bufferMax;
     }
 
-    /**
-     * TODO: BUFFER.
-     */
     public void setBufferMax(int bufferMax) {
         this.bufferMax = bufferMax;
     }
 
-    /**
-     * TODO: BUFFER.
-     */
     public double getBufferMultiple() {
         return this.bufferMultiple;
     }
 
-    /**
-     * TODO: BUFFER.
-     */
     public void setBufferMultiple(double bufferMultiple) {
         this.bufferMultiple = bufferMultiple;
     }
 
-    /**
-     * TODO: BUFFER.
-     */
     public double getBufferDecay() {
         return this.bufferDecay;
     }
 
-    /**
-     * TODO: BUFFER.
-     */
     public void setBufferDecay(double bufferDecay) {
         this.bufferDecay = bufferDecay;
     }
