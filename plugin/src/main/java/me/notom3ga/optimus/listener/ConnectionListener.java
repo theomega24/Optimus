@@ -21,7 +21,6 @@ package me.notom3ga.optimus.listener;
 import me.notom3ga.optimus.Optimus;
 import me.notom3ga.optimus.check.movement.groundspoof.GroundSpoofA;
 import me.notom3ga.optimus.check.player.blockplace.BlockPlaceA;
-import me.notom3ga.optimus.check.player.chat.ChatA;
 import me.notom3ga.optimus.check.player.protocol.ProtocolA;
 import me.notom3ga.optimus.check.player.protocol.ProtocolB;
 import me.notom3ga.optimus.check.player.protocol.ProtocolC;
@@ -55,7 +54,6 @@ public class ConnectionListener implements Listener {
         }
 
         user.addCheck(new BlockPlaceA(user));
-        user.addCheck(new ChatA(user));
         user.addCheck(new GroundSpoofA(user));
         user.addCheck(new ProtocolA(user));
         user.addCheck(new ProtocolB(user));
