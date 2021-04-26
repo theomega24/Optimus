@@ -102,7 +102,7 @@ public class Optimus extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (Config.Banwave.RUN_ON_DISABLE) {
+        if (Config.Banwave.EXECUTE_ON_DISABLE) {
             this.banwaveManager.getCurrent().execute();
         }
 

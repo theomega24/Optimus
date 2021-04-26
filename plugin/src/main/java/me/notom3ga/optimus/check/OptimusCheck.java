@@ -37,7 +37,6 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -46,16 +45,16 @@ public abstract class OptimusCheck implements Check {
     protected final UserImpl user;
     protected final CheckData data;
     protected final HashSet<String> packets;
-    protected final ConfigurationSection config;
+    //protected final ConfigurationSection config;
 
     protected int vl = 0, fails = 0;
     protected boolean punishing = false, failed = false;
     protected double buffer;
 
     public OptimusCheck(User user, String name, String type, CheckCategory category, boolean experimental, String... packets) {
-        this.config = Config.getCheckSection(name, type);
+        //this.config = Config.getCheckSection(name, type);
         this.user = (UserImpl) user;
-        this.data = new CheckData(name, type, category, experimental, config);
+        this.data = new CheckData(name, type, category, experimental, null); // todo - config sections
         this.packets = Sets.newHashSet(packets);
 
         this.buffer = data.getBufferMax();
@@ -104,8 +103,22 @@ public abstract class OptimusCheck implements Check {
 
         // todo buffer
 
+        StringBuilder hoverBuilder = new StringBuilder();
+        boolean first = true;
+
+        for (String line : Config.Alerts.HOVER_MESSAGE) {
+            if (first) {
+                hoverBuilder.append(line);
+
+                first = false;
+                continue;
+            }
+
+            hoverBuilder.append("\n").append(line);
+        }
+
         PlayerViolationEvent event = new PlayerViolationEvent(user.getBukkitPlayer(), Config.Alerts.FORMAT,
-                Config.Alerts.HOVER_MESSAGE, Config.Alerts.CLICK_COMMAND, true, Config.Alerts.CONSOLE, data.getVl());
+                hoverBuilder.toString(), Config.Alerts.CLICK_COMMAND, true, Config.Alerts.CONSOLE, data.getVl());
 
         if (event.getHandlers().getRegisteredListeners().length > 0) {
             event.callEvent();

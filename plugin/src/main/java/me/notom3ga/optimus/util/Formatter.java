@@ -26,10 +26,10 @@ import org.bukkit.Bukkit;
 public class Formatter {
 
     public static String formatAlerts(String message, CheckData data, int vl, String debug, UserImpl user) {
-        return message.replace("{color}", vl >= Config.Alerts.Colors.DARK_RED_VL ? "&" + Config.Alerts.Colors.DARK_RED
-                : vl >= Config.Alerts.Colors.RED_VL ? "&" + Config.Alerts.Colors.RED
-                : vl >= Config.Alerts.Colors.YELLOW_VL ? "&" + Config.Alerts.Colors.YELLOW
-                : "&" + Config.Alerts.Colors.GREEN)
+        return message.replace("{color}", vl >= Config.Alerts.DARK_RED_VL ? "&" + Config.Alerts.DARK_RED
+                : vl >= Config.Alerts.RED_VL ? "&" + Config.Alerts.RED
+                : vl >= Config.Alerts.YELLOW_VL ? "&" + Config.Alerts.YELLOW
+                : "&" + Config.Alerts.GREEN)
                 .replace("{player}", user.getBukkitPlayer().getName())
                 .replace("{check}", data.getName())
                 .replace("{type}", data.getType())

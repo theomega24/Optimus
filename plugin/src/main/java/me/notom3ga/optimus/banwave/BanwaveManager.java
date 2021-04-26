@@ -34,10 +34,10 @@ public class BanwaveManager {
     public BanwaveManager() {
         current = new Banwave();
 
-        if (Config.Banwave.RUN_AUTOMATICALLY) {
+        if (Config.Banwave.EXECUTE_AUTOMATICALLY) {
             Bukkit.getScheduler().runTaskTimer(Optimus.getInstance(), this::execute,
-                    Tick.tick().fromDuration(Duration.of(Config.Banwave.RUN_EVERY, ChronoUnit.MINUTES)),
-                    Tick.tick().fromDuration(Duration.of(Config.Banwave.RUN_EVERY, ChronoUnit.MINUTES)));
+                    Tick.tick().fromDuration(Duration.of(Config.Banwave.EXECUTE_EVERY, ChronoUnit.MINUTES)),
+                    Tick.tick().fromDuration(Duration.of(Config.Banwave.EXECUTE_EVERY, ChronoUnit.MINUTES)));
         }
     }
 

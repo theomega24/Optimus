@@ -19,14 +19,6 @@
 package me.notom3ga.optimus.listener;
 
 import me.notom3ga.optimus.Optimus;
-import me.notom3ga.optimus.check.movement.groundspoof.GroundSpoofA;
-import me.notom3ga.optimus.check.player.blockplace.BlockPlaceA;
-import me.notom3ga.optimus.check.player.protocol.ProtocolA;
-import me.notom3ga.optimus.check.player.protocol.ProtocolB;
-import me.notom3ga.optimus.check.player.protocol.ProtocolC;
-import me.notom3ga.optimus.check.player.protocol.ProtocolD;
-import me.notom3ga.optimus.check.player.protocol.ProtocolE;
-import me.notom3ga.optimus.check.player.skinblinker.SkinBlinkerA;
 import me.notom3ga.optimus.packet.PacketInjector;
 import me.notom3ga.optimus.user.UserImpl;
 import me.notom3ga.optimus.user.UserManager;
@@ -53,6 +45,7 @@ public class ConnectionListener implements Listener {
             PacketInjector.inject(user);
         }
 
+        /* // todo - config sections
         user.addCheck(new BlockPlaceA(user));
         user.addCheck(new GroundSpoofA(user));
         user.addCheck(new ProtocolA(user));
@@ -61,6 +54,7 @@ public class ConnectionListener implements Listener {
         user.addCheck(new ProtocolD(user));
         user.addCheck(new ProtocolE(user));
         user.addCheck(new SkinBlinkerA(user));
+         */
     }
 
     @EventHandler

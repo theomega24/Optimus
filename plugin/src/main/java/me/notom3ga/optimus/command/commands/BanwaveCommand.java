@@ -104,7 +104,7 @@ public class BanwaveCommand implements Subcommand {
             Optimus.getInstance().getBanwaveManager().execute();
             sender.sendMessage(TextComponent.ofChildren(
                     Component.text("Optimus > ", Config.Brand.BRAND_COLOR, TextDecoration.BOLD),
-                    MiniMessage.get().parse(Config.Lang.BANWAVE_RAN)
+                    MiniMessage.get().parse(Config.Lang.BANWAVE_EXECUTED)
             ));
 
             return true;
