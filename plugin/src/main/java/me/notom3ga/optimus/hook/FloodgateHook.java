@@ -36,10 +36,6 @@ public class FloodgateHook {
     }
 
     public boolean isBedrockPlayer(Player player) {
-        if (this.isEnabled()) {
-            return floodgate.isFloodgatePlayer(player.getUniqueId());
-        }
-
-        return false;
+        return this.isEnabled() ? floodgate.isFloodgatePlayer(player.getUniqueId()) : false;
     }
 }

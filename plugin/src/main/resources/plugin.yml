@@ -14,29 +14,3 @@ permissions:
   optimus.bypass:
     description: Allow the player to bypass Optimus.
     default: op
-  optimus.command:
-    description: Allows the player to run '/optimus'.
-    default: op
-  optimus.command.alerts:
-    description: Allows the player to run '/optimus alerts'.
-    default: op
-  optimus.command.banwave:
-    description: Allows the player to run '/optimus banwave'.
-    default: op
-  optimus.command.exempt:
-    description: Allows the player to run '/optimus exempt'.
-    default: op
-  optimus.command.profile:
-    description: Allows the player to run '/optimus profile'.
-    default: op
-  optimus.command.recalculate:
-    description: Allows the player to run '/optimus recalculate'.
-    default: op
-  optimus.command.reset:
-    description: Allows the player to run '/optimus reset'.
-    default: op
-
-commands:
-  optimus:
-    description: Commands to manage Optimus.
-    permission: optimus.command

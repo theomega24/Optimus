@@ -21,13 +21,6 @@ package me.notom3ga.optimus;
 import me.notom3ga.optimus.api.OptimusAPI;
 import me.notom3ga.optimus.api.OptimusAPIImpl;
 import me.notom3ga.optimus.banwave.BanwaveManager;
-import me.notom3ga.optimus.command.CommandExecutor;
-import me.notom3ga.optimus.command.commands.AlertsCommand;
-import me.notom3ga.optimus.command.commands.BanwaveCommand;
-import me.notom3ga.optimus.command.commands.ExemptCommand;
-import me.notom3ga.optimus.command.commands.ProfileCommand;
-import me.notom3ga.optimus.command.commands.RecalculateCommand;
-import me.notom3ga.optimus.command.commands.ResetCommand;
 import me.notom3ga.optimus.config.Config;
 import me.notom3ga.optimus.hook.FloodgateHook;
 import me.notom3ga.optimus.listener.ConnectionListener;
@@ -56,7 +49,6 @@ public class Optimus extends JavaPlugin {
     private Executor asyncExecutor;
     private PacketQueue packetQueue;
     private BanwaveManager banwaveManager;
-    private CommandExecutor commandExecutor;
     private FloodgateHook floodgateHook;
 
     @Override
@@ -84,15 +76,7 @@ public class Optimus extends JavaPlugin {
         this.asyncExecutor = Executors.newFixedThreadPool(1);
         this.packetQueue = new PacketQueue();
         this.banwaveManager = new BanwaveManager();
-        this.commandExecutor = new CommandExecutor(getCommand("optimus"));
         this.floodgateHook = new FloodgateHook();
-
-        this.commandExecutor.addSubcommand(new AlertsCommand());
-        this.commandExecutor.addSubcommand(new BanwaveCommand());
-        this.commandExecutor.addSubcommand(new ExemptCommand());
-        this.commandExecutor.addSubcommand(new ProfileCommand());
-        this.commandExecutor.addSubcommand(new RecalculateCommand());
-        this.commandExecutor.addSubcommand(new ResetCommand());
 
         getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
         getServer().getServicesManager().register(OptimusAPI.class, this.apiImpl, this, ServicePriority.Normal);
