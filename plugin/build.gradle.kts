@@ -29,7 +29,6 @@ tasks {
         }
 
         dependencies {
-            exclude("net.kyori.adventure.key", "net.kyori.adventure.text")
             exclude(dependency("net.kyori:adventure-api"))
             exclude(dependency("com.mojang:brigadier"))
         }

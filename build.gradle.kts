@@ -20,9 +20,10 @@ subprojects {
     repositories {
         mavenCentral()
         maven("https://papermc.io/repo/repository/maven-public/")
-        maven("https://repo.opencollab.dev/maven-snapshots")
+        maven("https://repo.codemc.io/repository/nms/")
         maven("https://libraries.minecraft.net/")
-        mavenLocal()
+        maven("https://repo.opencollab.dev/maven-snapshots")
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 
     tasks {
